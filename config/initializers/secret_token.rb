@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Genes::Application.config.secret_key_base = 'efbe13f0c138ebb638bbbfea898d1f743687526ac1739264d936d480b68f84583c734551073b63829b75850f9a2c5a15dc1d870c5252f8894194cf1021b47088'
+Genes::Application.config.secret_key_base = '3b2cbd7491be7a1ae8e8f115e101ce45c849008864c84404e870f37dd05eab33fd9ae4e7e15c25ba3f3c7acc7c5296305810383b0e60f0aa199651b08cf300da'

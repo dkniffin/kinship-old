@@ -1,42 +1,22 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '3.2,15'
+gem 'rails', '4.0.1'
 
-group :assets do
-  # Use SCSS for stylesheets
-  gem 'sass-rails', '~> 4.0.0'
-  # Use Uglifier as compressor for JavaScript assets
-  gem 'uglifier', '>= 1.3.0'
-  # Use CoffeeScript for .js.coffee assets and views
-  gem 'coffee-rails', '~> 4.0.0'
+# Use sqlite3 as the database for Active Record
+gem 'sqlite3'
+
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 4.0.0'
+
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+
+# Use CoffeeScript for .js.coffee assets and views
+gem 'coffee-rails', '~> 4.0.0'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', platforms: :ruby
-end
-
-group :development, :test do
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
-
-  gem 'capybara'
-  gem 'launchy', '~> 2.3.0'
-
-  # rspec for BDD
-  gem 'rspec', '~> 2.14.1'
-  gem 'rspec-rails', '~> 2.14.0'
- 
-  gem 'ruby-debug19', :require => 'ruby-debug'
-  gem 'database_cleaner'
-end
-
-group :test do
-  gem 'cucumber-rails', '~> 1.4.0'
-end
-
-group :production do
-  gem 'pg'
-end
-
+# gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
