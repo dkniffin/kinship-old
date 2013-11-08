@@ -24,4 +24,4 @@ def secure_token
   end
 end
 
-Genes::Application.config.secret_key_base = secure_token
+Kinship::Application.config.secret_key_base = secure_token

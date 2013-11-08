@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Genes::Application.load_tasks
+Kinship::Application.load_tasks
