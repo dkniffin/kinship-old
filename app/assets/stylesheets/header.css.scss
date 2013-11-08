@@ -1,6 +1,28 @@
-#top {
-   background-color: black;
-   color: white;
-   margin: 0;
-   top: 0;
+#header {
+	background-color: black;
+	height: 70px;
+	width: 100%;
+}
+
+#header * {
+	line-height: 70px;
+}
+
+#header #site-title {
+	color: white;
+	float: left;
+	margin-left: 20px;
+}
+
+#header #user-box {
+	float: right;
+	margin-right: 20px;
+}
+
+.header-link {
+	text-decoration: none;
+	color: #999;
+}
+.header-link:hover {
+	color: white;
 }
