@@ -42,6 +42,7 @@ describe User do
 	describe "when username is already taken" do
 		before do
 			user_with_same_username = @user.dup
+			user_with_same_username.email = @user.email.upcase
 			user_with_same_username.save
 		end
 
