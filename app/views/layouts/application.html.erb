@@ -8,20 +8,11 @@
 </head>
 <body>
 
-<!-- Header -->
-<div id='header'>
-  <h1 id='site-title'>Kinship</h1>
-  <div id='user-box'><%= link_to "Sign In", '#', class:'header-link' %></div> <!-- If user is logged in, this should be replaced with user's username -->
-</div>
-
+<%= render 'layouts/header' %>
 <%= yield %>
-
-
-<!-- Footer -->
-<div id='footer'>
-	<hr />
-	<span id='powered-by'>Powered by Kinship</span>
-</div>
+<%= render 'layouts/footer' %>
+<br />
+<%= debug(params) if Rails.env.development? %>
 
 </body>
 </html>
