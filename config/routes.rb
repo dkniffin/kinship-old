@@ -1,6 +1,4 @@
 Kinship::Application.routes.draw do
-  get "users/new"
-  get "static_pages/home"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -9,12 +7,16 @@ Kinship::Application.routes.draw do
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
+  get "static_pages/home"
+  match '/home', to: 'static_pages#home', via: 'get'
+  match '/signup',  to: 'users#new',  via: 'get'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+  resources :users
 
   # Example resource route with options:
   #   resources :products do
