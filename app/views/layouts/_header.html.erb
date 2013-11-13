@@ -1,5 +1,16 @@
 <!-- Header -->
-<div id='header'>
-  <h1 id='site-title'>Kinship</h1>
-  <div id='user-box'><%= link_to "Sign In", '#', class:'header-link' %></div> <!-- If user is logged in, this should be replaced with user's username -->
-</div>
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner" id="header">
+    <div class="container">
+      <%= link_to "Kinship", '#', id: "logo" %>
+      <nav>
+        <ul class="nav pull-right">
+          <li><%= link_to "Home",    '/static_pages/home' %></li>
+          <li><%= link_to "Help",    '#' %></li>
+          <li><%= link_to "Sign in", '#', class:'header-link' %></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
