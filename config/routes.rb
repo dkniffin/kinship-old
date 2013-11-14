@@ -8,8 +8,10 @@ Kinship::Application.routes.draw do
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
   get "static_pages/home"
-  match '/home', to: 'static_pages#home', via: 'get'
-  match '/signup',  to: 'users#new',  via: 'get'
+  match '/home',   to: 'static_pages#home', via: 'get'
+  match '/signup', to: 'users#new',         via: 'get'
+  match '/signin', to: 'sessions#new',      via: 'get'
+  match '/signout', to: 'sessions#destroy',  via: 'delete'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
@@ -17,6 +19,7 @@ Kinship::Application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
 
   # Example resource route with options:
   #   resources :products do
