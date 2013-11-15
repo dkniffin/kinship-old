@@ -25,13 +25,10 @@ require 'spec_helper'
 
 		describe "with valid information" do
 			let(:user) { FactoryGirl.create(:user) }
-			before do
-				fill_in "Username", with: user.username.upcase
-				fill_in "Password", with: user.password
-				click_button "Sign in"
-			end
+			before { sign_in user }
 
 			it { should have_link('Profile',     href: user_path(user)) }
+			it { should have_link('My Account',    href: edit_user_path(user)) }
 			it { should have_link('Sign out',    href: signout_path) }
 			it { should_not have_link('Sign in', href: signin_path) }
 
