@@ -14,7 +14,7 @@
 		<% flash.each do |key, value| %>
 			<div class="alert alert-<%= key %>"><%= value %></div>
 		<% end %>
-		<%= yield %>
+		<%= content_for?(:content) ? yield(:content) : yield %>
 	</div>
 	<%= render 'layouts/footer' %>
 	<br />
