@@ -16,10 +16,12 @@
               <ul class="dropdown-menu">
                 <li><%= link_to "Profile", current_user %></li>
                 <li><%= link_to "My Account", edit_user_path(current_user) %></li>
+                <% if user_role?(User::ROLE_ADMIN) %>
                 <li class="divider"></li>
-                <li>
-                  <%= link_to "Sign out", signout_path, method: "delete" %>
-                </li>
+                <li><%= link_to "Admin", admin_path %></li>
+                <% end %>
+                <li class="divider"></li>
+                <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
               </ul>
             </li>
           <% else %>
