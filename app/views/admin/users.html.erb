@@ -8,10 +8,10 @@
 		<th>Delete</th>
 	</tr>
 	<% User.all.each do |user| %>
-		<tr>
+		<tr class="<%= 'warning' if user.role == User::ROLE_UNAPPROVED %>" >
 			<td><%= user.username %></td>
 			<td><%= user.email %></td>
-			<td><%= 'nothing yet'%></td>
+			<td><%= user.role %></td> <!-- This should be a drop down -->
 			<td><%= link_to edit_user_path(user), :class=>'btn' do %><i class="icon-edit"></i><% end %></td>
 			<td><a class="btn btn-danger <%= 'disabled' if user.username == 'admin'%>"><i class="icon-trash"></i></a></td>
 		</tr>

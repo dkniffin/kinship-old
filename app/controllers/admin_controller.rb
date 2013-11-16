@@ -1,4 +1,5 @@
 class AdminController < ApplicationController
+	before_action :admin_user
 	def home
 	end
 	
@@ -13,4 +14,10 @@ class AdminController < ApplicationController
 
 	def logs
 	end
+
+	private
+		def admin_user
+			redirect_to root_url, 
+				notice: "Only admins can access the admin interface" unless user_role?(User::ROLE_ADMIN)
+		end
 end

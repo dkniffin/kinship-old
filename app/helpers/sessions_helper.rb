@@ -10,6 +10,10 @@ module SessionsHelper
 		!current_user.nil?
 	end
 
+	def user_role?(role)
+		signed_in? && current_user.role == role
+	end
+
 	def current_user=(user)
 		@current_user = user
 	end
