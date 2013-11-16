@@ -26,8 +26,8 @@ class UsersController < ApplicationController
 	def create
 	    @user = User.new(user_params)
 		if @user.save
-			flash[:success] = "Welcome to Kinship!"
-			redirect_to @user
+			flash[:success] = "Your account request has been submitted to the admin(s) for approval."
+			redirect_to home_path
 		else
 			render 'new'
 		end
