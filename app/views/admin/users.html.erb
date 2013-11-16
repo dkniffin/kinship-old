@@ -12,7 +12,7 @@
 			<td><%= user.username %></td>
 			<td><%= user.email %></td>
 			<td><%= 'nothing yet'%></td>
-			<td><%= link_to user_path(user), :class=>'btn' do %><i class="icon-edit"></i><% end %></td>
+			<td><%= link_to edit_user_path(user), :class=>'btn' do %><i class="icon-edit"></i><% end %></td>
 			<td><a class="btn btn-danger <%= 'disabled' if user.username == 'admin'%>"><i class="icon-trash"></i></a></td>
 		</tr>
 	<% end %>
