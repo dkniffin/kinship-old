@@ -13,7 +13,7 @@
 			<td><%= user.email %></td>
 			<td>
 				<div class="btn-group">
-					<a class='btn dropdown-toggle' data-toggle="dropdown" href="#">
+					<a class='btn dropdown-toggle <%= 'disabled' if user.username == 'admin'%>' data-toggle="dropdown" href="#">
 						<%= user.role %>
 						<span class="caret"></span>
 					</a>
