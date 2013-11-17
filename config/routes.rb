@@ -13,7 +13,11 @@ Kinship::Application.routes.draw do
   match '/signup', to: 'users#new',         via: 'get'
   match '/signin', to: 'sessions#new',      via: 'get'
   match '/signout', to: 'sessions#destroy',  via: 'delete'
-  resources :users
+  resources :users do
+    member do
+      patch 'update_role'
+    end
+  end
   resources :sessions, only: [:new, :create, :destroy]
 
   # Admin

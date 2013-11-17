@@ -18,8 +18,12 @@
 						<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<% User::ROLES.each  do |role| %>
-							<li class="<%= 'active' if role == user.role%>"><a><%= role %></a></li>
+						<% User::ROLES.each do |role| %>
+							<li class="<%= 'active' if role == user.role%>">
+								<%= link_to update_role_user_path(:id => user, :role => role), :method => :patch do %>
+									<%= role %>
+								<% end %>
+							</li>
 						<% end %>
 					</ul>
 				</div>
