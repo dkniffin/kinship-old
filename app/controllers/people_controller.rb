@@ -34,6 +34,7 @@ class PeopleController < ApplicationController
   # GET /people/1.json
   def show
     @person = Person.find(params[:id])
+    @eventsFormat = Setting.eventsFormat
   end
 
   # GET /people/new

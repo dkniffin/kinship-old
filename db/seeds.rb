@@ -18,3 +18,5 @@ Setting.create(var: 'homepage_blurb', value: <<-eos
 <p>This is where the homepage blurb will go. It can be configured through the admin interface</p>
 eos
 )
+Setting.create(var: 'eventsFormat', value: 'timeline')
+
