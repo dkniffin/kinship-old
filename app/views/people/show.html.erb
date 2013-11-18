@@ -1,11 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<%= image_tag @person.photo.url(:small) %>
+<h3> <%= @person.first_name %> <%=@person.last_name%> </h3>
 
-<p>
-  <strong>Name:</strong>
-  <%= @person.first_name %> <%=@person.last_name%>
-</p>
+<%= image_tag @person.photo.url(:small) %>
 
 <p>
   <strong>Gender:</strong>

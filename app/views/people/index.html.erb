@@ -1,11 +1,23 @@
 <h1>Person Index</h1>
 
+<%= form_tag people_path, :method => :get, :id => 'gender_form' do %>
+  <%= hidden_field_tag "first_name_sort", true if @first_name_header %>
+  <%= hidden_field_tag "last_name_sort", true if @last_name_header %>
+  Genders:
+  <% @all_genders.each do |gender| %>
+     <%= gender %>
+     <%= check_box_tag "genders[#{gender}]", 1, @selected_genders.include?(gender), :id => "genders_#{gender}" %>
+  <% end %>
+  <%= button_tag 'Refresh', :id => 'genders_submit', :class => 'btn' %>
+<% end %>
+
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Name</th>
+      <th class=<%= @first_name_header %>><%= link_to 'First Name', people_path(:sort => 'first_name', :genders => @selected_genders), :id => 'first_name_header' %></th>
+      <th class=<%= @last_name_header %>><%= link_to 'Last Name', people_path(:sort => 'last_name', :genders => @selected_genders), :id => 'last_name_header' %></th>
       <th>Gender</th>
-      <th>Portrait</th>
+      <th>Photo</th>
       <th></th>
       <th></th>
       <th></th>
@@ -15,7 +27,8 @@
   <tbody>
     <% @people.each do |person| %>
       <tr>
-        <td><%= link_to "#{person.first_name} #{person.last_name}", person%></td>
+        <td><%= link_to person.first_name, person%></td>
+        <td><%= link_to person.last_name, person%></td>
         <td><%= person.gender %></td>
         <td><%= link_to image_tag(person.photo.url(:small)), person %></td>
         <td><%= link_to 'Edit', edit_person_path(person) %></td>
@@ -27,4 +40,4 @@
 
 <br>
 
-<%= link_to 'New Person', new_person_path %>
+<%= button_to "New Person", new_person_path, :class => 'btn btn-primary' %>
