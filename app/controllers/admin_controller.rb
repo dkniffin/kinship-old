@@ -5,16 +5,18 @@ class AdminController < ApplicationController
 	
 	def look_and_feel
 		@blurb = Setting.homepage_blurb
+		@eventsFormat = Setting.eventsFormat
 	end
 	def update_look_and_feel
 		# Permitted params
-		params.permit(:blurb)
+		params.permit(:blurb, :eventsFormat)
 
 		# Update the settings
 		Setting.homepage_blurb = params[:blurb]
+		Setting.eventsFormat = params[:eventsFormat]
 
 		# Flash a success message and send back to page
-		flash[:success] = "Settings updated"
+		flash[:success] = params
 		redirect_to :back
 	end
 
