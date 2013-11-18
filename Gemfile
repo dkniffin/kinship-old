@@ -7,6 +7,8 @@ gem 'bcrypt-ruby', '3.1.2'
 
 gem 'bootstrap-sass', '2.3.2.0'
 
+gem "paperclip", "~> 3.0"
+
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3', '1.3.8'

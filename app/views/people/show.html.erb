@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<%= image_tag @person.photo.url(:small) %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @person.first_name %> <%=@person.last_name%>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @person.gender %>
+</p>
+
+
+<%= link_to 'Edit', edit_person_path(@person) %> |
+<%= link_to 'Back', people_path %>
