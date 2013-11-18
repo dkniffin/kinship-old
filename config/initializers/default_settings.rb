@@ -1,1 +1,1 @@
-Setting.save_default(:homepage_blurb, 'meh')
+
