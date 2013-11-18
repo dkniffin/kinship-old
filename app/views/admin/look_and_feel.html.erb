@@ -1,1 +1,9 @@
-<h1>Admin#look_and_feel</h1>
+<h1>Admin - Look & Feel</h1>
+<dl class="dl-horizontal">
+<%= form_tag do %>
+	<dt><%= label_tag :blurb, "Homepage Blurb" %></dt>
+	<dd><%= text_area_tag :blurb, @blurb, :rows =>10 %></dd>
+
+	<%= submit_tag 'Save' %>
+<% end %>
+</dl>

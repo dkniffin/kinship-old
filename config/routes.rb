@@ -25,8 +25,12 @@ Kinship::Application.routes.draw do
   # Admin
   match '/admin', to: 'admin#home', via: 'get'
   get "admin/home"
+
   get "admin/look_and_feel"
+  match "admin/look_and_feel", to: 'admin#update_look_and_feel', via: 'post'
+
   get "admin/privacy"
   get "admin/users"
+
   get "admin/logs"
 end

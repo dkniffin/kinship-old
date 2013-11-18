@@ -7,7 +7,11 @@ gem 'bcrypt-ruby', '3.1.2'
 
 gem 'bootstrap-sass', '2.3.2.0'
 
+# For file attachments
 gem "paperclip", "~> 3.0"
+
+# For global settings
+gem "rails-settings-cached", "0.3.1"
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record

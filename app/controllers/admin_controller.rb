@@ -4,6 +4,18 @@ class AdminController < ApplicationController
 	end
 	
 	def look_and_feel
+		@blurb = Setting.homepage_blurb
+	end
+	def update_look_and_feel
+		# Permitted params
+		params.permit(:blurb)
+
+		# Update the settings
+		Setting.homepage_blurb = params[:blurb]
+
+		# Flash a success message and send back to page
+		flash[:success] = "Settings updated"
+		redirect_to :back
 	end
 
 	def privacy
