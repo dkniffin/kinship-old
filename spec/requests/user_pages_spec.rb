@@ -41,4 +41,23 @@ require 'spec_helper'
 			end
 		end
 	end
+	describe "edit" do
+		let(:user) { FactoryGirl.create(:user) }
+		before do
+			sign_in user
+			visit edit_user_path(user)
+		end
+
+		describe "page" do
+			it { should have_content("Edit User") }
+		end
+
+		describe "with invalid information" do
+			before { click_button "Save changes" }
+
+			it { should have_content('error') }
+		end
+
+		
+	end
 end

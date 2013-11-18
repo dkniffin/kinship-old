@@ -1,0 +1,35 @@
+<h1>Admin - Users</h1>
+<table class="table table-striped">
+	<tr>
+		<th>Username</th>
+		<th>Email</th>
+		<th>Role</th>
+		<th>Edit</th>
+		<th>Delete</th>
+	</tr>
+	<% User.all.each do |user| %>
+		<tr class="<%= 'warning' if user.role == User::ROLE_UNAPPROVED %>" >
+			<td><%= user.username %></td>
+			<td><%= user.email %></td>
+			<td>
+				<div class="btn-group">
+					<a class='btn dropdown-toggle' data-toggle="dropdown" href="#">
+						<%= user.role %>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<% User::ROLES.each do |role| %>
+							<li class="<%= 'active' if role == user.role%>">
+								<%= link_to update_role_user_path(:id => user, :role => role), :method => :patch do %>
+									<%= role %>
+								<% end %>
+							</li>
+						<% end %>
+					</ul>
+				</div>
+			</td>
+			<td><%= link_to edit_user_path(user), :class=>'btn' do %><i class="icon-edit"></i><% end %></td>
+			<td><a class="btn btn-danger <%= 'disabled' if user.username == 'admin'%>"><i class="icon-trash"></i></a></td>
+		</tr>
+	<% end %>
+</table>

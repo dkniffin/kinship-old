@@ -10,6 +10,10 @@ module SessionsHelper
 		!current_user.nil?
 	end
 
+	def user_role?(role)
+		signed_in? && current_user.role == role
+	end
+
 	def current_user=(user)
 		@current_user = user
 	end
@@ -17,6 +21,10 @@ module SessionsHelper
 	def current_user
 		remember_token = User.encrypt(cookies[:remember_token])
 		@current_user ||= User.find_by(remember_token: remember_token)
+	end
+
+	def current_user?(user)
+		user == current_user
 	end
 
 	def sign_out
