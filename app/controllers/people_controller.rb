@@ -5,6 +5,29 @@ class PeopleController < ApplicationController
   # GET /people.json
   def index
     @people = Person.all
+
+    sort = params[:sort] || session[:sort]
+    case sort
+    when 'first_name'
+      ordering,@first_name_header = {:order => :first_name}, 'hilite'
+    when 'last_name'
+      ordering,@last_name_header = {:order => :last_name}, 'hilite'
+    end
+    @all_genders = Person.all_genders
+    @selected_genders = params[:genders] || session[:genders] || {}
+
+    if @selected_genders == {}
+      @selected_genders = Hash[@all_genders.map {|gender| [gender, gender]}]
+    end
+
+    if params[:sort] != session[:sort] or params[:genders] != session[:genders]
+      session[:sort] = sort
+      session[:genders] = @selected_genders
+      redirect_to :sort => sort, :genders => @selected_genders and return
+    end
+    @people = Person.find_all_by_gender(@selected_genders.keys, ordering)
+
+
   end
 
   # GET /people/1
