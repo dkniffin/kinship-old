@@ -21,11 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :gender %><br>
-    <%= f.text_field :gender %>
-  </div>
-  <div class="field">
-    <%= f.label :portrait_link %><br>
-    <%= f.text_field :portrait_link %>
+    <%= f.select :gender, options_for_select({'M' => 'M','F' => 'F'}) %>
   </div>
   <div class="field">
     <%= f.label :photo %><br>
