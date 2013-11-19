@@ -1,4 +1,6 @@
 Kinship::Application.routes.draw do
+  resources :places
+
   resources :people
   match '/people/new', to: 'people#new', via: 'post'
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131118200231) do
+ActiveRecord::Schema.define(version: 20131119004439) do
 
   create_table "people", force: true do |t|
     t.string   "first_name"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 20131118200231) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+  end
+
+  create_table "places", force: true do |t|
+    t.string   "country"
+    t.string   "state"
+    t.string   "county"
+    t.string   "postal_code"
+    t.string   "city"
+    t.string   "street_address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "settings", force: true do |t|
