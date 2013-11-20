@@ -3,6 +3,11 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_filter :get_site_header
+  def get_site_header
+    @site_header = Setting.site_header
+  end
+
   # Include a module for sessions
   include SessionsHelper
 end

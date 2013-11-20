@@ -19,4 +19,5 @@ Setting.create(var: 'homepage_blurb', value: <<-eos
 eos
 )
 Setting.create(var: 'eventsFormat', value: 'timeline')
+Setting.create(var: 'site_header', value: 'kinship')
 
