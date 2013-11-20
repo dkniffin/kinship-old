@@ -16,7 +16,7 @@ class AdminController < ApplicationController
 		Setting.eventsFormat = params[:eventsFormat]
 
 		# Flash a success message and send back to page
-		flash[:success] = "Settings updated"
+		flash[:success] = params
 		redirect_to :back
 	end
 
