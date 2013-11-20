@@ -4,14 +4,17 @@ class Person < ActiveRecord::Base
 		:url  => "/assets/products/:id/:style/:basename.:extension",
 		:path => ":rails_root/public/assets/products/:id/:style/:basename.:extension"
 
+	has_one :birth, :foreign_key => "child_id"
+	accepts_nested_attributes_for :birth
+
 	validates_attachment_size :photo, :less_than => 5.megabytes
 	validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png']
 	validates :first_name, :presence => true
 	validates :last_name, :presence => true
 	validates :gender, :presence => true
 
+
 	def self.all_genders
 		%w(M F)
 	end
-        
 end
