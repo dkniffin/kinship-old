@@ -1,7 +1,5 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
-
-  autocomplete :person, :first_name, :full => false
   # GET /people
   # GET /people.json
   def index
