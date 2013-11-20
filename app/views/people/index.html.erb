@@ -8,36 +8,43 @@
      <%= gender %>
      <%= check_box_tag "genders[#{gender}]", 1, @selected_genders.include?(gender), :id => "genders_#{gender}" %>
   <% end %>
-  <%= button_tag 'Refresh', :id => 'genders_submit', :class => 'btn' %>
+  <br><br>
+  <%= text_field_tag :query, params[:query] %><br>
+  <%= button_tag 'Search', :id => 'genders_submit', :class => 'btn' %>
 <% end %>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th class=<%= @first_name_header %>><%= link_to 'First Name', people_path(:sort => 'first_name', :genders => @selected_genders), :id => 'first_name_header' %></th>
-      <th class=<%= @last_name_header %>><%= link_to 'Last Name', people_path(:sort => 'last_name', :genders => @selected_genders), :id => 'last_name_header' %></th>
-      <th>Gender</th>
-      <th>Photo</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<% if @people.empty?  then %>
+   <h4>No results matched your search</h4>
+<%else %>
 
-  <tbody>
-    <% @people.each do |person| %>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= link_to person.first_name, person%></td>
-        <td><%= link_to person.last_name, person%></td>
-        <td><%= person.gender %></td>
-        <td><%= link_to image_tag(person.photo.url(:small)), person %></td>
-        <td><%= link_to 'Edit', edit_person_path(person) %></td>
-        <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th class=<%= @first_name_header %>><%= link_to 'First Name', people_path(:sort => 'first_name', :genders => @selected_genders), :id => 'first_name_header' %></th>
+        <th class=<%= @last_name_header %>><%= link_to 'Last Name', people_path(:sort => 'last_name', :genders => @selected_genders), :id => 'last_name_header' %></th>
+        <th>Gender</th>
+        <th>Photo</th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+  
+    <tbody>
+      <% @people.each do |person| %>
+        <tr>
+          <td><%= link_to person.first_name, person%></td>
+          <td><%= link_to person.last_name, person%></td>
+          <td><%= person.gender %></td>
+          <td><%= link_to image_tag(person.photo.url(:small)), person %></td>
+          <td><%= link_to 'Edit', edit_person_path(person) %></td>
+          <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
+<% end %>
 <br>
 
 <%= link_to new_person_path, :class => 'btn btn-primary' do %>Add Person <i class="icon-plus icon-white"></i><%end%>

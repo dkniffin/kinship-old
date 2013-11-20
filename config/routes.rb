@@ -1,4 +1,9 @@
 Kinship::Application.routes.draw do
+ 
+  resources :people do
+    get :autocomplete_person_first_name, :on => :collection
+  end
+
   resources :places
 
   resources :people
