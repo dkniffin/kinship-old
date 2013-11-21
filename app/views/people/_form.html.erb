@@ -25,8 +25,16 @@
   </div>
   <%= f.fields_for :birth do |ff| %>
     <div>
-      <%= ff.label :date %>
+      <%= ff.label :date, "Birth Date" %>
       <%= ff.date_field :date %>
+    </div>
+    <div>
+      <%= ff.label :father_id, "Father ID" %>
+      <%= ff.text_field :father_id %>
+    </div>
+    <div>
+      <%= ff.label :mother_id, "Mother ID" %>
+      <%= ff.text_field :mother_id %>
     </div>
   <% end %>
   <div class="field">

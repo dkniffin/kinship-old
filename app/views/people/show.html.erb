@@ -3,13 +3,13 @@
 <div class="row">
 	<%= image_tag @person.photo.url(:small), class: 'span3' %>
 	<div class="span9">
-		<h3> <%= @person.first_name %> <%=@person.last_name%> </h3>
+		<h3> <%= @person.full_name %> </h3>
 
 		<p>
 		  <strong>Gender:</strong>
 		  <%= @person.gender %>
 		</p>
-		<p>Birth date: <%= @person.birth.date %> </p>
+		<p>Birth date: <%= @person.birth.date %> (Age: <%= @person.age %>)</p>
 
 
 		<%= link_to 'Edit', edit_person_path(@person) %> |
@@ -33,3 +33,6 @@
 		</table>
 	<% end %>
 </div>
+
+<p>Mother: <%= @person.mother %></p>
+<p>Father: <%= @person.father %></p>
