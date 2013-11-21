@@ -1,21 +1,18 @@
 require 'spec_helper'
 
 describe "people/show" do
+  let(:person) { FactoryGirl.create(:person) }
   before(:each) do
-    @person = assign(:person, stub_model(Person,
-      :first_name => "First Name",
-      :last_name => "Last Name",
-      :gender => "Gender",
-      :portrait_link => "Portrait Link"
-    ))
+    @person = person
   end
 
-  it "renders attributes in <p>" do
+  it "renders properly" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/First Name/)
-    rendered.should match(/Last Name/)
-    rendered.should match(/Gender/)
-    rendered.should match(/Portrait Link/)
+    rendered.should have_selector('img#photo')
+    rendered.should have_selector('#full_name')
+    rendered.should have_content('Gender')
+    rendered.should have_content('Birth date')
+    rendered.should have_link('Edit', :href => edit_person_path(@person))
   end
 end

@@ -17,8 +17,8 @@ describe "people/new" do
     assert_select "form[action=?][method=?]", people_path, "post" do
       assert_select "input#person_first_name[name=?]", "person[first_name]"
       assert_select "input#person_last_name[name=?]", "person[last_name]"
-      assert_select "input#person_gender[name=?]", "person[gender]"
-      assert_select "input#person_portrait_link[name=?]", "person[portrait_link]"
+      assert_select "select#person_gender[name=?]", "person[gender]"
+      assert_select "input#person_photo[name=?]", "person[photo]"
     end
   end
 end

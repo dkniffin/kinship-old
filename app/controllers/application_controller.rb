@@ -4,10 +4,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :get_site_header
+
+ # Include a module for sessions
+  include SessionsHelper
+
+
   def get_site_header
     @site_header = Setting.site_header
-  end
-
-  # Include a module for sessions
-  include SessionsHelper
+  end 
 end

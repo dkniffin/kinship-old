@@ -1,12 +1,12 @@
 class AdminController < ApplicationController
-	before_action :admin_user
+	before_action :authorization
 	def home
 	end
 	
 	def look_and_feel
 		@blurb = Setting.homepage_blurb
 		@eventsFormat = Setting.eventsFormat
-    @site_header = Setting.site_header
+		@site_header = Setting.site_header
 	end
 	def update_look_and_feel
 		# Permitted params
@@ -32,7 +32,7 @@ class AdminController < ApplicationController
 	end
 
 	private
-		def admin_user
+		def authorization
 			redirect_to root_url, 
 				notice: "Only admins can access the admin interface" unless user_role?(User::ROLE_ADMIN)
 		end

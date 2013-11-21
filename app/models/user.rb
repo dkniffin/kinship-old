@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 	before_save { self.email = email.downcase }
 	before_create :create_remember_token
-	before_validation :unapproved
+	before_validation :default_role_unapproved
 
 	# Attribute validations
 	validates :username, presence: true
@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
 			self.remember_token = User.encrypt(User.new_remember_token)
 		end
 
-		def unapproved
+		def default_role_unapproved
 			self.role = User::ROLE_UNAPPROVED if self.role.nil?
 		end
 end
