@@ -1,12 +1,13 @@
 class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
-
   # GET /people
   # GET /people.json
   def index
     @people = Person.all
 
+    query = params[:query] || session[:query]
     sort = params[:sort] || session[:sort]
+
     case sort
     when 'first_name'
       ordering,@first_name_header = {:order => :first_name}, 'hilite'
@@ -20,14 +21,21 @@ class PeopleController < ApplicationController
       @selected_genders = Hash[@all_genders.map {|gender| [gender, gender]}]
     end
 
-    if params[:sort] != session[:sort] or params[:genders] != session[:genders]
+    if params[:sort] != session[:sort] or params[:genders] != session[:genders] or params[:query] != session[:query]
       session[:sort] = sort
       session[:genders] = @selected_genders
-      redirect_to :sort => sort, :genders => @selected_genders and return
+      session[:query] = query
+      redirect_to :sort => sort, :genders => @selected_genders, :query => query and return
     end
-    @people = Person.find_all_by_gender(@selected_genders.keys, ordering)
 
-
+    if query
+       gender_results = Person.find_all_by_gender(@selected_genders.keys, ordering)
+       people_results = Person.where('first_name NOT LIKE ? AND last_name NOT LIKE ?', "%#{query}%", "%#{query}%")
+       @people = (gender_results - people_results).uniq
+       
+    else
+      @people = Person.find_all_by_gender(@selected_genders.keys, ordering)
+    end
   end
 
   # GET /people/1
