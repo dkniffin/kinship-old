@@ -16,8 +16,12 @@ class Person < ActiveRecord::Base
 	# Aloow blank values; see private method default_values for details
 	validates :first_name, :presence => true, :allow_blank => true
 	validates :last_name, :presence => true, :allow_blank => true
-	validates :gender, :presence => true, :allow_blank => true
+
+	VALID_GENDERS = ['M', 'F']
+	validates :gender, :presence => true, inclusion: {in: VALID_GENDERS},:allow_blank => true
 	validates_associated :birth
+
+	
 
 	def father
 		birth.father
@@ -41,7 +45,7 @@ class Person < ActiveRecord::Base
     end
 
 	def self.all_genders
-		%w(M F)
+		VALID_GENDERS
 	end
 
 	private
