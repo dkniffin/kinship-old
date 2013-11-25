@@ -1,6 +1,10 @@
 class Place < ActiveRecord::Base
 	before_validation :default_values
 
+	geocoded_by :full_address, :latitude  => :lat, :longitude => :lon
+	after_validation :geocode
+
+
 	def full_address
 		self.street_address + ', '
 		self.city + ', '
