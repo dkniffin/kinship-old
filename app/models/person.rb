@@ -17,7 +17,7 @@ class Person < ActiveRecord::Base
 	validates :first_name, :presence => true, :allow_blank => true
 	validates :last_name, :presence => true, :allow_blank => true
 
-	VALID_GENDERS = ['', 'M', 'F']
+	VALID_GENDERS = ['M', 'F']
 	validates :gender, :presence => true, inclusion: {in: VALID_GENDERS},:allow_blank => true
 	validates_associated :birth
 

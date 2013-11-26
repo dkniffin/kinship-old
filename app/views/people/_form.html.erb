@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :gender %><br>
-    <%= f.collection_select :gender, Person.all_genders, :upcase, :upcase %>
+    <%= f.collection_select :gender, [''] + Person.all_genders, :upcase, :upcase %>
   </div>
   <%= f.fields_for :birth do |ff| %>
     <div>
