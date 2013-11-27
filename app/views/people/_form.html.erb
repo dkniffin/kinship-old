@@ -30,11 +30,11 @@
     </div>
     <div>
       <%= ff.label :father_id, "Father ID" %>
-      <%= ff.collection_select :father_id, Person.all, :id, :full_name_and_id %>
+      <%= ff.collection_select :father_id, Person.all, :id, :full_name_and_id, {include_blank: true} %>
     </div>
     <div>
       <%= ff.label :mother_id, "Mother ID" %>
-      <%= ff.collection_select :mother_id, Person.all, :id, :full_name_and_id %>
+      <%= ff.collection_select :mother_id, Person.all, :id, :full_name_and_id, {include_blank: true} %>
     </div>
   <% end %>
   <div class="field">
