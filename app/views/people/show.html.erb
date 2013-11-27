@@ -34,12 +34,17 @@
 	<% end %>
 </div>
 <% if @person.mother %>
-  <p>Mother: <%= link_to "#{@person.mother.first_name} #{@person.mother.last_name}", @person.mother%></p>
+  <p>Mother: <%= link_to @person.mother.full_name, @person.mother%></p>
 <% else %>
-  <p>Mother: <%= link_to new_person_path, :class => 'btn btn-primary' do %>Add Mother <i class="icon-plus icon-white"></i><%end%></p>
+  <p>Mother: <%= link_to edit_person_path, :class => 'btn btn-primary' do %>Add Mother <i class="icon-plus icon-white"></i><%end%></p>
 <% end %>
 <% if @person.father %>
-  <p>Father: <%= link_to "#{@person.father.first_name} #{@person.father.last_name}", @person.father%></p>
+  <p>Father: <%= link_to @person.father.full_name, @person.father%></p>
 <% else %>
-  <p>Father: <%= link_to new_person_path, :class => 'btn btn-primary' do %>Add Father <i class="icon-plus icon-white"></i><%end%></p>
+  <p>Father: <%= link_to edit_person_path, :class => 'btn btn-primary' do %>Add Father <i class="icon-plus icon-white"></i><%end%></p>
+<% end %>
+
+<p>Children: </p>
+<% @children.each do |child| %>
+  <%= link_to child.full_name, child %><br>
 <% end %>

@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :gender %><br>
-    <%= f.collection_select :gender, [' '] + Person.all_genders, :to_str, :to_str %>
+    <%= f.select :gender, [' '] + Person.all_genders %>
   </div>
   <%= f.fields_for :birth do |ff| %>
     <div>
@@ -30,11 +30,11 @@
     </div>
     <div>
       <%= ff.label :father_id, "Father ID" %>
-      <%= ff.text_field :father_id %>
+      <%= ff.collection_select :father_id, Person.all, :id, :full_name_and_id %>
     </div>
     <div>
       <%= ff.label :mother_id, "Mother ID" %>
-      <%= ff.text_field :mother_id %>
+      <%= ff.collection_select :mother_id, Person.all, :id, :full_name_and_id %>
     </div>
   <% end %>
   <div class="field">

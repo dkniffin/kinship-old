@@ -35,6 +35,10 @@ class Person < ActiveRecord::Base
 		first_name + ' ' + last_name
 	end
 
+  def full_name_and_id
+    first_name + ' ' + last_name + " \(#{id}\)"
+  end
+
 	def age
 		return nil if birth.date.nil?
 
