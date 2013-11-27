@@ -33,6 +33,13 @@
 		</table>
 	<% end %>
 </div>
-
-<p>Mother: <%= @person.mother %></p>
-<p>Father: <%= @person.father %></p>
+<% if @person.mother %>
+  <p>Mother: <%= link_to "#{@person.mother.first_name} #{@person.mother.last_name}", @person.mother%></p>
+<% else %>
+  <p>Mother: <%= link_to new_person_path, :class => 'btn btn-primary' do %>Add Mother <i class="icon-plus icon-white"></i><%end%></p>
+<% end %>
+<% if @person.father %>
+  <p>Father: <%= link_to "#{@person.father.first_name} #{@person.father.last_name}", @person.father%></p>
+<% else %>
+  <p>Father: <%= link_to new_person_path, :class => 'btn btn-primary' do %>Add Father <i class="icon-plus icon-white"></i><%end%></p>
+<% end %>

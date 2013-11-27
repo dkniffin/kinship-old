@@ -13,7 +13,7 @@ class Person < ActiveRecord::Base
 	has_one :birth, :foreign_key => "child_id"
 	accepts_nested_attributes_for :birth
 
-	# Aloow blank values; see private method default_values for details
+	# Allow blank values; see private method default_values for details
 	validates :first_name, :presence => true, :allow_blank => true
 	validates :last_name, :presence => true, :allow_blank => true
 
