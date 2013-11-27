@@ -20,6 +20,10 @@ class PeopleController < ApplicationController
     if @selected_genders == {}
       @selected_genders = Hash[@all_genders.map {|gender| [gender, gender]}]
     end
+    # Allow searching for people with no gender specified
+    if @selected_genders.keys.include?('M') and @selected_genders.keys.include?('F')
+       @selected_genders[' '] = "1"
+    end
 
     if params[:sort] != session[:sort] or params[:genders] != session[:genders] or params[:query] != session[:query]
       session[:sort] = sort
