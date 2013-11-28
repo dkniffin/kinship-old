@@ -1,12 +1,12 @@
 <h3>Statistics</h3><br>
 <h4>Men vs. Women</h4>
-<div class="chart" left="100px">
+<div class="chart">
     <script type="text/javascript">
 
-    var w = 500,                        //width
+    var w = 300,                        //width
     h = 300,                            //height
     r = 100,                            //radius
-    l = 250, //distance from left
+    l = 200, //distance from left
     color = d3.scale.category20c();     //builtin range of colors
     data = [{"label":"men (<%=@men.length%>)", "value":<%=@men.length%>}, 
             {"label":"women (<%=@women.length%>)", "value":<%=@women.length%>}];
