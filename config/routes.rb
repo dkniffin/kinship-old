@@ -1,6 +1,7 @@
 Kinship::Application.routes.draw do
   resources :places
 
+  match '/people/stats', to: 'people#stats', via: 'get'
   resources :people
   match '/people/new', to: 'people#new', via: 'post'
 
@@ -12,6 +13,7 @@ Kinship::Application.routes.draw do
 
   # "Static" Pages
   get "static_pages/home"
+  get "static_pages/test"
   match '/home',   to: 'static_pages#home', via: 'get'
 
   # Request an account, Signin, Signout

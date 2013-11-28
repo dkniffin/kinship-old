@@ -101,6 +101,11 @@ class PeopleController < ApplicationController
     end
   end
 
+  def stats
+    @women = Person.find_all_by_gender('F')
+    @men = Person.find_all_by_gender('M')
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_person
