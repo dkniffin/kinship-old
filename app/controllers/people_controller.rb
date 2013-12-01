@@ -1,4 +1,5 @@
 class PeopleController < ApplicationController
+  include PeopleHelper
   before_action :set_person, only: [:show, :edit, :update, :destroy]
   # GET /people
   # GET /people.json
@@ -50,6 +51,8 @@ class PeopleController < ApplicationController
     children_ids = Birth.find_all_by_father_id(params[:id]).map {|elt| elt.child_id}
     children_ids += Birth.find_all_by_mother_id(params[:id]).map {|elt| elt.child_id}
     @children = Person.find_all_by_id(children_ids)
+    get_json_tree(@person)
+    
   end
 
   # GET /people/new
