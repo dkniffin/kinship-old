@@ -24,6 +24,9 @@ class Place < ActiveRecord::Base
 			self.county 		||= ''
 			self.state 			||= ''
 			self.country 		||= ''
+			self.lat 			||= 37.09024
+			self.lon 			||= -95.712891
+
 		end
 
 end

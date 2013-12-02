@@ -27,7 +27,7 @@
 </ul>
 
 <div id="tabs" class="tab-content">
-  <div id="events-tab" class="tab-pane active">
+  <div id="events-tab" class="tab-pane active"> <!--id="facts-box" -->
   	<% if @eventsFormat == 'data-list' %>
   		<dl class="dl-horizontal">
   			<dt>Event Name</dt>
@@ -41,7 +41,7 @@
   				<td class="span8">Event Details</td>
   			</tr>
   		</table>
-  	<% end %> <!--id="facts-box" -->
+  	<% end %>
   </div>
 
   <div id="family-tab" class="tab-pane">
@@ -239,17 +239,25 @@
   </div>
 
   <div id="map-tab" class="tab-pane">
-    <style>
+    
+  </div>
+</div>
+<style>
     #map {
+      width: 500px;
       height: 500px;
     }
     </style>
-    <div id='map' class="span11"></div>
+    lat: <%= @person.birth.place.lat %><br/>
+    lon: <%= @person.birth.place.lon %><br/>
+
+
+    <div id='map'></div>
 
     <%= 
       map(:center => {
           :latlng => [@person.birth.place.lat, @person.birth.place.lon],
-          :zoom => 20
+          :zoom => 0
       },
       :markers => [
         {
@@ -257,5 +265,4 @@
         }
       ]) 
     %>
-  </div>
-</div>
+
