@@ -17,7 +17,7 @@ gem "rails-settings-cached", "0.3.1"
 
 # For places and map
 gem "geocoder", "~> 1.1.8"
-#gem "leaflet-rails", "~> 0.7.0"
+gem "leaflet-rails", "~> 0.7.0"
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record

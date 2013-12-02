@@ -1,6 +1,8 @@
 class Place < ActiveRecord::Base
 	before_validation :default_values
 
+	belongs_to :birth
+
 	geocoded_by :full_address, :latitude  => :lat, :longitude => :lon
 	after_validation :geocode
 

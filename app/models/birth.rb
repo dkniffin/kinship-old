@@ -1,5 +1,9 @@
 class Birth < ActiveRecord::Base
+	before_create :build_default_place
+
 	belongs_to :child, :class_name => "Person", :foreign_key => "child"
+
+	has_one :place
 
 	validate :parents_born_before_child
 
@@ -36,5 +40,8 @@ class Birth < ActiveRecord::Base
 				mother.birth.date >= date
 				errors.add(:mother, "can't be born before child")
 			end
+		end
+		def build_default_place
+			build_place if place.nil? 
 		end
 end

@@ -215,3 +215,22 @@ function click(d) {
 
 </script>
 
+<style>
+#map {
+  width: 500px;
+  height: 500px;
+}
+</style>
+<div id='map'></div>
+
+<%= 
+  map(:center => {
+      :latlng => [@person.birth.place.lat, @person.birth.place.lon],
+      :zoom => 10
+  },
+  :markers => [
+    {
+      :latlng => [@person.birth.place.lat, @person.birth.place.lon]
+    }
+  ]) 
+%>
