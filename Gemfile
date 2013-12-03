@@ -30,6 +30,7 @@ group :test do
   gem 'capybara', '2.1.0'
   gem 'factory_girl_rails', '4.2.1'
   gem 'cucumber-rails', :require => false
+  gem 'cucumber-rails-training-wheels'
   gem 'database_cleaner'
 end
 
@@ -38,7 +39,6 @@ group :production do
   gem 'rails_12factor', '0.0.2'
 end
 
-gem 'cucumber-rails-training-wheels'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
