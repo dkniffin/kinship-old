@@ -24,17 +24,31 @@
     <%= f.select :gender, [' '] + Person.all_genders %>
   </div>
   <%= f.fields_for :birth do |ff| %>
-    <div>
+    <div class="field">
       <%= ff.label :date, "Birth Date" %>
       <%= ff.date_field :date %>
     </div>
-    <div>
-      <%= ff.label :father_id, "Father ID" %>
+    <div class="field">
+      <%= ff.label :father_id, "Father" %>
       <%= ff.collection_select :father_id, Person.all, :id, :full_name_and_id, {include_blank: true} %>
     </div>
-    <div>
-      <%= ff.label :mother_id, "Mother ID" %>
+    <div class="field">
+      <%= ff.label :mother_id, "Mother" %>
       <%= ff.collection_select :mother_id, Person.all, :id, :full_name_and_id, {include_blank: true} %>
+    </div>
+  <% end %>
+  <%= f.fields_for :death do |ff| %>
+    <div class="field">
+      <%= ff.label :dead, "Dead" %>
+      <%= ff.check_box :dead %>
+    </div>
+    <div class="field">
+      <%= ff.label :date, "Death Date" %>
+      <%= ff.date_field :date %>
+    </div>
+    <div class="field">
+      <%= ff.label :cause, "Cause of Death" %>
+      <%= ff.text_field :cause %>
     </div>
   <% end %>
   <div class="field">

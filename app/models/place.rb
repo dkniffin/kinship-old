@@ -15,6 +15,9 @@ class Place < ActiveRecord::Base
 		self.state + ', '
 		self.country
 	end
+	def full_address_and_id
+		full_address + " \(#{id}\)"
+	end
 
 	private
 		def default_values
