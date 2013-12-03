@@ -6,7 +6,7 @@ class PeopleController < ApplicationController
   def index
     @people = Person.all
 
-    query = params[:query] || session[:query]
+    query = params[:query]
     sort = params[:sort] || session[:sort]
 
     case sort
@@ -16,7 +16,7 @@ class PeopleController < ApplicationController
       ordering,@last_name_header = {:order => :last_name}, 'hilite'
     end
     @all_genders = Person.all_genders
-    @selected_genders = params[:genders] || session[:genders] || {}
+    @selected_genders = params[:genders] || {}
 
     if @selected_genders == {}
       @selected_genders = Hash[@all_genders.map {|gender| [gender, gender]}]
@@ -48,9 +48,7 @@ class PeopleController < ApplicationController
   def show
     @person = Person.find(params[:id])
     @eventsFormat = Setting.eventsFormat
-    children_ids = Birth.find_all_by_father_id(params[:id]).map {|elt| elt.child_id}
-    children_ids += Birth.find_all_by_mother_id(params[:id]).map {|elt| elt.child_id}
-    @children = Person.find_all_by_id(children_ids)
+    @children = @person.children
     get_json_tree(@person)
     
   end
@@ -101,6 +99,15 @@ class PeopleController < ApplicationController
     respond_to do |format|
       format.html { redirect_to people_url }
       format.json { head :no_content }
+    end
+    # Clear the record of the person in Birth
+    Birth.find_all_by_father_id(@person.id).each do |child|
+      child.father_id = nil
+      child.save
+    end
+    Birth.find_all_by_mother_id(@person.id).each do |child|
+      child.mother_id = nil
+      child.save
     end
   end
 

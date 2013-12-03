@@ -39,6 +39,12 @@ class Person < ActiveRecord::Base
     first_name + ' ' + last_name + " \(#{id}\)"
   end
 
+  def children
+    children_ids = Birth.find_all_by_father_id(id).map {|elt| elt.child_id}
+    children_ids += Birth.find_all_by_mother_id(id).map {|elt| elt.child_id}
+    return Person.find_all_by_id(children_ids)
+  end
+
 	def age
 		return nil if birth.date.nil?
 
