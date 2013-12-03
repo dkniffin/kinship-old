@@ -11,8 +11,15 @@
 		  <strong>Gender:</strong>
 		  <%= @person.gender %>
 		</p>
-		<p>Birth date: <%= @person.birth.date %> (Age: <%= @person.age %>)</p>
-
+		<p>Birth date: <%= @person.birth.date %></p>
+    <p>Dead: <%= @person.death.dead.yesno %></p>
+    <% if @person.alive? %>
+      <p>Age: <%= @person.age %></p>
+    <% else %>
+      <p>Age at death: <%= @person.age('death_date') %></p>
+      <p>Death date: <%= @person.death.date %></p>
+      <p>Cause of Death: <%= @person.death.cause %></p>
+    <% end %>
 
 		<%= link_to 'Edit', edit_person_path(@person) %> |
 		<%= link_to 'Back', people_path %>
