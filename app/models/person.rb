@@ -4,7 +4,7 @@ class Person < ActiveRecord::Base
 
 	# Photo stuff
 	has_attached_file :photo, :styles => { :small => "256x256>" },
-		:default_url => "/assets/default_avatar.png",
+		:default_url => :set_default_avatar,
 		:url  => "/assets/products/:id/:style/:basename.:extension",
 		:path => ":rails_root/public/assets/products/:id/:style/:basename.:extension"
 	validates_attachment_size :photo, :less_than => 5.megabytes
@@ -91,4 +91,11 @@ class Person < ActiveRecord::Base
 		def build_default_death
 			build_death if death.nil? 
 		end
+    def set_default_avatar
+      if gender == "F"
+        default_avatar = "/assets/default_female_avatar.png"
+      else
+        default_avatar = "/assets/default_male_avatar.png"
+      end
+    end
 end
