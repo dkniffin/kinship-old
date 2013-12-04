@@ -3,6 +3,7 @@
 	<tr>
 		<th>Username</th>
 		<th>Email</th>
+		<th>Person ID</th>
 		<th>Role</th>
 		<th>Edit</th>
 		<th>Delete</th>
@@ -11,6 +12,24 @@
 		<tr class="<%= 'warning' if user.role == User::ROLE_UNAPPROVED %>" >
 			<td><%= user.username %></td>
 			<td><%= user.email %></td>
+			<td>
+			<div class="btn-group">
+					<a class='btn dropdown-toggle' data-toggle="dropdown" href="#">
+						<%= user.person_id %>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><%= link_to update_person_user_path(:id => user, :person_id => nil), :method => :patch do %>&nbsp;<% end %></li>
+						<% Person.find_each() do |person| %>
+							<li class="<%= 'active' if person.id == user.person_id%>">
+								<%= link_to update_person_user_path(:id => user, :person_id => person.id), :method => :patch do %>
+									<%= person.id %>
+								<% end %>
+							</li>
+						<% end %>
+					</ul>
+				</div>
+			</td>
 			<td>
 				<div class="btn-group">
 					<a class='btn dropdown-toggle <%= 'disabled' if user.username == 'admin'%>' data-toggle="dropdown" href="#">

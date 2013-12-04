@@ -33,6 +33,16 @@ class UsersController < ApplicationController
 		redirect_to :back
 	end
 
+	def update_person
+		@user = User.find(params[:id])
+		if @user.update_attribute(:person_id, params[:person_id])
+			flash[:success] = "Person Changed"
+		else
+			flash[:error] = "Error"
+		end
+		redirect_to :back
+	end
+
 	def create
 	    @user = User.new(user_params)
 		if @user.save

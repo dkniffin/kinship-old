@@ -21,6 +21,9 @@ class Person < ActiveRecord::Base
 	accepts_nested_attributes_for :death
 	validates_associated :death
 
+	# User
+	has_one :user
+
 	# Other Validations
 	# Allow blank values; see private method default_values for details
 	validates :first_name, :presence => true, :allow_blank => true

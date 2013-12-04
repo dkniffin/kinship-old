@@ -24,6 +24,9 @@ Kinship::Application.routes.draw do
     member do
       patch 'update_role'
     end
+    member do
+      patch 'update_person'
+    end
   end
   resources :sessions, only: [:new, :create, :destroy]
 

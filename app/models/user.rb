@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
 			 ROLE_ADMIN = 'admin']
     validates :role, presence: true, inclusion: {in: ROLES}
 
+    belongs_to :person
+
 	def User.new_remember_token
 		SecureRandom.urlsafe_base64
 	end
