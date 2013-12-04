@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131203164028) do
+ActiveRecord::Schema.define(version: 20131204194435) do
 
   create_table "births", force: true do |t|
     t.date     "date"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20131203164028) do
     t.integer  "mother_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "place_id"
   end
 
   create_table "deaths", force: true do |t|
@@ -55,7 +56,6 @@ ActiveRecord::Schema.define(version: 20131203164028) do
     t.datetime "updated_at"
     t.float    "lat"
     t.float    "lon"
-    t.integer  "birth_id"
   end
 
   create_table "settings", force: true do |t|

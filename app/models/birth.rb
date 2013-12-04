@@ -1,9 +1,9 @@
 class Birth < ActiveRecord::Base
-	before_create :build_default_place
+	before_save :build_default_place
 
 	belongs_to :child, :class_name => "Person", :foreign_key => "child"
 
-	has_one :place
+	belongs_to :place, :autosave => true
 
 	validate :parents_born_before_child
 
