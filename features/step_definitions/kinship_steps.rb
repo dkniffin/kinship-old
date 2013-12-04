@@ -131,6 +131,21 @@ end
 Given /^I enter "(.*?)" in the search box$/ do |arg1|
   fill_in 'query', :with => arg1
 end
+
+Given /^I enter "(.*?)" for the Homepage Blurb$/ do |arg1|
+  fill_in 'blurb', :with => arg1
+end
+
+Given /^I enter "(.*?)" for the Site Header$/ do |arg1|
+  fill_in 'site_header', :with => arg1
+end
+
+Given /^I log in as "(.*?)" with password "(.*?)"$/ do |username, password|
+  visit path_to('the Sign in page')
+  fill_in 'session_username', :with => username
+  fill_in 'session_password', :with => password
+  click_button('Sign in')
+end
 ################### End Custom Steps ################################
 
 Then /^(?:|I )should see "([^"]*)"$/ do |text|

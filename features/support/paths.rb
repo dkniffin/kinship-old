@@ -9,6 +9,8 @@ module NavigationHelpers
     case page_name
 
     when /^the (People|Person)\s*index\s*page/ then '/people'
+    when /^the\s*Admin\s*Look\s*&\s*Feel\s*Page/i then '/admin/look_and_feel'
+    when /^the\s*Sign\s*in\s*page/i then '/signin'
     else
       begin
         page_name =~ /^the (.*) page$/

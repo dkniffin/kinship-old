@@ -32,6 +32,7 @@ group :test do
   gem 'cucumber-rails', :require => false
   gem 'cucumber-rails-training-wheels'
   gem 'database_cleaner'
+  gem 'launchy', '~> 2.1.2'
 end
 
 group :production do
