@@ -3,7 +3,7 @@
 <p id="notice"><%= notice %></p>
 
 <div class="row">
-	<%= image_tag @person.photo.url(:small), id: 'photo', class: 'span3' %>
+	<%= image_tag @person.photo.url(:medium), id: 'photo', class: 'span3' %>
 	<div class="span9">
 		<h3 id='full_name'> <%= @person.full_name %> </h3>
 

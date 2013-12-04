@@ -3,10 +3,11 @@ class Person < ActiveRecord::Base
 	before_create :build_default_birth, :build_default_death
 
 	# Photo stuff
-	has_attached_file :photo, :styles => { :small => "256x256>" },
+	has_attached_file :photo, 
+    :styles => { :medium => "256x256>", :small => "64x64>", :tiny => "24x24>" },
 		:default_url => :set_default_avatar,
-		:url  => "/assets/products/:id/:style/:basename.:extension",
-		:path => ":rails_root/public/assets/products/:id/:style/:basename.:extension"
+		:url  => "/assets/photos/:id/:style/:basename.:extension",
+		:path => ":rails_root/public/assets/photos/:id/:style/:basename.:extension"
 	validates_attachment_size :photo, :less_than => 5.megabytes
 	validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png']
 
@@ -93,9 +94,9 @@ class Person < ActiveRecord::Base
 		end
     def set_default_avatar
       if gender == "F"
-        default_avatar = "/assets/default_female_avatar.png"
+        default_avatar = "/assets/default_:style_female_avatar.png"
       else
-        default_avatar = "/assets/default_male_avatar.png"
+        default_avatar = "/assets/default_:style_male_avatar.png"
       end
     end
 end
