@@ -88,6 +88,32 @@ When /I (un)?check the following genders: (.*)/ do |uncheck, gender_list|
   end
 end
 
+Then /I should see the following people: (.*)/i do |people_list|
+  @people_list = people_list.gsub(/\s+/,"").split(",")
+  @people = Person.where(:first_name => @people_list)
+  @people.each do | person |
+     text = person.first_name
+     if page.respond_to? :should
+        page.should have_content(text)
+     else
+        assert page.has_no_content?(text)
+     end
+  end
+end
+Then /I should not see the following people: (.*)/i do |people_list|
+  @people_list = people_list.gsub(/\s+/,"").split(",")
+  @people = Person.where(:first_name => @people_list)
+  @people.each do | person |
+     text = person.first_name
+     if page.respond_to? :should
+        page.should_not have_content(text)
+     else
+        assert page.has_content?(text)
+     end
+  end
+end
+
+
 # Code for checking that all genders gives all people
 Given /^I check all genders$/ do
   @genders = Person.select("DISTINCT gender").map(&:gender).sort
@@ -100,6 +126,10 @@ Then /^I should see all people$/ do
   @num_people = Person.all.length
   @num_rows = all("tbody tr").length 
   @num_rows.should == @num_people
+end
+
+Given /^I enter "(.*?)" in the search box$/ do |arg1|
+  fill_in 'query', :with => arg1
 end
 ################### End Custom Steps ################################
 
