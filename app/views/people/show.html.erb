@@ -5,24 +5,16 @@
 <div class="row">
 	<%= image_tag @person.photo.url(:medium), id: 'photo', class: 'span3' %>
 	<div class="span9">
-		<h3 id='full_name'> <%= @person.full_name %> </h3>
+		<h3 id='full_name'> <%= @person.full_name %> (<%= @person.gender %>)</h3> 
 
-		<p>
-		  <strong>Gender:</strong>
-		  <%= @person.gender %>
-		</p>
 		<p>Birth date: <%= @person.birth.date %></p>
-    <p>Dead: <%= @person.death.dead.yesno %></p>
-    <% if @person.alive? %>
-      <p>Age: <%= @person.age %></p>
-    <% else %>
-      <p>Age at death: <%= @person.age('death_date') %></p>
+    <% if !@person.alive? %>
       <p>Death date: <%= @person.death.date %></p>
-      <p>Cause of Death: <%= @person.death.cause %></p>
     <% end %>
 
-		<%= link_to 'Edit', edit_person_path(@person) %> |
-		<%= link_to 'Back', people_path %>
+		<%= link_to edit_person_path(@person), :class => 'btn btn-primary' do %>
+      <i class="icon-edit icon-white"></i> Edit
+    <% end %>
 	</div>
 </div>
 
@@ -58,7 +50,7 @@
         <% if @person.mother %>
           <p><%= link_to @person.mother.full_name, @person.mother%></p>
         <% else %>
-          <p><%= link_to edit_person_path, :class => 'btn btn-primary' do %>Add Mother <i class="icon-plus icon-white"></i><%end%></p>
+          <p><%= link_to edit_person_path, :class => 'btn btn-primary' do %><i class="icon-plus icon-white"></i> Add Mother<%end%></p>
         <% end %>
       </dd>
       <dt>Father</dt>
@@ -66,7 +58,7 @@
         <% if @person.father %>
           <p><%= link_to @person.father.full_name, @person.father%></p>
         <% else %>
-          <p><%= link_to edit_person_path, :class => 'btn btn-primary' do %>Add Father <i class="icon-plus icon-white"></i><%end%></p>
+          <p><%= link_to edit_person_path, :class => 'btn btn-primary' do %><i class="icon-plus icon-white"></i> Add Father<%end%></p>
         <% end %>
       </dd>
       <% @children.each do |child| %>
