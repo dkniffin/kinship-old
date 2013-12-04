@@ -142,8 +142,8 @@ end
 
 Given /^I log in as "(.*?)" with password "(.*?)"$/ do |username, password|
   visit path_to('the Sign in page')
-  fill_in 'session_username', :with => username
-  fill_in 'session_password', :with => password
+  fill_in 'Username', :with => username
+  fill_in 'Password', :with => password
   click_button('Sign in')
 end
 ################### End Custom Steps ################################
