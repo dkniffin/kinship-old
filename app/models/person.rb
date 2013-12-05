@@ -70,7 +70,20 @@ class Person < ActiveRecord::Base
 		diff = date - birth.date
 		age = (diff / 365.25).floor
 		age.to_s	
-    end
+	end
+
+	def events
+	    e = []
+
+	    if !birth.nil?
+		e.push(birth)
+	    end
+	    if death.dead
+		e.push(death)
+	    end
+
+	    return e
+	end
 
 	def self.all_genders
 		VALID_GENDERS

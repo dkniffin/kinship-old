@@ -34,11 +34,15 @@
   		</dl>
   	<% elsif @eventsFormat == 'timeline' %>
   		<table>
+                  <% @person.events.each do |event| %>
   			<tr>
-  				<td class="span3">Event Name</td>
-  				<td class="span1"><i class='icon-glass'></i></td>
-  				<td class="span8">Event Details</td>
+                          <td class="span2"><%= event.date.strftime('%B %-d, %Y') %></td>
+                          <td class="span1">
+                            <i class='<%= event.icon_class %>'></i>
+                          </td>
+                          <td class="span8"><%= event.short_description %></td>
   			</tr>
+                  <% end %>
   		</table>
   	<% end %>
   </div>

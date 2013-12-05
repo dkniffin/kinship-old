@@ -8,6 +8,13 @@ class Death < ActiveRecord::Base
 	belongs_to :person
 	belongs_to :place, :autosave => true
 
+	def short_description
+		person.full_name + ' died'
+	end
+
+	def icon_class
+		'icon-cemetery'
+	end
 
 	private
 		def dead_if_date

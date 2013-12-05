@@ -1,7 +1,7 @@
 class Birth < ActiveRecord::Base
 	before_save :build_default_place
 
-	belongs_to :child, :class_name => "Person", :foreign_key => "child"
+	belongs_to :child, :class_name => "Person"
 
 	belongs_to :place, :autosave => true
 
@@ -21,6 +21,18 @@ class Birth < ActiveRecord::Base
 		else
 			nil
 		end
+	end
+
+	def parents_string
+		mother.full_name + ' and ' + father.full_name
+	end
+
+	def short_description
+		child.full_name + ' was born'
+	end
+
+	def icon_class
+		'icon-baby'
 	end
 
 	private
