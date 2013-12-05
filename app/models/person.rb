@@ -69,7 +69,7 @@ class Person < ActiveRecord::Base
 
 		diff = date - birth.date
 		age = (diff / 365.25).floor
-		age.to_s	
+		age
 	end
 
 	def events

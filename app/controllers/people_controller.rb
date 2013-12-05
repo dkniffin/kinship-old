@@ -112,8 +112,32 @@ class PeopleController < ApplicationController
   end
 
   def stats
+    # Gender distribution
     @women = Person.find_all_by_gender('F')
     @men = Person.find_all_by_gender('M')
+
+    # Average lifespan by century
+    lifespan_total = Array.new(Date.today.century + 1, 0)
+    @lifespan = Array.new(Date.today.century + 1, 0)
+    @family_population_per_century = Array.new(Date.today.century + 1, 0)
+    Person.all.each do |person|
+      if person.death.date.nil?
+        next
+      elsif person.birth.date.nil?
+        next
+      else
+        c = person.death.date.century
+        lifespan_total[c] += person.age('death_date')
+        @family_population_per_century[c] += 1
+      end
+    end
+
+    lifespan_total.each_with_index do |total_lifespan, index|
+      if @family_population_per_century[index] == 0
+        next
+      end
+      @lifespan[index] = total_lifespan / @family_population_per_century[index]
+    end
   end
 
   private
