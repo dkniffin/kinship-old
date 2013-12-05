@@ -36,7 +36,13 @@
   		<table>
                   <% @person.events.each do |event| %>
   			<tr>
-                          <td class="span2"><%= event.date.strftime('%B %-d, %Y') %></td>
+                          <td class="span2">
+                            <% if event.date.nil? %>
+                              Unknown
+                            <% else %>
+                              <%= event.date.strftime('%B %-d, %Y') %>
+                            <% end %>
+                          </td>
                           <td class="span1">
                             <i class='<%= event.icon_class %>'></i>
                           </td>
