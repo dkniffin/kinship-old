@@ -9,3 +9,9 @@ class FalseClass
     "No"
   end
 end
+
+class NilClass
+  def yesno
+    "No"
+  end
+end
