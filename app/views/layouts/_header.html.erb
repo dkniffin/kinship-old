@@ -6,7 +6,7 @@
       <nav>
         <ul class="nav pull-right">
           <li><%= link_to "Home", root_path %></li>
-          <li><%= link_to "Help", '#' %></li>
+          <li><%= link_to "Help", help_path %></li>
           <% if signed_in? %>
             <%= render 'layouts/navigation_dropdown' %>
             <%= render 'layouts/account_dropdown' %>

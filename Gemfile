@@ -7,7 +7,13 @@ gem 'd3-rails', '~> 3.3.7'
 gem 'rails', '4.0.1'
 gem 'bcrypt-ruby', '3.1.2'
 
+# For css/beautification
 gem 'bootstrap-sass', '2.3.2.0'
+
+# For security
+gem 'honeypot-captcha'
+gem 'simple_captcha', :git => 'git://github.com/galetahub/simple-captcha.git'
+gem 'protected_attributes', '~> 1.0.5 '
 
 # For file attachments
 gem "paperclip", "~> 3.0"

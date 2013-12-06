@@ -16,6 +16,8 @@ Kinship::Application.routes.draw do
   get "static_pages/test"
   match '/home',   to: 'static_pages#home', via: 'get'
 
+  # Help page
+  match 'help' => 'help#new', via: [:get, :post]
   # Request an account, Signin, Signout
   match '/signup', to: 'users#new',         via: 'get'
   match '/signin', to: 'sessions#new',      via: 'get'
