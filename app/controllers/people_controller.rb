@@ -50,6 +50,7 @@ class PeopleController < ApplicationController
     @eventsFormat = Setting.eventsFormat
     @children = @person.children
     get_json_tree(@person)
+    @json_pedigree_tree = get_json_pedigree_tree(@person)
     
   end
 

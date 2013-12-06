@@ -24,4 +24,18 @@ module PeopleHelper
     end
   end
 
+  def get_json_pedigree_tree(person)
+    json_pedigree_tree = { :name => person.full_name, :born => (person.birth.date || ""), :died => (person.death.date || ""), :location => person.birth.place.city, :parents => []}
+    father = person.birth.father
+    mother = person.birth.mother
+    if father
+      json_pedigree_tree[:parents] << get_json_pedigree_tree(father)
+    end
+    if mother
+      json_pedigree_tree[:parents] << get_json_pedigree_tree(mother)
+    end
+    return json_pedigree_tree
+  end
+
+
 end
