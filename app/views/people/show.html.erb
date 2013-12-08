@@ -32,25 +32,25 @@
   			<dt>Event Name</dt>
   			<dd>Event details</dd>
   		</dl>
-  	<% elsif @eventsFormat == 'timeline' %>
-  		<table>
-                  <% @person.events.each do |event| %>
-  			<tr>
-                          <td class="span2">
-                            <% if event.date.nil? %>
-                              Unknown
-                            <% else %>
-                              <%= event.date.strftime('%B %-d, %Y') %>
-                            <% end %>
-                          </td>
-                          <td class="span1">
-                            <i class='<%= event.icon_class %>'></i>
-                          </td>
-                          <td class="span8"><%= event.short_description %></td>
-  			</tr>
-                  <% end %>
-  		</table>
-  	<% end %>
+     <% elsif @eventsFormat == 'timeline' %>
+     <table>
+      <% @person.events.each do |event| %>
+      <tr>
+        <td class="span2">
+          <% if event.date.nil? %>
+          Unknown
+          <% else %>
+          <%= event.date.strftime('%B %-d, %Y') %>
+          <% end %>
+        </td>
+        <td class="span1">
+          <i class='<%= event.icon_class %>'></i>
+        </td>
+        <td class="span8"><%= event.short_description %></td>
+      </tr>
+      <% end %>
+    </table>
+    <% end %>
   </div>
 
   <div id="family-tab" class="tab-pane">
@@ -94,7 +94,7 @@
         .children(function(d) { return d.parents; })
         .size([height, width]);
     
-    var svg = d3.select("body").append("svg")
+    var svg = d3.select("#tree-container").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
       .append("g")
