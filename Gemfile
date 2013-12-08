@@ -12,8 +12,8 @@ gem 'bootstrap-sass', '2.3.2.0'
 
 # For security
 gem 'honeypot-captcha'
-gem 'simple_captcha', :git => 'git://github.com/galetahub/simple-captcha.git'
-gem 'protected_attributes', '~> 1.0.5 '
+gem 'simple_captcha', :git => 'git://github.com/pludoni/simple-captcha.git'
+#gem 'protected_attributes', '~> 1.0.5 '
 
 # For file attachments
 gem "paperclip", "~> 3.0"

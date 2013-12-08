@@ -1,8 +1,9 @@
 GIT
-  remote: git://github.com/galetahub/simple-captcha.git
-  revision: 3557b78feb5fa2624efce065ff77dd4775a8256f
+  remote: git://github.com/pludoni/simple-captcha.git
+  revision: fb6d99c47d95b60d48a4c4c15c938c8c415e5362
   specs:
-    simple_captcha (0.1.5)
+    simple_captcha (0.2.0)
+      rails (>= 3.1)
 
 GEM
   remote: https://rubygems.org/
@@ -115,8 +116,6 @@ GEM
       mime-types
     pg (0.15.1)
     polyglot (0.3.3)
-    protected_attributes (1.0.5)
-      activemodel (>= 4.0.1, < 5.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -216,7 +215,6 @@ DEPENDENCIES
   leaflet-rails (~> 0.7.0)
   paperclip (~> 3.0)
   pg (= 0.15.1)
-  protected_attributes (~> 1.0.5)
   rails (= 4.0.1)
   rails-settings-cached (= 0.3.1)
   rails_12factor (= 0.0.2)
