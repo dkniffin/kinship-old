@@ -9,7 +9,7 @@
 
 		<p>Birth date: <%= @person.birth.date %></p>
     <% if !@person.alive? %>
-      <p>Death date: <%= @person.death.date %></p>
+      <p>Death date: <%= @person.death.date %><%= " (age: " + @person.age.to_s + ")"%></p>
     <% end %>
 
 		<%= link_to edit_person_path(@person), :class => 'btn btn-primary' do %>
@@ -81,6 +81,7 @@
   </div>
 
   <div id="tree-tab" class="tab-pane">
+    <h4> Pedigree Tree </h4>
     <div id="tree-container"></div>
     <script src="http://d3js.org/d3.v2.min.js?2.9.4"></script>
     <script>

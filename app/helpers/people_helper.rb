@@ -25,7 +25,17 @@ module PeopleHelper
   end
 
   def get_json_pedigree_tree(person)
-    json_pedigree_tree = { :name => person.full_name, :born => (person.birth.date || ""), :died => (person.death.date || ""), :location => person.birth.place.city, :parents => []}
+    if person.birth.date
+      birthday = person.birth.date.strftime("%Y")
+    else
+      birthday = ""
+    end
+    if person.death.date
+      deathday = person.death.date.strftime("%Y")
+    else
+      deathday = ""
+    end
+    json_pedigree_tree = { :name => person.full_name, :born => birthday, :died => deathday, :location => person.birth.place.city, :parents => []}
     father = person.birth.father
     mother = person.birth.mother
     if father
