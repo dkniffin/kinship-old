@@ -65,8 +65,7 @@ class Person < ActiveRecord::Base
 	def age(date=Date.today)
 		return nil if birth.date.nil?
 
-		if (date === 'death_date')
-			return nil if death.date.nil?
+		if death.date
 			date = death.date
 		end
 
