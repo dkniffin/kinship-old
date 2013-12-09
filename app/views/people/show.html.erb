@@ -8,7 +8,12 @@
 	<div class="span9">
 		<h3 id='full_name'> <%= @person.full_name %> (<%= @person.gender %>)</h3> 
 
-		<p>Birth date: <%= @person.birth.date.strftime('%B %-d, %-Y') %></p>
+                                                                  
+		<p>Birth date: 
+      <% if @person.birth.date != nil%>
+        <%= @person.birth.date.strftime('%B %-d, %-Y') %>
+      <% end %>
+    </p>
     <% if !@person.alive? %>
       <p>Death date: <%= @person.death.date.strftime('%B %-d, %-Y') %><%= " (age: " + @person.age.to_s + ")"%></p>
     <% end %>
