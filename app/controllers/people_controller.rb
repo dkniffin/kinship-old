@@ -35,11 +35,11 @@ class PeopleController < ApplicationController
 
     @search_genders = @selected_genders.keys << ''
     if query
-       gender_results = Person.find_all_by_gender(@search_genders, ordering)
+       gender_results = Person.where(:gender => @search_genders)
        people_results = Person.where('first_name NOT LIKE ? AND last_name NOT LIKE ?', "%#{query}%", "%#{query}%")
        @people = (gender_results - people_results).uniq
     else
-      @people = Person.find_all_by_gender(@search_genders, ordering)
+      @people = Person.where(:gender => @search_genders)
     end
   end
 
@@ -52,7 +52,6 @@ class PeopleController < ApplicationController
     if @person.spouse_id
        @spouse = Person.find(@person.spouse_id)
     end
-    get_json_tree(@person)
     @json_pedigree_tree = get_json_pedigree_tree(@person)
     
   end
@@ -105,11 +104,11 @@ class PeopleController < ApplicationController
       format.json { head :no_content }
     end
     # Clear the record of the person in Birth
-    Birth.find_all_by_father_id(@person.id).each do |child|
+    Birth.where(:father_id => @person.id).each do |child|
       child.father_id = nil
       child.save
     end
-    Birth.find_all_by_mother_id(@person.id).each do |child|
+    Birth.where(:mother_id => @person.id).each do |child|
       child.mother_id = nil
       child.save
     end
@@ -117,8 +116,8 @@ class PeopleController < ApplicationController
 
   def stats
     # Gender distribution
-    @women = Person.find_all_by_gender('F')
-    @men = Person.find_all_by_gender('M')
+    @women = Person.where(:gender => 'F')
+    @men = Person.where(:gender => 'M')
 
     # Average lifespan by century
     lifespan_total = Array.new(Date.today.century + 1, 0)

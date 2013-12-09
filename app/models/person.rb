@@ -57,9 +57,9 @@ class Person < ActiveRecord::Base
 
 	def children
 		# TODO: Might be able to minimize the search here by basing it on gender
-		children_ids = Birth.find_all_by_father_id(id).map {|elt| elt.child_id}
-		children_ids += Birth.find_all_by_mother_id(id).map {|elt| elt.child_id}
-		return Person.find_all_by_id(children_ids)
+		children_ids = Birth.where(:father_id => id).map {|elt| elt.child_id}
+		children_ids += Birth.where(:father_id => id).map {|elt| elt.child_id}
+		return Person.where(:id => children_ids)
 	end
 
 	def age(date=Date.today)
