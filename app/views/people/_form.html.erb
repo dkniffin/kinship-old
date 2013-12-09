@@ -23,6 +23,10 @@
     <%= f.label :gender %><br>
     <%= f.select :gender, [' '] + Person.all_genders %>
   </div>
+  <div class="field">
+    <%= f.label :spouse_id, "Spouse" %>
+    <%= f.collection_select :spouse_id, Person.all, :id, :full_name_and_id, {include_blank: true} %>
+  </div>
   <%= f.fields_for :birth do |ff| %>
     <div class="field">
       <%= ff.label :date, "Birth Date" %>

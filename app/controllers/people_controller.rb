@@ -33,13 +33,13 @@ class PeopleController < ApplicationController
       redirect_to :sort => sort, :genders => @selected_genders, :query => query and return
     end
 
+    @search_genders = @selected_genders.keys << ''
     if query
-       gender_results = Person.find_all_by_gender(@selected_genders.keys, ordering)
+       gender_results = Person.find_all_by_gender(@search_genders, ordering)
        people_results = Person.where('first_name NOT LIKE ? AND last_name NOT LIKE ?', "%#{query}%", "%#{query}%")
        @people = (gender_results - people_results).uniq
-       
     else
-      @people = Person.find_all_by_gender(@selected_genders.keys, ordering)
+      @people = Person.find_all_by_gender(@search_genders, ordering)
     end
   end
 
@@ -49,6 +49,9 @@ class PeopleController < ApplicationController
     @person = Person.find(params[:id])
     @eventsFormat = Setting.eventsFormat
     @children = @person.children
+    if @person.spouse_id
+       @spouse = Person.find(@person.spouse_id)
+    end
     get_json_tree(@person)
     @json_pedigree_tree = get_json_pedigree_tree(@person)
     

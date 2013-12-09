@@ -12,6 +12,9 @@
     <% if !@person.alive? %>
       <p>Death date: <%= @person.death.date %><%= " (age: " + @person.age.to_s + ")"%></p>
     <% end %>
+    <% if @spouse%>
+      <p>Spouse: <%= link_to @spouse.full_name, @spouse %></p>
+    <% end %>
 
 		<%= link_to edit_person_path(@person), :class => 'btn btn-primary' do %>
       <i class="icon-edit icon-white"></i> Edit

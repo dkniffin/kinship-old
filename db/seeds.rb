@@ -14,16 +14,19 @@ User.create(username: 'admin',
 			password_confirmation: 'kinship')
 
 # Example people
-person1 = Person.create(first_name: 'Helen', last_name: 'Mills', gender: 'F')
-person2 = Person.create(first_name: 'Charles', last_name: 'Mills', gender: 'M')
-Person.create(first_name: 'Cheryl', last_name: 'Mills', gender: 'F', :birth => Birth.create(father_id: person2.id, mother_id: person1.id))
-person3 = Person.create(first_name: 'Claudia', last_name: 'Mills', gender: 'F', :birth => Birth.create(father_id: person2.id, mother_id: person1.id))
-person4 = Person.create(first_name: 'Velma', last_name: 'Wahl', gender: 'F')
-person5 = Person.create(first_name: 'Alfred', last_name: 'Wahl', gender: 'M')
-Person.create(first_name: 'Jerry', last_name: 'Wahl', gender: 'M', :birth => Birth.create(father_id: person4.id, mother_id: person5.id))
-person6 = Person.create(first_name: 'Richard', last_name: 'Wahl', gender: 'M', :birth => Birth.create(father_id: person4.id, mother_id: person5.id))
-Person.create(first_name: 'Greg', last_name: 'Wahl', gender: 'M', :birth => Birth.create(father_id: person6.id, mother_id: person3.id))
-Person.create(first_name: 'Christopher', last_name: 'Wahl', gender: 'M', :birth => Birth.create(father_id: person6.id, mother_id: person3.id))
+rickard = Person.create(:first_name => 'Rickard', :last_name => 'Stark', :gender => 'M', :death => Death.create(:dead => true, :date => '282-01-01'))
+brandon = Person.create(:first_name => 'Brandon', :last_name => 'Stark', :gender => 'M', :birth => Birth.create(:date => '261-01-01', :father_id => rickard.id), :death => Death.create(:dead => true, :date => '282-01-01'))
+lyanna = Person.create(:first_name => 'Lyanna', :last_name => 'Stark', :gender => 'F', :birth => Birth.create(:date => '268-01-01', :father_id => rickard.id), :death => Death.create(:dead => true, :date => '284-01-01'))
+eddard = Person.create(:first_name => 'Eddard', :last_name => 'Stark', :gender => 'M', :birth => Birth.create(:father_id => rickard.id, :date => '263-01-01'), :death => Death.create(:dead => true, :date => '298-01-01', :cause => 'Executed at order of Joffrey'))
+catelyn = Person.create(:first_name => 'Catelyn', :last_name => 'Tulley', :gender => 'F', :spouse_id => eddard.id, :birth => Birth.create(:date => '264-01-01'), :death => Death.create(:dead => true, :date => '299-01-1', :cause => 'The Red Wedding'))
+jeyne = Person.create(:first_name => 'Jeyne', :last_name => 'Westerling', :gender => 'F', :birth => Birth.create( :date => '284-01-01'), :death => Death.create(:dead => true, :date => '299-01-01',:cause => 'The Red Wedding'))
+rob = Person.create(:first_name => 'Rob', :last_name => 'Stark', :gender => 'M', :spouse_id => jeyne.id, :birth => Birth.create(:father_id => eddard.id, :mother_id => catelyn.id), :death => Death.create(:dead => true, :date => '299-01-01', :cause => 'The Red Wedding'))
+bran = Person.create(:first_name => 'Bran', :last_name => 'Stark', :gender => 'M', :birth => Birth.create(:father_id => eddard.id, :mother_id => catelyn.id, :date => '291-01-01'))
+sansa = Person.create(:first_name => 'Sansa', :last_name => 'Stark', :gender => 'F', :birth => Birth.create(:father_id => eddard.id, :mother_id => catelyn.id, :date => '286-01-01'))
+arya = Person.create(:first_name => 'Arya', :last_name => 'Stark', :gender => 'F', :birth => Birth.create(:father_id => eddard.id, :mother_id => catelyn.id, :date => '289-01-01'))
+rickon = Person.create(:first_name => 'Rickon', :last_name => 'Stark', :gender => 'M', :birth => Birth.create(:father_id => eddard.id, :mother_id => catelyn.id, :date => '295-01-01'))
+john = Person.create(:first_name => 'John', :last_name => 'Snow', :gender => 'M', :birth => Birth.create(:father_id => eddard.id, :date => '295-01-01'))
+
 
 # Default settings
 Setting.create(var: 'homepage_blurb', value: <<-eos

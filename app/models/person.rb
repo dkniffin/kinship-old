@@ -24,10 +24,13 @@ class Person < ActiveRecord::Base
 	# User
 	has_one :user
 
+	# Spouse
+
 	# Other Validations
 	# Allow blank values; see private method default_values for details
 	validates :first_name, :presence => true, :allow_blank => true
 	validates :last_name, :presence => true, :allow_blank => true
+	validates :spouse_id, :presence => true, :allow_blank => true
 
 	VALID_GENDERS = ['M', 'F']
 	validates :gender, :presence => true, inclusion: {in: VALID_GENDERS},:allow_blank => true
