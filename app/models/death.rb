@@ -9,7 +9,11 @@ class Death < ActiveRecord::Base
 	belongs_to :place, :autosave => true
 
 	def short_description
-		person.full_name + ' died'
+		if self.cause
+			person.full_name + ' died' + " (cause: #{self.cause})"
+		else
+			person.full_name + ' died'
+		end
 	end
 
 	def icon_class
