@@ -174,7 +174,17 @@
           :zoom => 3
       },
       :markers => [
-        {:latlng => [@person.birth.place.lat, @person.birth.place.lon] }
+        {
+          :latlng => [@person.birth.place.lat, @person.birth.place.lon], 
+          :popup => "Birth" + '</br>' + 
+                    @person.birth.place.full_address + '<br/>'
+
+        },
+        {
+          :latlng => [@person.death.place.lat, @person.death.place.lon], 
+          :popup => "Death" + '</br>' + 
+                    @person.death.place.full_address + '<br/>'
+        }
       ]) 
     %>
     
