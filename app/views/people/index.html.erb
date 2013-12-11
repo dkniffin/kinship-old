@@ -25,9 +25,10 @@
         <th class=<%= @last_name_header %>><%= link_to 'Last Name', people_path(:sort => 'last_name', :genders => @selected_genders), :id => 'last_name_header' %></th>
         <th>Gender</th>
         <th>Photo</th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th>Birth Date</th>
+        <th>Birth Place</th>
+        <th>Death Date</th>
+        <th>Death Place</th>
       </tr>
     </thead>
   
@@ -38,8 +39,10 @@
           <td><%= link_to person.last_name, person%></td>
           <td><%= person.gender %></td>
           <td><%= link_to image_tag(person.photo.url(:small)), person %></td>
-          <td><%= link_to 'Edit', edit_person_path(person) %></td>
-          <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= person.birth.date %></td>
+          <td><%= person.birth.place.place_string %></td>
+          <td><%= person.death.date %></td>
+          <td><%= person.death.place.place_string %></td>
         </tr>
       <% end %>
     </tbody>
