@@ -7,6 +7,8 @@ class Death < ActiveRecord::Base
 
 	belongs_to :person
 	belongs_to :place, :autosave => true
+	accepts_nested_attributes_for :place
+	validates_associated :place
 
 	def short_description
 		if self.cause
