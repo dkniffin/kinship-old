@@ -4,6 +4,8 @@ class Birth < ActiveRecord::Base
 	belongs_to :child, :class_name => "Person"
 
 	belongs_to :place, :autosave => true
+	accepts_nested_attributes_for :place
+	validates_associated :place
 
 	validate :parents_born_before_child
 

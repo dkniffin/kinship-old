@@ -32,6 +32,12 @@
       <%= ff.label :date, "Birth Date" %>
       <%= ff.date_field :date %>
     </div>
+    <%= ff.fields_for :place do |fff| %>
+      <div class="field">
+        <%= fff.label :place_string, "Birth Place" %>
+        <%= fff.text_field :place_string %>
+      </div>
+    <% end %>
     <div class="field">
       <%= ff.label :father_id, "Father" %>
       <%= ff.collection_select :father_id, Person.all, :id, :full_name_and_id, {include_blank: true} %>
