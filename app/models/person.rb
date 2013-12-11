@@ -4,7 +4,7 @@ class Person < ActiveRecord::Base
 
 	# Photo stuff
 	has_attached_file :photo, 
-    :styles => { :medium => "256x256>", :small => "64x64>", :tiny => "24x24>" },
+    :styles => { :medium => "256x256#", :small => "64x64#", :tiny => "24x24#" },
 		:default_url => :set_default_avatar,
 		:url  => "/assets/photos/:id/:style/:basename.:extension",
 		:path => ":rails_root/public/assets/photos/:id/:style/:basename.:extension"
