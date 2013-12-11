@@ -52,6 +52,12 @@
       <%= ff.label :dead, "Dead" %>
       <%= ff.check_box :dead %>
     </div>
+    <%= ff.fields_for :place do |fff| %>
+      <div class="field">
+        <%= fff.label :place_string, "Death Place" %>
+        <%= fff.text_field :place_string %>
+      </div>
+    <% end %>
     <div class="field">
       <%= ff.label :date, "Death Date" %>
       <%= ff.date_field :date %>
