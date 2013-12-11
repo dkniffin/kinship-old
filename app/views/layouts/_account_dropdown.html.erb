@@ -3,8 +3,10 @@
     Account <b class="caret"></b>
   </a>
   <ul class="dropdown-menu">
-    <li><%= link_to "Profile", current_user %></li>
     <li><%= link_to "My Account", edit_user_path(current_user) %></li>
+    <% if ! current_user.person_id.nil? %>
+    <li><%= link_to "My Person", current_user.person %></li>
+    <% end %>
     <% if user_role?(User::ROLE_ADMIN) %>
     <li class="divider"></li>
     <li><%= link_to "Admin", admin_path %></li>
