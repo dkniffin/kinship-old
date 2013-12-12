@@ -35,6 +35,8 @@ class Place < ActiveRecord::Base
 			hn = (retVal.house_number.nil?) ? '' : retVal.house_number.to_s
 			st = (retVal.street.nil?) ? '' : retVal.street.to_s
 			self.street_address = hn + ' ' + st
+
+			#geocode
 		else
 			splt = input.split(/,\s*/).reverse
 
@@ -45,6 +47,8 @@ class Place < ActiveRecord::Base
 			self.city = (splt[4].nil?) ? '' : splt[4]
 			self.street_address = (splt[5].nil?) ? '' : splt[5]
 		end
+
+
 
 		self.save
 	end
@@ -57,8 +61,8 @@ class Place < ActiveRecord::Base
 			self.county 		||= ''
 			self.state 			||= ''
 			self.country 		||= 'United States of America'
-			self.lat 			||= 37.09024
-			self.lon 			||= -95.712891
+			#self.lat 			||= 37.09024
+			#self.lon 			||= -95.712891
 		end
 
 end
