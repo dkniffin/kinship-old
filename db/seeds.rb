@@ -5,6 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'open-uri'
 
 # Admin user
 User.create(username: 'admin', 
@@ -28,7 +29,8 @@ rickard = Person.create(
 	:death => Death.create(
 		:dead => true, 
 		:date => '282-10-12'
-	)
+	),
+  :photo => open("http://i.imgur.com/vfwJazN.png")
 )
 brandon = Person.create(
 	:first_name => 'Brandon', 
@@ -92,7 +94,8 @@ eddard = Person.create(
 			:lat => 53.9, 
 			:lon => -2.5
 		)
-	)
+	),
+  :photo => open("http://i.imgur.com/xetbbMe.png")
 )
 catelyn = Person.create(
 	:first_name => 'Catelyn', 
@@ -111,7 +114,8 @@ catelyn = Person.create(
 		:dead => true, 
 		:date => '299-09-12', 
 		:cause => 'The Red Wedding'
-	)
+	),
+  :photo => open("http://i.imgur.com/JawR3Si.png")
 )
 jeyne = Person.create(
 	:first_name => 'Jeyne', 
@@ -124,7 +128,8 @@ jeyne = Person.create(
 		:dead => true, 
 		:date => '299-09-12', 
 		:cause => 'The Red Wedding'
-	)
+	),
+  :photo => open("http://i.imgur.com/mf6ngP7.png")
 )
 robb = Person.create(
 	:first_name => 'Robb', 
@@ -145,7 +150,8 @@ robb = Person.create(
 		:dead => true, 
 		:date => '299-09-12', 
 		:cause => 'The Red Wedding'
-	)
+	),
+  :photo => open("http://i.imgur.com/BkEe9zI.png")
 )
 bran = Person.create(
 	:first_name => 'Bran', 
@@ -160,7 +166,8 @@ bran = Person.create(
 			:lat => 56.9, 
 			:lon => -3.8
 		)
-	)
+	),
+  :photo => open("http://i.imgur.com/nFLdmYj.png")
 )
 sansa = Person.create(
 	:first_name => 'Sansa', 
@@ -175,7 +182,8 @@ sansa = Person.create(
 			:lat => 56.9, 
 			:lon => -3.8
 		)
-	)
+	),
+  :photo => open("http://i.imgur.com/Ng2xLVq.png")
 )
 arya = Person.create(
 	:first_name => 'Arya', 
@@ -190,7 +198,8 @@ arya = Person.create(
 			:lat => 56.9, 
 			:lon => -3.8
 		)
-	)
+	),
+  :photo => open("http://i.imgur.com/SLhKZNd.png")
 )
 rickon = Person.create(
 	:first_name => 'Rickon', 
@@ -205,7 +214,8 @@ rickon = Person.create(
 			:lat => 56.9, 
 			:lon => -3.8
 		)
-	)
+	),
+  :photo => open("http://i.imgur.com/pOvDXI1.png")
 )
 jon = Person.create(
 	:first_name => 'Jon', 
@@ -214,18 +224,9 @@ jon = Person.create(
 	:birth => Birth.create(
 		:father_id => eddard.id, 
 		:date => '295-10-19'
-	)
+	),
+  :photo => open("http://i.imgur.com/A63CCCr.png")
 )
-
-all_seeded_people = [rickard, brandon, lyanna, eddard, catelyn, jeyne, robb, bran, sansa, arya, rickon, jon]
-all_seeded_people.each do |person|
-  filename = "#{Rails.root}/app/assets/images/#{person.first_name.downcase}-#{person.last_name.downcase}.png"
-  if File.exist?(filename)
-    person.photo = File.open(filename)
-    person.save
-  end
-end
-
 
 # Default settings
 Setting.create(var: 'homepage_blurb', value: <<-eos
