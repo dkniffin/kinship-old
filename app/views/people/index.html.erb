@@ -46,8 +46,8 @@
           </td>
           <td><%= person.birth.place.place_string.gsub(/( ,)+|^,/, "") %></td>
           <td>
-              <% if !person.birth.date.nil? %>
-                  <%= person.birth.date.strftime('%B %-d, %-Y') %>
+              <% if !person.death.date.nil? %>
+                  <%= person.death.date.strftime('%B %-d, %-Y') %>
               <%end%>
           </td>
           <td><%= person.death.place.place_string.gsub(/( ,)+|^,/, "") %></td>
