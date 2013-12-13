@@ -39,10 +39,18 @@
           <td><%= link_to person.last_name, person%></td>
           <td><%= person.gender %></td>
           <td><%= link_to image_tag(person.photo.url(:small)), person %></td>
-          <td><%= person.birth.date %></td>
-          <td><%= person.birth.place.place_string %></td>
-          <td><%= person.death.date %></td>
-          <td><%= person.death.place.place_string %></td>
+          <td>
+              <% if !person.birth.date.nil? %>
+                  <%= person.birth.date.strftime('%B %-d, %-Y') %>
+              <%end%>
+          </td>
+          <td><%= person.birth.place.place_string.gsub(/( ,)+|^,/, "") %></td>
+          <td>
+              <% if !person.birth.date.nil? %>
+                  <%= person.birth.date.strftime('%B %-d, %-Y') %>
+              <%end%>
+          </td>
+          <td><%= person.death.place.place_string.gsub(/( ,)+|^,/, "") %></td>
         </tr>
       <% end %>
     </tbody>
