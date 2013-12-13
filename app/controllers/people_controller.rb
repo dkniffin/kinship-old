@@ -13,7 +13,7 @@ class PeopleController < ApplicationController
     when 'first_name'
       ordering,@first_name_header = {:first_name => :asc}, 'hilite'
     when 'last_name'
-      ordering,@last_name_header = {:last_name => :asc}, 'hilite'
+      ordering,@last_name_header = {:last_name => :asc, :first_name => :asc}, 'hilite'
     end
     @all_genders = Person.all_genders
     @selected_genders = params[:genders] || {}
@@ -52,6 +52,11 @@ class PeopleController < ApplicationController
     if @person.spouse_id
        @spouse = Person.find(@person.spouse_id)
     end
+    
+    @primary_siblings = Person.where(:id => Birth.where(:father_id => @person.birth.father_id, 
+                             :mother_id => @person.birth.mother_id).map {|elt| elt.child_id}) - [@person]
+    @step_siblings = Person.where(:id => (Birth.where(:father_id => @person.birth.father_id) -
+                             Birth.where(:mother_id => @person.birth.mother_id)).map {|elt| elt.child_id})
     @json_pedigree_tree = get_json_pedigree_tree(@person)
     
   end

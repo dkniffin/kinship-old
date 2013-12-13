@@ -74,7 +74,7 @@
         <% if @person.mother %>
           <p><%= link_to @person.mother.full_name, @person.mother%></p>
         <% else %>
-          <p><%= link_to edit_person_path(@person), :class => 'btn btn-primary' do %><i class="icon-plus icon-white"></i> Add Mother<%end%></p>
+          <p><%= link_to new_person_path, :class => 'btn btn-primary' do %><i class="icon-plus icon-white"></i> Add Mother<%end%></p>
         <% end %>
       </dd>
       <dt>Father</dt>
@@ -82,7 +82,7 @@
         <% if @person.father %>
           <p><%= link_to @person.father.full_name, @person.father%></p>
         <% else %>
-          <p><%= link_to edit_person_path(@person), :class => 'btn btn-primary' do %><i class="icon-plus icon-white"></i> Add Father<%end%></p>
+          <p><%= link_to new_person_path, :class => 'btn btn-primary' do %><i class="icon-plus icon-white"></i> Add Father<%end%></p>
         <% end %>
       </dd>
       <% @children.each do |child| %>
@@ -91,6 +91,22 @@
         <%= link_to child.full_name, child %><br>
         </dd>
       <% end %>
+      <br>
+      <% @primary_siblings.each do |sibling| %>
+        <dt>Sibling</dt>
+        <dd>
+        <%= link_to sibling.full_name, sibling %><br>
+        </dd>
+      <% end %>
+      <br>
+      <% @step_siblings.each do |step_sibling| %>
+        <dt>Step Sibling</dt>
+        <dd>
+        <%= link_to step_sibling.full_name, step_sibling %><br>
+        </dd>
+      <% end %>
+
+
     </dl>
   </div>
 
