@@ -70,12 +70,12 @@ class Place < ActiveRecord::Base
 		end
 
 		def cleanup_input
-			self.street_address = clean_field(self.county)
-			self.city = clean_field(self.county)
-			self.postal_code = clean_field(self.county)
+			self.street_address = clean_field(self.street_address)
+			self.city = clean_field(self.city)
+			self.postal_code = clean_field(self.postal_code)
 			self.county = clean_field(self.county)
-			self.state = clean_field(self.county)
-			self.country = clean_field(self.county)
+			self.state = clean_field(self.state)
+			self.country = clean_field(self.country)
 		end
 		def clean_field(field)
 			# Removed spaces and commas at the beginning and the end
