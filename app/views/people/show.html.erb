@@ -197,9 +197,9 @@
       :markers => @person.markers.map{|marker| 
         {
           :latlng => marker[:latlng],
-          :popup => '<h3 class="popup-header">' + marker[:title] + '</h3><br/>' +
-                    marker[:place] + '<br/>' +
-                    marker[:date]
+          :popup => '<h3 class="popup-header">' + h(marker[:title]) + '</h3><br/>' +
+                    h(marker[:place]) + '<br/>' +
+                    h(marker[:date])
         }
       })
     %>
