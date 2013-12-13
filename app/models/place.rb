@@ -10,6 +10,15 @@ class Place < ActiveRecord::Base
 	has_many :deaths
 
 
+	def has_valid_latlng?
+		# TODO: Add a check to see if it is actually valid (real coords)
+		if lat.nil? || lon.nil?
+			false
+		else
+			true
+		end
+	end
+
 	def full_address
 		[self.street_address, self.city, self.postal_code, 
 			self.county, self.state, self.country].join(', ').gsub(/( ,)+|^,/, "")
@@ -60,9 +69,7 @@ class Place < ActiveRecord::Base
 			self.postal_code 	||= ''
 			self.county 		||= ''
 			self.state 			||= ''
-			self.country 		||= 'United States of America'
-			#self.lat 			||= 37.09024
-			#self.lon 			||= -95.712891
+			self.country 		||= ''
 		end
 
 end

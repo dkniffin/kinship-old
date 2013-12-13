@@ -190,8 +190,9 @@
     </script>
     <%= 
       map(:center => {
-          :latlng => [@person.birth.place.lat, @person.birth.place.lon],
-          :zoom => 3
+          # TODO: Make these coords an admin setting
+          :latlng => [24.45,-27.60],
+          :zoom => 2
       },
       :markers => @person.markers.map{|marker| 
         {

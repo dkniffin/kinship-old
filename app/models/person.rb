@@ -91,7 +91,7 @@ class Person < ActiveRecord::Base
 		event_markers = []
 
 		events.each do |event|
-			if event.place.place_string != ''
+			if event.place.has_valid_latlng?
 				event_markers.push({
 					:latlng => [event.place.lat, event.place.lon],
 					:title => event.title_string,
