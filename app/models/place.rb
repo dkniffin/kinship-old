@@ -12,7 +12,7 @@ class Place < ActiveRecord::Base
 
 	def full_address
 		[self.street_address, self.city, self.postal_code, 
-			self.county, self.state, self.country].join(', ')
+			self.county, self.state, self.country].join(', ').gsub(/( ,)+|^,/, "")
 	end
 	def full_address_and_id
 		full_address + " \(#{id}\)"

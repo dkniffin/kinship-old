@@ -11,11 +11,11 @@
                                                                   
 		<p>Birth date: 
       <% if @person.birth.date != nil%>
-        <%= @person.birth.date.strftime('%B %-d, %-Y') %>
+        <%= @person.birth.date.formatted %>
       <% end %>
     </p>
     <% if !@person.alive? %>
-      <p>Death date: <%= @person.death.date.strftime('%B %-d, %-Y') %><%= " (age: " + @person.age.to_s + ")"%></p>
+      <p>Death date: <%= @person.death.date.formatted %><%= " (age: " + @person.age.to_s + ")"%></p>
     <% end %>
     <% if @spouse%>
       <p>Spouse: <%= link_to @spouse.full_name, @spouse %></p>
@@ -38,27 +38,29 @@
   <div id="events-tab" class="tab-pane active"> <!--id="facts-box" -->
     <% if @eventsFormat == 'data-list' %>
       <dl class="dl-horizontal">
-        <dt>Event Name</dt>
-        <dd>Event details</dd>
+      <% @person.events.each do |event| %>
+        <dt><%= event.title_string %></dt>
+        <dd><%= event.details.join('<br />').html_safe  %></dd>
+      <% end %>
       </dl>
     <% elsif @eventsFormat == 'timeline' %>
       <table>
         <tr>
-          <th>Date</th>
+          <th>Date & Place</th>
+          <th></th>
+          <th>Details</th>
         </tr>
       <% @person.events.each do |event| %>
         <tr>
-          <td class="span2">
-            <% if event.date.nil? %>
-            Unknown
-            <% else %>
-            <%= event.date.strftime('%B %-d, %-Y') %>
-            <% end %>
+          <td class="span4">
+            <%= event.date_string %>
+            <br />
+            <%= event.place.place_string %>
           </td>
           <td class="span1">
             <i class='<%= event.icon_class %>'></i>
           </td>
-          <td class="span8"><%= event.short_description %></td>
+          <td class="span6"><%= event.short_description %></td>
         </tr>
       <% end %>
       </table>

@@ -26,11 +26,29 @@ class Birth < ActiveRecord::Base
 	end
 
 	def parents_string
-		mother.full_name + ' and ' + father.full_name
+		mother_str = (mother.nil?) ? 'Unknown mother' : mother.full_name
+		father_str = (father.nil?) ? 'Unknown father' : father.full_name
+		mother_str + ' and ' + father_str
+	end
+
+	def date_string
+		(date.nil?) ? 'Unknown date' : date.formatted
 	end
 
 	def short_description
 		child.full_name + ' was born'
+	end
+
+	def title_string
+		'Birth'
+	end
+
+	def details
+		[
+			'Parents: ' + parents_string,
+			'Date: ' + date_string,
+			'Place: ' + place.place_string
+		]
 	end
 
 	def icon_class

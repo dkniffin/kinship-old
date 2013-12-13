@@ -41,16 +41,16 @@
           <td><%= link_to image_tag(person.photo.url(:small)), person %></td>
           <td>
               <% if !person.birth.date.nil? %>
-                  <%= person.birth.date.strftime('%B %-d, %-Y') %>
+                  <%= person.birth.date.formatted %>
               <%end%>
           </td>
-          <td><%= person.birth.place.place_string.gsub(/( ,)+|^,/, "") %></td>
+          <td><%= person.birth.place.place_string %></td>
           <td>
               <% if !person.death.date.nil? %>
-                  <%= person.death.date.strftime('%B %-d, %-Y') %>
+                  <%= person.death.date.formatted %>
               <%end%>
           </td>
-          <td><%= person.death.place.place_string.gsub(/( ,)+|^,/, "") %></td>
+          <td><%= person.death.place.place_string %></td>
         </tr>
       <% end %>
     </tbody>

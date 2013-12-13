@@ -18,6 +18,27 @@ class Death < ActiveRecord::Base
 		end
 	end
 
+	def date_string
+		(date.nil?) ? 'Unknown date' : date.formatted
+	end
+
+	def cause_string
+		(cause.nil?) ? 'Unknown cause' : cause
+	end
+
+	def title_string
+		'Death'
+	end
+
+	def details
+		[
+			'Date: ' + date_string,
+			'Place: ' + place.place_string,
+			'Cause: ' + cause_string
+		]
+	end
+
+
 	def icon_class
 		'icon-cemetery'
 	end
