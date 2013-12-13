@@ -36,29 +36,32 @@
 
 <div id="tabs" class="tab-content">
   <div id="events-tab" class="tab-pane active"> <!--id="facts-box" -->
-  	<% if @eventsFormat == 'data-list' %>
-  		<dl class="dl-horizontal">
-  			<dt>Event Name</dt>
-  			<dd>Event details</dd>
-  		</dl>
-     <% elsif @eventsFormat == 'timeline' %>
-     <table>
+    <% if @eventsFormat == 'data-list' %>
+      <dl class="dl-horizontal">
+        <dt>Event Name</dt>
+        <dd>Event details</dd>
+      </dl>
+    <% elsif @eventsFormat == 'timeline' %>
+      <table>
+        <tr>
+          <th>Date</th>
+        </tr>
       <% @person.events.each do |event| %>
-      <tr>
-        <td class="span2">
-          <% if event.date.nil? %>
-          Unknown
-          <% else %>
-          <%= event.date.strftime('%B %-d, %-Y') %>
-          <% end %>
-        </td>
-        <td class="span1">
-          <i class='<%= event.icon_class %>'></i>
-        </td>
-        <td class="span8"><%= event.short_description %></td>
-      </tr>
+        <tr>
+          <td class="span2">
+            <% if event.date.nil? %>
+            Unknown
+            <% else %>
+            <%= event.date.strftime('%B %-d, %-Y') %>
+            <% end %>
+          </td>
+          <td class="span1">
+            <i class='<%= event.icon_class %>'></i>
+          </td>
+          <td class="span8"><%= event.short_description %></td>
+        </tr>
       <% end %>
-    </table>
+      </table>
     <% end %>
   </div>
 
