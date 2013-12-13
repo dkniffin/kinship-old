@@ -1,5 +1,5 @@
 class Place < ActiveRecord::Base
-	before_validation :default_values
+	before_validation :default_values, :cleanup_input
 
 	geocoded_by :full_address, :latitude  => :lat, :longitude => :lon
 	after_validation :geocode
@@ -72,4 +72,16 @@ class Place < ActiveRecord::Base
 			self.country 		||= ''
 		end
 
+		def cleanup_input
+			self.street_address = clean_field(self.county)
+			self.city = clean_field(self.county)
+			self.postal_code = clean_field(self.county)
+			self.county = clean_field(self.county)
+			self.state = clean_field(self.county)
+			self.country = clean_field(self.county)
+		end
+		def clean_field(field)
+			# Removed spaces and commas at the beginning and the end
+			field.gsub(/^\s+|\s+$|^,|,$/, "")
+		end
 end
