@@ -13,5 +13,5 @@ describe Place do
 	it { should respond_to(:country)}
 	it { should respond_to(:lat)}
 	it { should respond_to(:lon)}
-	it { should respond_to(:full_address)}
+	it { should respond_to(:place_string)}
 end
