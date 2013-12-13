@@ -86,6 +86,20 @@
         <%= link_to child.full_name, child %><br>
         </dd>
       <% end %>
+      <% @primary_siblings.each do |sibling| %>
+        <dt>Sibling</dt>
+        <dd>
+        <%= link_to sibling.full_name, sibling %><br>
+        </dd>
+      <% end %>
+      <% @step_siblings.each do |step_sibling| %>
+        <dt>Step Sibling</dt>
+        <dd>
+        <%= link_to step_sibling.full_name, step_sibling %><br>
+        </dd>
+      <% end %>
+
+
     </dl>
   </div>
 
