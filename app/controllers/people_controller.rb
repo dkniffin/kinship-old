@@ -11,9 +11,9 @@ class PeopleController < ApplicationController
 
     case sort
     when 'first_name'
-      ordering,@first_name_header = {:order => :first_name}, 'hilite'
+      ordering,@first_name_header = {:first_name => :asc}, 'hilite'
     when 'last_name'
-      ordering,@last_name_header = {:order => :last_name}, 'hilite'
+      ordering,@last_name_header = {:last_name => :asc}, 'hilite'
     end
     @all_genders = Person.all_genders
     @selected_genders = params[:genders] || {}
@@ -35,11 +35,11 @@ class PeopleController < ApplicationController
 
     @search_genders = @selected_genders.keys << ''
     if query
-       gender_results = Person.find_all_by_gender(@search_genders, ordering)
+       gender_results = Person.where(gender: @search_genders).order(ordering)
        people_results = Person.where('first_name NOT LIKE ? AND last_name NOT LIKE ?', "%#{query}%", "%#{query}%")
        @people = (gender_results - people_results).uniq
     else
-      @people = Person.find_all_by_gender(@search_genders, ordering)
+      @people = Person.where(gender: @search_genders).order(ordering)
     end
   end
 
