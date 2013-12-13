@@ -87,6 +87,22 @@ class Person < ActiveRecord::Base
 	    return e
 	end
 
+	def markers
+		event_markers = []
+
+		events.each do |event|
+			if event.place.place_string != ''
+				event_markers.push({
+					:latlng => [event.place.lat, event.place.lon],
+					:title => event.title_string,
+					:place => event.place.place_string,
+					:date => event.date_string
+				})
+			end	
+		end
+		event_markers
+	end
+
 	def self.all_genders
 		VALID_GENDERS
 	end

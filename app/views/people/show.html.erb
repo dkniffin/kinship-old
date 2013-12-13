@@ -172,25 +172,19 @@
         map.invalidateSize(false);
       });
     </script>
-  
     <%= 
       map(:center => {
           :latlng => [@person.birth.place.lat, @person.birth.place.lon],
           :zoom => 3
       },
-      :markers => [
+      :markers => @person.markers.map{|marker| 
         {
-          :latlng => [@person.birth.place.lat, @person.birth.place.lon], 
-          :popup => "Birth" + '</br>' + 
-                    @person.birth.place.full_address + '<br/>'
-
-        },
-        {
-          :latlng => [@person.death.place.lat, @person.death.place.lon], 
-          :popup => "Death" + '</br>' + 
-                    @person.death.place.full_address + '<br/>'
+          :latlng => marker[:latlng],
+          :popup => '<h3 class="popup-header">' + marker[:title] + '</h3><br/>' +
+                    marker[:place] + '<br/>' +
+                    marker[:date]
         }
-      ]) 
+      })
     %>
     
   </div>
