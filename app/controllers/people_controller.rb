@@ -13,7 +13,7 @@ class PeopleController < ApplicationController
     when 'first_name'
       ordering,@first_name_header = {:first_name => :asc}, 'hilite'
     when 'last_name'
-      ordering,@last_name_header = {:last_name => :asc}, 'hilite'
+      ordering,@last_name_header = {:last_name => :asc, :first_name => :asc}, 'hilite'
     end
     @all_genders = Person.all_genders
     @selected_genders = params[:genders] || {}
