@@ -99,6 +99,7 @@ GEM
     launchy (2.1.2)
       addressable (~> 2.3)
     leaflet-rails (0.7.0)
+    libv8 (3.16.14.3)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -142,6 +143,7 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    ref (1.0.5)
     rspec-core (2.13.1)
     rspec-expectations (2.13.0)
       diff-lcs (>= 1.1.3, < 2.0)
@@ -177,6 +179,9 @@ GEM
       activesupport (>= 3.0)
       sprockets (~> 2.8)
     sqlite3 (1.3.8)
+    therubyracer (0.12.0)
+      libv8 (~> 3.16.14.0)
+      ref
     thor (0.18.1)
     thread_safe (0.1.3)
       atomic
@@ -206,6 +211,7 @@ DEPENDENCIES
   cucumber-rails-training-wheels
   d3-rails (~> 3.3.7)
   database_cleaner
+  execjs
   factory_girl_rails (= 4.2.1)
   geocoder (~> 1.1.8)
   honeypot-captcha
@@ -224,5 +230,6 @@ DEPENDENCIES
   selenium-webdriver (= 2.35.1)
   simple_captcha!
   sqlite3 (= 1.3.8)
+  therubyracer
   turbolinks
   uglifier (>= 1.3.0)
