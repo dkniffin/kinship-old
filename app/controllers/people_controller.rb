@@ -150,6 +150,9 @@ class PeopleController < ApplicationController
       end
       @lifespan[index] = total_lifespan / @family_population_per_century[index]
     end
+
+    # For word cloud
+    @words = Person.all.map {|elt| elt.first_name} + Person.all.map {|elt| elt.last_name}
   end
 
   private

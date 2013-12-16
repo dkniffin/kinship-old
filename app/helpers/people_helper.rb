@@ -33,5 +33,4 @@ module PeopleHelper
     return json_pedigree_tree
   end
 
-
 end
