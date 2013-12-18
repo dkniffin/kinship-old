@@ -152,7 +152,19 @@ class PeopleController < ApplicationController
     end
 
     # For word cloud
-    @words = Person.all.map {|elt| elt.first_name} + Person.all.map {|elt| elt.last_name}
+    surnameCount = {}
+    Person.all.each{|person|
+      surnameCount[person.last_name] = (surnameCount[person.last_name] || 0) + 1
+    }
+
+    @wordData = []
+    surnameCount.each{|key, value|
+      @wordData.push({key: key, value: value})
+    }
+
+    @wordData = JSON.generate(@wordData)
+    #@wordData = Person.all.ma
+    #@words = Person.all.map {|elt| elt.first_name} + Person.all.map {|elt| elt.last_name}
   end
 
   private

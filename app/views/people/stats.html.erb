@@ -150,21 +150,24 @@
     <h4>Name Frequency Word Cloud</h4>
     <div class="chart">
 
-        <script src="/app/assets/javascripts/d3.layout.cloud.js"></script>
         <script>
           var fill = d3.scale.category20();
         
-          d3.layout.cloud().size([600, 600])
-              .words(<%=@words.to_s.html_safe %>
-                .map(function(d) {
-                return {text: d, size: 10 + Math.random() * 90};
-              }))
-              .padding(5)
-              .rotate(function() { return ~~(Math.random() * 2) * 90; })
-              .font("Impact")
-              .fontSize(function(d) { return d.size; })
-              .on("end", draw)
-              .start();
+          var fontSize = d3.scale.log().range([10, 100]);
+          var layout = d3.layout.cloud()
+            .size([960, 600])
+            .timeInterval(10)
+            .text(function(d) { return d.key; })
+            .font("Impact")
+            .fontSize(function(d) { 
+              console.log(d);
+              return fontSize(+d.value); 
+            })
+            .rotate(function(d) { return ~~(Math.random() * 5) * 30 - 60; })
+            .padding(1)
+            .on("end", draw)
+            .words(<%=@wordData.to_s.html_safe %>)
+            .start();
         
           function draw(words) {
             d3.select("#word-cloud>.chart").append("svg")
