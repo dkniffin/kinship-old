@@ -151,20 +151,30 @@ class PeopleController < ApplicationController
       @lifespan[index] = total_lifespan / @family_population_per_century[index]
     end
 
-    # For word cloud
+    # For surname word cloud
     surnameCount = {}
     Person.all.each{|person|
       surnameCount[person.last_name] = (surnameCount[person.last_name] || 0) + 1
     }
 
-    @wordData = []
+    @surname_word_data = []
     surnameCount.each{|key, value|
-      @wordData.push({key: key, value: value})
+      @surname_word_data.push({key: key, value: value})
     }
 
-    @wordData = JSON.generate(@wordData)
-    #@wordData = Person.all.ma
-    #@words = Person.all.map {|elt| elt.first_name} + Person.all.map {|elt| elt.last_name}
+    @surname_word_data = JSON.generate(@surname_word_data)
+    # For first name word cloud
+    first_nameCount = {}
+    Person.all.each{|person|
+      first_nameCount[person.first_name] = (first_nameCount[person.first_name] || 0) + 1
+    }
+
+    @first_name_word_data = []
+    first_nameCount.each{|key, value|
+      @first_name_word_data.push({key: key, value: value})
+    }
+
+    @first_name_word_data = JSON.generate(@first_name_word_data)
   end
 
   private
