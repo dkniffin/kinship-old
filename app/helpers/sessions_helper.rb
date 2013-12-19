@@ -11,7 +11,23 @@ module SessionsHelper
 	end
 
 	def user_role?(role)
-		signed_in? && current_user.role == role
+		if signed_in? && role_rank(current_user.role) >= role_rank(role)
+			return true
+		end
+		return false
+	end
+
+	def role_rank(role)
+		case role
+		when User::ROLE_UNAPPROVED
+			return 0 
+		when User::ROLE_MEMBER
+			return 1
+		when User::ROLE_EDITOR
+			return 2
+		when User::ROLE_ADMIN
+			return 3
+		end	
 	end
 
 	def current_user=(user)

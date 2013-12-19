@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	before_action :signed_in_user, only: [:edit, :update]
+	before_action :authorization
 
 	def show
 		@user = User.find(params[:id])
@@ -68,6 +69,13 @@ class UsersController < ApplicationController
 
 		def signed_in_user
 			redirect_to signin_url, notice: "Please sign in." unless signed_in?
+		end
+
+		def authorization
+			if !(user_role?(User::ROLE_ADMIN) || current_user?(User.find(params[:id])))
+				redirect_to :back, 
+					notice: "Only the specified user and admins can access the edit interface for this user" 
+			end
 		end
 		
 		def correct_user
