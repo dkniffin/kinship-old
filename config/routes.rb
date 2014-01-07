@@ -1,5 +1,5 @@
 Kinship::Application.routes.draw do
-  resources :places
+  #resources :places
 
   match '/people/stats', to: 'people#stats', via: 'get'
   resources :people
