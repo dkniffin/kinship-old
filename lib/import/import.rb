@@ -2,37 +2,44 @@
 
 require_relative 'gedcom-ruby/lib/gedcom.rb'
 
-class Person
-   attr_accessor :name, :gender, :bdate, :bplace, :ddate, :dplace
-
-   def to_s
-      "#{name} (#{gender}) B: #{bdate} at #{bplace}, D: #{ddate} at #{dplace}"
-   end
-end
-
 class Import < GEDCOM::Parser
-   def initialize
+   def initialize(verbosity)
       super
 
-      setPreHandler  [ "INDI" ], method( :startPerson )
-      setPreHandler  [ "INDI", "NAME" ], method( :registerName )
-      setPreHandler  [ "INDI", "SEX" ], method( :registerGender )
-      setPreHandler  [ "INDI", "BIRT", "DATE" ], method( :registerBirthdate )
-      setPreHandler  [ "INDI", "BIRT", "PLAC" ], method( :registerBirthplace )
-      setPreHandler  [ "INDI", "DEAT", "DATE" ], method( :registerDeathdate )
-      setPreHandler  [ "INDI", "DEAT", "PLAC" ], method( :registerDeathplace )
-      setPostHandler [ "INDI" ], method( :endPerson )
+      opts = { :v => verbosity }
+
+      setPreHandler  [ "INDI" ], method( :startPerson ), opts
+      setPreHandler  [ "INDI", "NAME" ], method( :registerName ), opts
+      setPreHandler  [ "INDI", "SEX" ], method( :registerGender ), opts
+      #setPreHandler  [ "INDI", "BIRT", "DATE" ], method( :registerBirthdate ), opts
+      #setPreHandler  [ "INDI", "BIRT", "PLAC" ], method( :registerBirthplace ), opts
+      #setPreHandler  [ "INDI", "DEAT", "DATE" ], method( :registerDeathdate ), opts
+      #setPreHandler  [ "INDI", "DEAT", "PLAC" ], method( :registerDeathplace ), opts
+      setPostHandler [ "INDI" ], method( :endPerson ), opts
 
       @currentPerson = nil
       @allPeople = []
 
    end
    def startPerson( data, state, parm )
+      if parm[:v] >= 2
+         puts "starting new person"
+      end
       @currentPerson = Person.new
+
    end
 
    def registerName( data, state, parm )
-      @currentPerson.name = data if @currentPerson.name == nil
+      (first_name, last_name ) = data.split("/")
+      first_name = '' if first_name == nil
+      last_name = '' if last_name == nil
+
+      if @currentPerson.first_name == nil
+         @currentPerson.first_name = first_name.rstrip
+      end
+      if @currentPerson.last_name == nil && last_name != nil
+         @currentPerson.last_name = last_name.rstrip
+      end
    end
 
    def registerGender( data, state, parm )
@@ -57,17 +64,16 @@ class Import < GEDCOM::Parser
 
    def endPerson( data, state, parm )
       @allPeople.push @currentPerson
+      if parm[:v] >= 1
+         puts "saving #{@currentPerson.full_name}"
+      end
+      @currentPerson.save!
       @currentPerson = nil
    end
 
    def printPeople
       @allPeople.each do |person|
-         puts person.to_s
+         puts person.full_name
       end
    end
 end
-
-i = Import.new
-
-i.parse("/home/kniffin/Kniffin.ged")
-i.printPeople
