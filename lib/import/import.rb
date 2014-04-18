@@ -6,7 +6,7 @@ class Person
    attr_accessor :name, :gender, :bdate, :bplace, :ddate, :dplace
 
    def to_s
-      "#{name}"
+      "#{name} (#{gender}) B: #{bdate} at #{bplace}, D: #{ddate} at #{dplace}"
    end
 end
 
@@ -16,7 +16,11 @@ class Import < GEDCOM::Parser
 
       setPreHandler  [ "INDI" ], method( :startPerson )
       setPreHandler  [ "INDI", "NAME" ], method( :registerName )
+      setPreHandler  [ "INDI", "SEX" ], method( :registerGender )
       setPreHandler  [ "INDI", "BIRT", "DATE" ], method( :registerBirthdate )
+      setPreHandler  [ "INDI", "BIRT", "PLAC" ], method( :registerBirthplace )
+      setPreHandler  [ "INDI", "DEAT", "DATE" ], method( :registerDeathdate )
+      setPreHandler  [ "INDI", "DEAT", "PLAC" ], method( :registerDeathplace )
       setPostHandler [ "INDI" ], method( :endPerson )
 
       @currentPerson = nil
@@ -26,17 +30,31 @@ class Import < GEDCOM::Parser
    def startPerson( data, state, parm )
       @currentPerson = Person.new
    end
+
    def registerName( data, state, parm )
       @currentPerson.name = data if @currentPerson.name == nil
    end
-   def registerBirthdate( data, state, parm )
-      if @currentPerson.date == nil
-         d = GEDCOM::Date.safe_new( data )
-         if d.is_date? and d.first.has_year? and d.first.has_month?
-            @currentPerson.date = d
-         end
-      end
+
+   def registerGender( data, state, parm )
+      @currentPerson.gender = data if @currentPerson.gender == nil
    end
+
+   def registerBirthdate( data, state, parm )
+      @currentPerson.bdate = data if @currentPerson.bdate == nil
+   end
+
+   def registerBirthplace( data, state, parm )
+      @currentPerson.bplace = data if @currentPerson.bplace == nil
+   end
+
+   def registerDeathdate( data, state, parm )
+      @currentPerson.ddate = data if @currentPerson.ddate == nil
+   end
+
+   def registerDeathplace( data, state, parm )
+      @currentPerson.dplace = data if @currentPerson.dplace == nil
+   end
+
    def endPerson( data, state, parm )
       @allPeople.push @currentPerson
       @currentPerson = nil

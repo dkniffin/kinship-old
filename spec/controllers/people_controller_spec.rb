@@ -23,7 +23,7 @@ describe PeopleController do
   # This should return the minimal set of attributes required to create a valid
   # Person. As you add validations to Person, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "first_name" => "MyString" } }
+  let(:valid_attributes) { { "first_name" => "Joe" } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -38,6 +38,8 @@ describe PeopleController do
   #    assigns(:people).should eq([person])
   #  end
   #end
+  let(:admin) { FactoryGirl.create(:admin) }
+  before { sign_in admin, :no_capybara => true }
 
   describe "GET show" do
     it "assigns the requested person as @person" do
@@ -49,7 +51,7 @@ describe PeopleController do
 
   describe "GET new" do
     it "assigns a new person as @person" do
-      get :new, {}, valid_session
+      get :new
       assigns(:person).should be_a_new(Person)
     end
   end

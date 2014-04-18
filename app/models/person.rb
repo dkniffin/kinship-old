@@ -119,6 +119,7 @@ class Person < ActiveRecord::Base
 			self.first_name ||= ''
 			self.last_name ||= ''
 			self.gender ||= ''
+			self.spouse_id ||= ''
 		end
 		def build_default_birth
 			build_birth if birth.nil? 

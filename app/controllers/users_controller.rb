@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	before_action :signed_in_user, only: [:edit, :update]
-	before_action :authorization
+	before_action :authorization, except: [:new, :create]
 
 	def show
 		@user = User.find(params[:id])
@@ -73,8 +73,12 @@ class UsersController < ApplicationController
 
 		def authorization
 			if !(user_role?(User::ROLE_ADMIN) || current_user?(User.find(params[:id])))
-				redirect_to :back, 
-					notice: "Only the specified user and admins can access the edit interface for this user" 
+				begin
+					redirect_to :back, 
+						notice: "Only the specified user and admins can access the edit interface for this user" 
+				rescue ActionController::RedirectBackError
+  					redirect_to root_path
+  				end
 			end
 		end
 		

@@ -85,25 +85,31 @@
           <p><%= link_to new_person_path, :class => 'btn btn-primary' do %><i class="icon-plus icon-white"></i> Add Father<%end%></p>
         <% end %>
       </dd>
-      <% @children.each do |child| %>
-        <dt>Child</dt>
-        <dd>
-        <%= link_to child.full_name, child %><br>
-        </dd>
+      <% if ! @children.nil? %>
+        <% @children.each do |child| %>
+          <dt>Child</dt>
+          <dd>
+          <%= link_to child.full_name, child %><br>
+          </dd>
+        <% end %>
       <% end %>
       <br>
-      <% @primary_siblings.each do |sibling| %>
-        <dt>Sibling</dt>
-        <dd>
-        <%= link_to sibling.full_name, sibling %><br>
-        </dd>
+      <% if ! @primary_siblings.nil? %>
+        <% @primary_siblings.each do |sibling| %>
+          <dt>Sibling</dt>
+          <dd>
+          <%= link_to sibling.full_name, sibling %><br>
+          </dd>
+        <% end %>
       <% end %>
       <br>
-      <% @step_siblings.each do |step_sibling| %>
-        <dt>Step Sibling</dt>
-        <dd>
-        <%= link_to step_sibling.full_name, step_sibling %><br>
-        </dd>
+      <% if ! @step_siblings.nil? %>
+        <% @step_siblings.each do |step_sibling| %>
+          <dt>Step Sibling</dt>
+          <dd>
+          <%= link_to step_sibling.full_name, step_sibling %><br>
+          </dd>
+        <% end %>
       <% end %>
 
 
