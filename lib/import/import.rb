@@ -9,8 +9,8 @@ class Import < GEDCOM::Parser
       before  [ "INDI" ], method( :startPerson )
       before  [ "INDI", "NAME" ], method( :registerName )
       before  [ "INDI", "SEX" ], method( :registerGender )
-      #before  [ "INDI", "BIRT", "DATE" ], method( :registerBirthdate )
-      #before  [ "INDI", "BIRT", "PLAC" ], method( :registerBirthplace )
+      before  [ "INDI", "BIRT", "DATE" ], method( :registerBirthdate )
+      before  [ "INDI", "BIRT", "PLAC" ], method( :registerBirthplace )
       #before  [ "INDI", "DEAT", "DATE" ], method( :registerDeathdate )
       #before  [ "INDI", "DEAT", "PLAC" ], method( :registerDeathplace )
       after [ "INDI" ], method( :endPerson )
@@ -21,9 +21,9 @@ class Import < GEDCOM::Parser
    end
    def startPerson( data )
       if @opts[:v] >= 2
-         puts "starting new person"
+         puts "Creating new person"
       end
-      @currentPerson = Person.new
+      @currentPerson = Person.create
 
    end
 
@@ -41,22 +41,37 @@ class Import < GEDCOM::Parser
    end
 
    def registerGender( data )
+      if @opts[:v] >= 3
+         puts "updating person's gender"
+      end
       @currentPerson.gender = data if @currentPerson.gender == nil
    end
 
    def registerBirthdate( data )
-      @currentPerson.bdate = data if @currentPerson.bdate == nil
+      if @opts[:v] >= 3
+         puts "updating person's birthdate"
+      end
+      @currentPerson.birth.date = data if @currentPerson.birth.date == nil
    end
 
    def registerBirthplace( data )
-      @currentPerson.bplace = data if @currentPerson.bplace == nil
+      if @opts[:v] >= 3
+         puts "updating person's birthplace"
+      end
+      @currentPerson.birth.place = data if @currentPerson.birth.place == nil
    end
 
    def registerDeathdate( data )
+      if @opts[:v] >= 3
+         puts "updating person's deathdate"
+      end
       @currentPerson.ddate = data if @currentPerson.ddate == nil
    end
 
    def registerDeathplace( data )
+      if @opts[:v] >= 3
+         puts "updating person's deathplace"
+      end
       @currentPerson.dplace = data if @currentPerson.dplace == nil
    end
 
