@@ -3,33 +3,31 @@
 require_relative 'gedcom-ruby/lib/gedcom.rb'
 
 class Import < GEDCOM::Parser
-   def initialize(verbosity)
+   def initialize
       super
 
-      opts = { :v => verbosity }
-
-      setPreHandler  [ "INDI" ], method( :startPerson ), opts
-      setPreHandler  [ "INDI", "NAME" ], method( :registerName ), opts
-      setPreHandler  [ "INDI", "SEX" ], method( :registerGender ), opts
-      #setPreHandler  [ "INDI", "BIRT", "DATE" ], method( :registerBirthdate ), opts
-      #setPreHandler  [ "INDI", "BIRT", "PLAC" ], method( :registerBirthplace ), opts
-      #setPreHandler  [ "INDI", "DEAT", "DATE" ], method( :registerDeathdate ), opts
-      #setPreHandler  [ "INDI", "DEAT", "PLAC" ], method( :registerDeathplace ), opts
-      setPostHandler [ "INDI" ], method( :endPerson ), opts
+      before  [ "INDI" ], method( :startPerson )
+      before  [ "INDI", "NAME" ], method( :registerName )
+      before  [ "INDI", "SEX" ], method( :registerGender )
+      #before  [ "INDI", "BIRT", "DATE" ], method( :registerBirthdate )
+      #before  [ "INDI", "BIRT", "PLAC" ], method( :registerBirthplace )
+      #before  [ "INDI", "DEAT", "DATE" ], method( :registerDeathdate )
+      #before  [ "INDI", "DEAT", "PLAC" ], method( :registerDeathplace )
+      after [ "INDI" ], method( :endPerson )
 
       @currentPerson = nil
       @allPeople = []
 
    end
-   def startPerson( data, state, parm )
-      if parm[:v] >= 2
+   def startPerson( data )
+      if @opts[:v] >= 2
          puts "starting new person"
       end
       @currentPerson = Person.new
 
    end
 
-   def registerName( data, state, parm )
+   def registerName( data )
       (first_name, last_name ) = data.split("/")
       first_name = '' if first_name == nil
       last_name = '' if last_name == nil
@@ -42,29 +40,29 @@ class Import < GEDCOM::Parser
       end
    end
 
-   def registerGender( data, state, parm )
+   def registerGender( data )
       @currentPerson.gender = data if @currentPerson.gender == nil
    end
 
-   def registerBirthdate( data, state, parm )
+   def registerBirthdate( data )
       @currentPerson.bdate = data if @currentPerson.bdate == nil
    end
 
-   def registerBirthplace( data, state, parm )
+   def registerBirthplace( data )
       @currentPerson.bplace = data if @currentPerson.bplace == nil
    end
 
-   def registerDeathdate( data, state, parm )
+   def registerDeathdate( data )
       @currentPerson.ddate = data if @currentPerson.ddate == nil
    end
 
-   def registerDeathplace( data, state, parm )
+   def registerDeathplace( data )
       @currentPerson.dplace = data if @currentPerson.dplace == nil
    end
 
-   def endPerson( data, state, parm )
+   def endPerson( data )
       @allPeople.push @currentPerson
-      if parm[:v] >= 1
+      if @opts[:v] >= 1
          puts "saving #{@currentPerson.full_name}"
       end
       @currentPerson.save!

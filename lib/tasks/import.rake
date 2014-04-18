@@ -4,7 +4,9 @@ namespace :import do
     require_relative '../import/import.rb'
     file = args.file
     verbosity = args.verbosity.to_i || 0
-    i = Import.new(verbosity)
+    i = Import.new do 
+      @opts = { :v => verbosity }
+    end
     i.parse(file)
   end
 
