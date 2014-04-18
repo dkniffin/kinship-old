@@ -10,10 +10,13 @@ describe Person do
 	it { should respond_to(:gender)}
 	it { should respond_to(:photo)}
 	it { should respond_to(:birth)}
+	it { should respond_to(:death)}
 	it { should respond_to(:age)}
 	it { should respond_to(:full_name)}
 	it { should respond_to(:father)}
 	it { should respond_to(:mother)}
+	it { should respond_to(:children)}
+	it { should respond_to(:user)}
 
 	describe "when gender is blank" do
 		before { @person.gender = "" }
@@ -63,6 +66,27 @@ describe Person do
 		end
 
 		specify { @person.age.should be_nil }
+	end
+	describe "when a birth date is specified" do
+		before do
+			@date = Date.new(1990,01,01)
+			@person.update_attributes({:birth_attributes => { :date => @date }})
+		end
+		specify { @person.birth.date.should eq(@date) }
+	end
+	describe "when no death date is specified" do
+		before do
+			@person.update_attributes({:death_attributes => { :date => nil }})
+		end
+
+		specify { @person.age.should be_nil }
+	end
+	describe "when a death date is specified" do
+		before do
+			@date = Date.new(1990,01,01)
+			@person.update_attributes({:death_attributes => { :date => @date }})
+		end
+		specify { @person.death.date.should eq(@date) }
 	end
 
 end
