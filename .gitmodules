@@ -1,0 +1,3 @@
+[submodule "lib/import/gedcom-ruby"]
+	path = lib/import/gedcom-ruby
+	url = https://github.com/binary011010/gedcom-ruby.git
