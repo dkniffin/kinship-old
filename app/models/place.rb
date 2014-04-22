@@ -59,6 +59,10 @@ class Place < ActiveRecord::Base
 		self.save
 	end
 
+	def empty?
+		self.place_string.rstrip.empty?
+	end
+
 	private
 		def default_values
 			self.street_address ||= ''

@@ -14,7 +14,7 @@
         <%= @person.birth.date.formatted %>
       <% end %>
     </p>
-    <% if !@person.alive? %>
+    <% if !@person.death.date.nil? %>
       <p>Death date: <%= @person.death.date.formatted %><%= " (age: " + @person.age.to_s + ")"%></p>
     <% end %>
     <% if @spouse%>
