@@ -8,6 +8,7 @@ namespace :import do
       @opts = { :v => verbosity }
     end
     i.parse(file)
+    #i.printPeople
   end
 
   desc "Print help message"

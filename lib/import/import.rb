@@ -11,13 +11,14 @@ class Import < GEDCOM::Parser
       before  [ "INDI", "NAME" ], method( :registerName )
       before  [ "INDI", "SEX" ], method( :registerGender )
       before  [ "INDI", "BIRT", "DATE" ], method( :registerBirthdate )
-      before  [ "INDI", "BIRT", "PLAC" ], method( :registerBirthplace )
+      #before  [ "INDI", "BIRT", "PLAC" ], method( :registerBirthplace )
       before  [ "INDI", "DEAT", "DATE" ], method( :registerDeathdate )
-      before  [ "INDI", "DEAT", "PLAC" ], method( :registerDeathplace )
+      #before  [ "INDI", "DEAT", "PLAC" ], method( :registerDeathplace )
       after [ "INDI" ], method( :endPerson )
 
       @currentPerson = nil
-      @allPeople = []
+      @currentId = nil
+      @allPeople = {}
 
    end
    def startPerson( data )
@@ -25,7 +26,7 @@ class Import < GEDCOM::Parser
          puts "Creating new person"
       end
       @currentPerson = Person.create
-
+      @currentId = data
    end
 
    def registerName( data )
@@ -77,7 +78,7 @@ class Import < GEDCOM::Parser
    end
 
    def endPerson( data )
-      @allPeople.push @currentPerson
+      @allPeople[@currentId] = @currentPerson
       if @opts[:v] >= 1
          puts "saving #{@currentPerson.full_name}"
       end
@@ -89,8 +90,6 @@ class Import < GEDCOM::Parser
    end
 
    def printPeople
-      @allPeople.each do |person|
-         puts person.full_name
-      end
+      pp @allPeople
    end
 end
