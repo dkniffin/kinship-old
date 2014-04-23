@@ -148,7 +148,7 @@ class Import < GEDCOM::Parser
          if !wife.nil?
             child.birth.mother_id = wife.id
          end
-         child.save!
+         child.save!(validate: false)
       end
 
       @currentFamily = nil
