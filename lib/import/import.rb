@@ -7,6 +7,9 @@ class Import < GEDCOM::Parser
    def initialize
       super
 
+      @currentId = nil
+
+      # Individuals
       before  [ "INDI" ], method( :startPerson )
       before  [ "INDI", "NAME" ], method( :registerName )
       before  [ "INDI", "SEX" ], method( :registerGender )
@@ -17,10 +20,23 @@ class Import < GEDCOM::Parser
       after [ "INDI" ], method( :endPerson )
 
       @currentPerson = nil
-      @currentId = nil
       @allPeople = {}
 
+      # Families
+      before [ "FAM" ], method( :startFamily )
+      before [ "FAM", "HUSB" ], method( :registerHusband )
+      before [ "FAM", "WIFE" ], method( :registerWife )
+      before [ "FAM", "CHIL" ], method( :registerChild )
+      after [ "FAM" ], method( :endFamily )
+
+      @currentFamily = nil
+
    end
+
+   ######################################################################
+   # People
+   ######################################################################
+
    def startPerson( data )
       if @opts[:v] >= 2
          puts "Creating new person"
@@ -87,6 +103,56 @@ class Import < GEDCOM::Parser
       end
       @currentPerson.save!
       @currentPerson = nil
+      @currentId = nil
+   end
+
+   ######################################################################
+   # Families
+   ######################################################################
+
+   def startFamily( data )
+      if @opts[:v] >= 1
+         puts "Starting new family"
+      end
+      @currentFamily = {
+         :husband => nil,
+         :wife => nil,
+         :children => []
+      }
+      @currentId = data
+   end
+
+   def registerHusband( data )
+      @currentFamily[:husband] = data
+   end
+   def registerWife( data )
+      @currentFamily[:wife] = data
+   end
+   def registerChild( data )
+      @currentFamily[:children].push data
+   end
+
+   def endFamily( data )
+      if @opts[:v] >= 2
+         puts "Processing family"
+      end
+
+      husb = @allPeople[@currentFamily[:husband]]
+      wife = @allPeople[@currentFamily[:wife]]
+      children = []
+      @currentFamily[:children].each do |child_id|
+         child = @allPeople[child_id]
+         if !husb.nil?
+            child.birth.father_id = husb.id
+         end
+         if !wife.nil?
+            child.birth.mother_id = wife.id
+         end
+         child.save!
+      end
+
+      @currentFamily = nil
+      @currentId = nil
    end
 
    def printPeople
