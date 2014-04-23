@@ -5,43 +5,13 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
-    @people = Person.all
+    # Get people
+    @genders = params[:genders].nil? ? Person.all_genders : params[:genders].keys
+    #sort = params[:sort] || session[:sort]
+    @people = Person.gender(@genders).filter(params[:query]).order(params[:sort]).page(params[:page])
 
-    query = params[:query]
-    sort = params[:sort] || session[:sort]
-
-    case sort
-    when 'first_name'
-      ordering,@first_name_header = {:first_name => :asc}, 'hilite'
-    when 'last_name'
-      ordering,@last_name_header = {:last_name => :asc, :first_name => :asc}, 'hilite'
-    end
+    # Get genders
     @all_genders = Person.all_genders
-    @selected_genders = params[:genders] || {}
-
-    if @selected_genders == {}
-      @selected_genders = Hash[@all_genders.map {|gender| [gender, gender]}]
-    end
-    # Allow searching for people with no gender specified
-    if @selected_genders.keys.include?('M') and @selected_genders.keys.include?('F')
-       @selected_genders[' '] = "1"
-    end
-
-    if params[:sort] != session[:sort] or params[:genders] != session[:genders] or params[:query] != session[:query]
-      session[:sort] = sort
-      session[:genders] = @selected_genders
-      session[:query] = query
-      redirect_to :sort => sort, :genders => @selected_genders, :query => query and return
-    end
-
-    @search_genders = @selected_genders.keys << ''
-    if query
-       gender_results = Person.where(gender: @search_genders).order(ordering)
-       people_results = Person.where('first_name NOT LIKE ? AND last_name NOT LIKE ?', "%#{query}%", "%#{query}%")
-       @people = (gender_results - people_results).uniq
-    else
-      @people = Person.where(gender: @search_genders).order(ordering)
-    end
   end
 
   # GET /people/1

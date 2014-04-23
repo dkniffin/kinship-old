@@ -35,6 +35,9 @@ class Person < ActiveRecord::Base
 	VALID_GENDERS = ['M', 'F']
 	validates :gender, :presence => true, inclusion: {in: VALID_GENDERS},:allow_blank => true
 
+	scope :gender, ->(genders = VALID_GENDERS) { where(gender: genders) }
+	scope :filter, ->(query) { where('first_name LIKE ? OR last_name LIKE ?', "%#{query}%", "%#{query}%") }
+
 	def father
 		birth.father
 	end

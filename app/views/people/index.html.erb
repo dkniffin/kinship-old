@@ -1,13 +1,15 @@
 <% provide(:title, "Person Index") %>
 <h1>Person Index</h1>
 
+<%= paginate @people %>
+
 <%= form_tag people_path, :method => :get, :id => 'gender_form' do %>
   <%= hidden_field_tag "first_name_sort", true if @first_name_header %>
   <%= hidden_field_tag "last_name_sort", true if @last_name_header %>
   Genders:
   <% @all_genders.each do |gender| %>
      <%= gender %>
-     <%= check_box_tag "genders[#{gender}]", 1, @selected_genders.include?(gender), :id => "genders_#{gender}" %>
+     <%= check_box_tag "genders[#{gender}]", 1, @genders.include?(gender), :id => "genders_#{gender}" %>
   <% end %>
   <br><br>
   <%= text_field_tag :query, params[:query] %><br>
@@ -21,8 +23,8 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th class=<%= @first_name_header %>><%= link_to 'First Name', people_path(:sort => 'first_name', :genders => @selected_genders), :id => 'first_name_header' %></th>
-        <th class=<%= @last_name_header %>><%= link_to 'Last Name', people_path(:sort => 'last_name', :genders => @selected_genders), :id => 'last_name_header' %></th>
+        <th class=<%= @first_name_header %>><%= link_to 'First Name', request.parameters.merge({:sort => 'first_name'}), :id => 'first_name_header' %></th>
+        <th class=<%= @last_name_header %>><%= link_to 'Last Name', request.parameters.merge({:sort => 'last_name'}), :id => 'last_name_header' %></th>
         <th>Gender</th>
         <th>Photo</th>
         <th>Birth Date</th>
