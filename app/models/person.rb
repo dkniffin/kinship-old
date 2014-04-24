@@ -77,6 +77,38 @@ class Person < ActiveRecord::Base
       age
    end
 
+   def siblings(mod=:full)
+      father_id = birth.father_id
+      mother_id = birth.mother_id
+      siblings = []
+      sibling_ids = []
+
+      # TODO: step siblings
+      case mod
+      when :full
+         if !father_id.nil? and !mother_id.nil?
+            sibling_ids = Birth.where(:father_id => father_id,
+                                    :mother_id => mother_id).map {|elt| elt.child_id} - [id]
+         end
+      when :half
+         father_sibling_ids=[]
+         mother_sibling_ids=[]
+         if !father_id.nil?
+            father_sibling_ids = Birth.where(:father_id => father_id)
+         end
+         if !mother_id.nil?
+            mother_sibling_ids = Birth.where(:mother_id => mother_id)
+         end
+
+         # One parent is the same (father_children xor mother_children)
+         sibling_ids = father_sibling_ids + mother_sibling_ids - (father_sibling_ids & mother_sibling_ids)
+      else
+         raise "Unknown sibling type"
+      end
+
+      return siblings = Person.where(:id => sibling_ids)
+   end
+
    def events
       e = []
 

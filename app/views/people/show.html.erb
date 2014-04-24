@@ -84,11 +84,11 @@
         <% end %>
       <% end %>
       <br>
-      <% if ! @step_siblings.nil? %>
-        <% @step_siblings.each do |step_sibling| %>
-          <dt>Step Sibling</dt>
+      <% if ! @half_siblings.nil? %>
+        <% @half_siblings.each do |half_sibling| %>
+          <dt>Half Sibling</dt>
           <dd>
-          <%= link_to step_sibling.full_name, step_sibling %><br>
+          <%= link_to half_sibling.full_name, half_sibling %><br>
           </dd>
         <% end %>
       <% end %>
