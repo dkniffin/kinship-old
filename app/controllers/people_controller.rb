@@ -7,7 +7,6 @@ class PeopleController < ApplicationController
   def index
     # Get people
     @genders = params[:genders].nil? ? Person.all_genders : params[:genders].keys
-    #sort = params[:sort] || session[:sort]
     @people = Person.gender(@genders).filter(params[:query]).order(params[:sort]).page(params[:page])
 
     # Get genders

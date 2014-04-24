@@ -1,0 +1,20 @@
+<table>
+  <tr>
+    <th>Date & Place</th>
+    <th></th>
+    <th>Details</th>
+  </tr>
+<% @person.events.each do |event| %>
+  <tr>
+    <td class="span4">
+      <%= event.date_string %>
+      <br />
+      <%= event.place.place_string %>
+    </td>
+    <td class="span1">
+      <i class='<%= event.icon_class %>'></i>
+    </td>
+    <td class="span6"><%= event.short_description %></td>
+  </tr>
+<% end %>
+</table>

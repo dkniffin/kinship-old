@@ -86,6 +86,10 @@ class Person < ActiveRecord::Base
 	    if death.dead
 		e.push(death)
 	    end
+	    # TODO: Add sibling births and deaths
+	    # TODO: Add child births and deaths
+	    # TODO: Add parent births and deaths
+	    # TODO: Add spouse births and deaths
 
 	    return e
 	end
