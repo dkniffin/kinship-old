@@ -6,7 +6,7 @@ GIT
       rails (>= 3.1)
 
 GEM
-  remote: https://rubygems.org/
+  remote: http://rubygems.org/
   specs:
     actionmailer (4.0.1)
       actionpack (= 4.0.1)
@@ -36,6 +36,7 @@ GEM
     arel (4.0.1)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
+    bcrypt-ruby (3.1.2-x86-mingw32)
     bootstrap-sass (2.3.2.0)
       sass (~> 3.2)
     builder (3.1.4)
@@ -83,8 +84,11 @@ GEM
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
     ffi (1.9.3)
+    ffi (1.9.3-x86-mingw32)
     geocoder (1.1.8)
     gherkin (2.12.2)
+      multi_json (~> 1.3)
+    gherkin (2.12.2-x86-mingw32)
       multi_json (~> 1.3)
     hike (1.2.3)
     honeypot-captcha (0.0.2)
@@ -113,12 +117,15 @@ GEM
     multi_test (0.0.2)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
+    nokogiri (1.6.0-x86-mingw32)
+      mini_portile (~> 0.5.0)
     paperclip (3.5.2)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
     pg (0.15.1)
+    pg (0.15.1-x86-mingw32)
     polyglot (0.3.3)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -203,6 +210,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86-mingw32
 
 DEPENDENCIES
   bcrypt-ruby (= 3.1.2)
