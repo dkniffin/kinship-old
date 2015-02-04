@@ -5,7 +5,7 @@
 #   gem 'sqlite3'
 development:
   adapter: postgresql
-  database: kinship-dev
+  database: kinship_dev
   pool: 5
   timeout: 5000
   username: kinship_dev
@@ -16,7 +16,7 @@ development:
 # Do not set this db to the same as development or production.
 test: &test
   adapter: postgresql
-  database: kinship-test
+  database: kinship_test
   pool: 5
   timeout: 5000
   username: kinship_test
