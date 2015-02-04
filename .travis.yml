@@ -6,3 +6,6 @@ before_script:
 script:
   - bundle exec rake db:setup
   - bundle exec rspec
+addons:
+  code_climate:
+    repo_token: 4ced2eeae257b14047076ec5a32a4721dd26fb72c93756ad1e2b7a3700e4cf9d
