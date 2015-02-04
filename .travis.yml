@@ -4,6 +4,5 @@ rvm:
 before_script:
   - psql -c "CREATE USER kinship_test WITH CREATEDB PASSWORD 'kinship';" -U postgres
 script:
-  - bundle exec rake db:migrate
-  - bundle exec rake db:seed
+  - bundle exec rake db:setup
   - bundle exec rspec
