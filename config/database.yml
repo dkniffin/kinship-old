@@ -8,7 +8,7 @@ development:
   database: kinship-dev
   pool: 5
   timeout: 5000
-  username: kinship-dev
+  username: kinship_dev
   password: kinship
 
 # Warning: The database defined as "test" will be erased and
@@ -19,7 +19,7 @@ test: &test
   database: kinship-test
   pool: 5
   timeout: 5000
-  username: kinship-test
+  username: kinship_test
   password: kinship
 
 production:

@@ -2,4 +2,4 @@ language: ruby
 rvm:
   - 2.0.0
 before_script:
-  - psql -c "CREATE USER kinship-test WITH PASSWORD 'kinship';" -U postgres
+  - psql -c "CREATE USER kinship_test WITH PASSWORD 'kinship';" -U postgres
