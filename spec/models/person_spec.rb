@@ -18,75 +18,102 @@ describe Person do
 	it { should respond_to(:children)}
 	it { should respond_to(:user)}
 
-	describe "when gender is blank" do
-		before { @person.gender = "" }
-		it { should be_valid }
-	end
-
-	describe "when gender is invalid" do
-		before { @person.gender = "X" }
-		it { should_not be_valid }
-	end
-
-	describe "when there is an associated mother"	do
-		before do
-			@mom = Person.create()
-			@person.update_attributes({:birth_attributes => {:mother_id => @mom.id }})
+	describe :gender do
+		context "when blank" do
+			before { @person.gender = "" }
+			it { is_expected.to be_valid }
+		end
+		context "when male" do
+			before { @person.gender = "M" }
+			it { is_expected.to be_valid }
+		end
+		context "when female" do
+			before { @person.gender = "F" }
+			it { is_expected.to be_valid }
 		end
 
-		specify { @person.mother.should eq(@mom) }
-	end
-	describe "when there is not an associated mother" do
-		before do
-			@mom = Person.create()
+		context "when gender is not M,F,<blank>" do
+			before { @person.gender = "X" }
+			it { is_expected.to be_invalid }
 		end
-
-		specify { @person.mother.should_not eq(@mom) }
 	end
 
-	describe "when there is an associated father" do
-		before do
-			@dad = Person.create()
-			@person.update_attributes({:birth_attributes => {:father_id => @dad.id }})
+	describe :mother do
+		context "when a person is associated as mother" do
+			let(:mom) { Person.create() }
+			before do
+				@person.update_attributes({
+					:birth_attributes => {
+						:mother_id => mom.id
+					}
+				})
+			end
+
+			it "has the mother" do
+				expect(@person.mother).to eq(mom)
+			end
 		end
-
-		specify { @person.father.should eq(@dad) }
-	end
-	describe "when there is not an associated father" do
-		before do
-			@dad = Person.create()
+		context "when there is no associated mother" do
+			specify "mother is nil" do
+				expect(@person.mother).to be_nil
+			end
 		end
-
-		specify { @person.father.should_not eq(@dad) }
 	end
 
-	describe "when no birth date is specified" do
-		before do
-			@person.update_attributes({:birth_attributes => { :date => nil }})
+	describe :father do
+		context "when a person is associated as father" do
+			let(:dad) { Person.create() }
+			before do
+				@person.update_attributes({
+					:birth_attributes => {
+						:father_id => dad.id
+					}
+				})
+			end
+
+			it "has that father" do
+				expect(@person.father).to eq(dad)
+			end
 		end
-
-		specify { @person.age.should be_nil }
-	end
-	describe "when a birth date is specified" do
-		before do
-			@date = Date.new(1990,01,01)
-			@person.update_attributes({:birth_attributes => { :date => @date }})
+		context "when there is no associated father" do
+			specify "father is nil" do
+				expect(@person.father).to be_nil
+			end
 		end
-		specify { @person.birth.date.should eq(@date) }
-	end
-	describe "when no death date is specified" do
-		before do
-			@person.update_attributes({:death_attributes => { :date => nil }})
-		end
-
-		specify { @person.age.should be_nil }
-	end
-	describe "when a death date is specified" do
-		before do
-			@date = Date.new(1990,01,01)
-			@person.update_attributes({:death_attributes => { :date => @date }})
-		end
-		specify { @person.death.date.should eq(@date) }
 	end
 
+	describe :age do
+		context "when birth is not given" do
+			before do
+				@person.update_attributes({:birth_attributes => { :date => nil }})
+			end
+
+			specify { expect(@person.age).to be_nil }
+		end
+		context "when birth is given" do
+			let(:bdate) { Date.new(1990,01,01) }
+			before(:each) do
+				@person.update_attributes({:birth_attributes => { :date => bdate }})
+			end
+
+			context "when death is not given" do
+				before do
+					@person.update_attributes({:death_attributes => { :date => nil }})
+				end
+
+				specify "is age today" do
+					expect(@person.age).to eq(Date.today.year - bdate.year)
+				end
+			end
+			context "when death is given" do
+				let(:ddate) { Date.new(1991,01,02) }
+				before do
+					@person.update_attributes({:death_attributes => { :date => ddate }})
+				end
+				specify "is age at death" do
+					expect(@person.age).to eq(1)
+				end
+			end
+		end
+	end
 end

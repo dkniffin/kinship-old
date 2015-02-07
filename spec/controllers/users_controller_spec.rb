@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UsersController do
+describe UsersController, :type => :controller do
 
   describe "GET 'new'" do
     it "returns http success" do

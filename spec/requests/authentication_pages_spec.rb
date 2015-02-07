@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-	describe "Authentication" do
+describe "Authentication" do
 
 	subject { page }
 
@@ -38,7 +38,7 @@ require 'spec_helper'
 		end
 	end
 
-	describe "authorization" do
+	describe "authorization", type: :request do
 		describe "for non-signed-in users" do
 			let(:user) { FactoryGirl.create(:user) }
 

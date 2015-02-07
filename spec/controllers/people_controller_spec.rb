@@ -18,7 +18,7 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe PeopleController do
+describe PeopleController, :type => :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # Person. As you add validations to Person, be sure to
@@ -156,7 +156,7 @@ describe PeopleController do
     it "redirects to the people list" do
       person = Person.create! valid_attributes
       delete :destroy, {:id => person.to_param}, valid_session
-      response.should redirect_to(people_url)
+      response.should redirect_to(people_path)
     end
   end
 

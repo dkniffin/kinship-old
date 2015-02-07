@@ -22,11 +22,11 @@ class PeopleController < ApplicationController
     if @person.spouse_id
        @spouse = Person.find(@person.spouse_id)
     end
-    
+
     @primary_siblings = @person.siblings
     @half_siblings = @person.siblings(:half)
     @json_pedigree_tree = get_json_pedigree_tree(@person)
-    
+
   end
 
   # GET /people/new
@@ -149,14 +149,14 @@ class PeopleController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def person_params
-      params.require(:person).permit(:first_name, :last_name, :gender, :spouse_id, :photo, 
-        birth_attributes: [:id, :date, {place_attributes: [:id, :place_string]}, :father_id, :mother_id], 
+      params.require(:person).permit(:first_name, :last_name, :gender, :spouse_id, :photo,
+        birth_attributes: [:id, :date, {place_attributes: [:id, :place_string]}, :father_id, :mother_id],
         death_attributes: [:id, :dead, {place_attributes: [:id, :place_string]}, :date, :cause]
       )
     end
 
     def authorization
-      redirect_to root_url, 
+      redirect_to root_url,
         notice: "You must be signed in to an approved account to access this content" unless user_role?(User::ROLE_MEMBER)
     end
 end

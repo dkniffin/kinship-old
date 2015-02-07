@@ -1,13 +1,13 @@
 require 'spec_helper'
 require 'pp'
 
-describe AdminController do
+describe AdminController, :type => :controller do
   let(:user) { FactoryGirl.create(:user) }
   let(:admin) { FactoryGirl.create(:admin) }
-  
+
   context "admins" do
     before { sign_in admin, :no_capybara => true }
-    
+
 
     it "can access home" do
       get 'home'
@@ -37,7 +37,7 @@ describe AdminController do
 
   context "non-admins" do
     before { sign_in user, :no_capybara => true }
-    
+
 
     it "can't access home" do
       get 'home'

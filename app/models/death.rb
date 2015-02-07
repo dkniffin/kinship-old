@@ -4,6 +4,7 @@ class Death < ActiveRecord::Base
    before_validation :dead_if_date
 
    validates :dead, inclusion: { in: [true] }, if: "!date.nil?"
+   validate :date_in_past
 
    belongs_to :person
    belongs_to :place, :autosave => true
@@ -37,7 +38,10 @@ class Death < ActiveRecord::Base
          'Cause: ' + cause_string
       ]
    end
-
+   def date=(value)
+      self.dead = true
+      self[:date] = value
+   end
 
    def icon_class
       'icon-cemetery'
@@ -50,6 +54,10 @@ class Death < ActiveRecord::Base
          end
       end
       def build_default_place
-         build_place if place.nil? 
+         build_place if place.nil?
+      end
+      def date_in_past
+         errors.add(:date, "must be in the past") if
+            !date.blank? and date >= Date.today
       end
 end
