@@ -5,11 +5,11 @@ describe Death do
 
 	subject { @death }
 
-	it { should respond_to(:date)}
-	it { should respond_to(:place)}
-	it { should respond_to(:person)}
-	it { should respond_to(:cause)}
-	it { should respond_to(:dead)}
+	it { is_expected.to respond_to(:date)}
+	it { is_expected.to respond_to(:place)}
+	it { is_expected.to respond_to(:person)}
+	it { is_expected.to respond_to(:cause)}
+	it { is_expected.to respond_to(:dead)}
 
 	context "when date is in the future" do
 		before { @death.date = Date.tomorrow }
@@ -23,7 +23,6 @@ describe Death do
 		context "when date is in the past" do
 			before do
 				@death.date = Date.new(1900,01,01)
-				puts @death.dead
 			end
 
 

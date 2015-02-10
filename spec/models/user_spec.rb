@@ -5,26 +5,26 @@ describe User do
 							  password: "foobar", password_confirmation: "foobar") }
 
 	subject { @user }
-	it { should respond_to(:username) }
-	it { should respond_to(:email) }
-	it { should respond_to(:password_digest) }
-	it { should respond_to(:password) }
-	it { should respond_to(:password_confirmation) }
-	it { should respond_to(:role) }
-	it { should respond_to(:remember_token) }
-	it { should respond_to(:authenticate) }
+	it { is_expected.to respond_to(:username) }
+	it { is_expected.to respond_to(:email) }
+	it { is_expected.to respond_to(:password_digest) }
+	it { is_expected.to respond_to(:password) }
+	it { is_expected.to respond_to(:password_confirmation) }
+	it { is_expected.to respond_to(:role) }
+	it { is_expected.to respond_to(:remember_token) }
+	it { is_expected.to respond_to(:authenticate) }
 
 
-	it { should be_valid }
+	it { is_expected.to be_valid }
 
 	describe "when username is not present" do
 		before { @user.username = " " }
-		it { should_not be_valid }
+		it { is_expected.to be_invalid }
 	end
 
 	describe "when email is not present" do
 		before { @user.email = " " }
-		it { should_not be_valid }
+		it { is_expected.to be_invalid }
 	end
 	describe "when email format is invalid" do
 		it "should be invalid" do
@@ -32,7 +32,7 @@ describe User do
 			             foo@bar_baz.com foo@bar+baz.com]
 			addresses.each do |invalid_address|
 				@user.email = invalid_address
-				expect(@user).not_to be_valid
+				expect(@user).to be_invalid
 			end
 		end
 	end
@@ -54,7 +54,7 @@ describe User do
 			user_with_same_username.save
 		end
 
-		it { should_not be_valid }
+		it { is_expected.to be_invalid }
 	end
 
 	describe "when password is not present" do
@@ -62,12 +62,12 @@ describe User do
 			@user = User.new(username: "Example User", email: "user@example.com",
 							 password: " ", password_confirmation: " ")
 		end
-		it { should_not be_valid }
+		it { is_expected.to be_invalid }
 	end
 
 	describe "when password doesn't match confirmation" do
 		before { @user.password_confirmation = "mismatch" }
-		it { should_not be_valid }
+		it { is_expected.to be_invalid }
 	end
 
 	describe "return value of authenticate method" do
@@ -75,25 +75,25 @@ describe User do
 		let(:found_user) { User.find_by(email: @user.email) }
 
 		describe "with valid password" do
-			it { should eq found_user.authenticate(@user.password) }
+			it { is_expected.to eq(found_user.authenticate(@user.password)) }
 		end
 
 		describe "with invalid password" do
 			let(:user_for_invalid_password) { found_user.authenticate("invalid") }
 
-			it { should_not eq user_for_invalid_password }
+			it { is_expected.to_not eq(user_for_invalid_password) }
 			specify { expect(user_for_invalid_password).to be_falsey }
 		end
 	end
 
 	describe "with a password that's too short" do
 		before { @user.password = @user.password_confirmation = "a" * 5 }
-		it { should be_invalid }
+		it { is_expected.to be_invalid }
 	end
 
 	describe "when role is not valid" do
 		before { @user.role = "blah"}
-		it { should be_invalid }
+		it { is_expected.to be_invalid }
 	end
 
 	describe "remember token" do

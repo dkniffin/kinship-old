@@ -5,18 +5,18 @@ describe Person do
 
 	subject { @person }
 
-	it { should respond_to(:first_name)}
-	it { should respond_to(:last_name)}
-	it { should respond_to(:gender)}
-	it { should respond_to(:photo)}
-	it { should respond_to(:birth)}
-	it { should respond_to(:death)}
-	it { should respond_to(:age)}
-	it { should respond_to(:full_name)}
-	it { should respond_to(:father)}
-	it { should respond_to(:mother)}
-	it { should respond_to(:children)}
-	it { should respond_to(:user)}
+	it { is_expected.to respond_to(:first_name)}
+	it { is_expected.to respond_to(:last_name)}
+	it { is_expected.to respond_to(:gender)}
+	it { is_expected.to respond_to(:photo)}
+	it { is_expected.to respond_to(:birth)}
+	it { is_expected.to respond_to(:death)}
+	it { is_expected.to respond_to(:age)}
+	it { is_expected.to respond_to(:full_name)}
+	it { is_expected.to respond_to(:father)}
+	it { is_expected.to respond_to(:mother)}
+	it { is_expected.to respond_to(:children)}
+	it { is_expected.to respond_to(:user)}
 
 	describe :gender do
 		context "when blank" do
