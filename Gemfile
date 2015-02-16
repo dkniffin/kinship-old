@@ -33,6 +33,7 @@ gem 'pg'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.2.0'
+  gem 'fuubar'
 end
 
 group :test do
