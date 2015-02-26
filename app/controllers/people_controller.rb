@@ -77,11 +77,11 @@ class PeopleController < ApplicationController
       format.json { head :no_content }
     end
     # Clear the record of the person in Birth
-    Birth.where(:father_id => @person.id).each do |child|
+    Birth.where("other_attributes -> 'father_id' = ?",@person.id.to_s).each do |child|
       child.father_id = nil
       child.save
     end
-    Birth.where(:mother_id => @person.id).each do |child|
+    Birth.where("other_attributes -> 'mother_id' = ?",@person.id.to_s).each do |child|
       child.mother_id = nil
       child.save
     end

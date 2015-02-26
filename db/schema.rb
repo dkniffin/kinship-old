@@ -11,29 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150204220118) do
+ActiveRecord::Schema.define(version: 20150219214749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
-  create_table "births", force: true do |t|
+  create_table "life_events", force: true do |t|
+    t.string   "type"
     t.date     "date"
-    t.integer  "child_id"
-    t.integer  "father_id"
-    t.integer  "mother_id"
+    t.date     "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "place_id"
-  end
-
-  create_table "deaths", force: true do |t|
     t.integer  "person_id"
-    t.date     "date"
-    t.integer  "place_id"
-    t.string   "cause"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "dead"
+    t.hstore   "other_attributes"
   end
 
   create_table "people", force: true do |t|

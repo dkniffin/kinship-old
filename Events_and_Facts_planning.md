@@ -53,3 +53,26 @@ Fact
    has_many Source
    has_one Place # Optional
 ```
+------------------------------------------------------
+Scratch all that above...
+
+For events, use STI. Most of the fields overlap.
+
+LifeEvent
+  date # start date in some cases
+  end_date # optional
+------------------------------------------------------
+
+For Sources, use polymorphic references. So, we'd have:
+
+class LifeEvent
+  has_many :sources
+
+# Might need AS::Concern
+# http://api.rubyonrails.org/classes/ActiveSupport/Concern.html
+module Source
+  belongs_to :lifeevent, polymorphic: true, as: :source
+
+
+class Census
+  include Source

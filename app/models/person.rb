@@ -1,9 +1,9 @@
 class Person < ActiveRecord::Base
    before_validation :default_values
-   before_create :build_default_birth, :build_default_death
+   after_create :build_default_birth, :build_default_death
 
    # Photo stuff
-   has_attached_file :photo, 
+   has_attached_file :photo,
       :styles => { :medium => "256x256#", :small => "64x64#", :tiny => "24x24#" },
       :default_url => :set_default_avatar,
       :url  => "/assets/photos/:id/:style/:basename.:extension",
@@ -11,15 +11,10 @@ class Person < ActiveRecord::Base
    validates_attachment_size :photo, :less_than => 5.megabytes
    validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png']
 
-   # Birth
-   has_one :birth, :foreign_key => "child_id"
-   accepts_nested_attributes_for :birth
-   validates_associated :birth
-
-   # Death
-   has_one :death
-   accepts_nested_attributes_for :death
-   validates_associated :death
+   # LifeEvents
+   has_many :life_events
+   has_one :birth, -> { where(type: "Birth") }, class_name: "LifeEvent"
+   has_one :death, -> { where(type: "Death") }, class_name: "LifeEvent"
 
    # User
    has_one :user
@@ -41,9 +36,14 @@ class Person < ActiveRecord::Base
    def father
       birth.father
    end
-
+   def father=(p)
+      birth.father = p
+   end
    def mother
       birth.mother
+   end
+   def mother=(p)
+      birth.mother = p
    end
 
    def full_name
@@ -60,8 +60,8 @@ class Person < ActiveRecord::Base
 
    def children
       # TODO: Might be able to minimize the search here by basing it on gender
-      children_ids = Birth.where(:father_id => id).map {|elt| elt.child_id}
-      children_ids += Birth.where(:mother_id => id).map {|elt| elt.child_id}
+      children_ids = Birth.where("other_attributes -> 'father_id' = ?",id.to_s).map {|elt| elt.child_id}
+      children_ids += Birth.where("other_attributes -> 'mother_id' = ?",id.to_s).map {|elt| elt.child_id}
       return Person.where(:id => children_ids)
    end
 
@@ -137,7 +137,7 @@ class Person < ActiveRecord::Base
                :place => event.place.place_string,
                :date => event.date_string
             })
-         end   
+         end
       end
       event_markers
    end
@@ -161,10 +161,12 @@ class Person < ActiveRecord::Base
          self.spouse_id ||= ''
       end
       def build_default_birth
-         build_birth if birth.nil? 
+         birth = Birth.create if birth.nil?
+         life_events << birth
       end
       def build_default_death
-         build_death if death.nil? 
+         death = Death.create if death.nil?
+         life_events << death
       end
     def set_default_avatar
       if gender == "F"

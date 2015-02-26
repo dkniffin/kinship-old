@@ -1,30 +1,20 @@
-class Birth < ActiveRecord::Base
-   before_save :build_default_place
+class Birth < LifeEvent
+   hstore_accessor :other_attributes,
+    father_id: :integer,
+    mother_id: :integer,
+    child_id: :integer
 
-   belongs_to :child, :class_name => "Person"
+   before_save :build_default_place
 
    belongs_to :place, :autosave => true
    accepts_nested_attributes_for :place
    validates_associated :place
 
    validate :parents_born_before_child
-   validate :date_in_past
 
-   def father
-      if father_id
-         Person.find(father_id)
-      else
-         nil
-      end
-   end
-
-   def mother
-      if mother_id
-         Person.find(mother_id)
-      else
-         nil
-      end
-   end
+   belongs_to :father, :class_name => "Person", :foreign_key => :father_id
+   belongs_to :mother, :class_name => "Person", :foreign_key => :mother_id
+   belongs_to :person
 
    def parents_string
       mother_str = (mother.nil?) ? 'Unknown mother' : mother.full_name
@@ -32,12 +22,8 @@ class Birth < ActiveRecord::Base
       mother_str + ' and ' + father_str
    end
 
-   def date_string
-      (date.nil?) ? 'Unknown date' : date.formatted
-   end
-
    def short_description
-      child.full_name + ' was born'
+      person.full_name + ' was born'
    end
 
    def title_string
@@ -76,9 +62,5 @@ class Birth < ActiveRecord::Base
       end
       def build_default_place
          build_place if place.nil?
-      end
-      def date_in_past
-         errors.add(:date, "must be in the past") if
-            !date.blank? and date >= Date.today
       end
 end

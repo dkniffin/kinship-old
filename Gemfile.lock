@@ -5,6 +5,13 @@ GIT
     simple_captcha (0.2.0)
       rails (>= 3.1)
 
+GIT
+  remote: https://github.com/oddityoverseer13/hstore_accessor.git
+  revision: 9924eb0c790b5f4b5ffd2772e78ff3395d38b53b
+  specs:
+    hstore_accessor (1.0.0)
+      activerecord (>= 4.0.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -26,6 +33,10 @@ GEM
       activesupport (= 4.0.1)
       arel (~> 4.0.0)
     activerecord-deprecated_finders (1.0.3)
+    activerecord-postgres-hstore (0.7.7)
+      activerecord (>= 3.1)
+      pg-hstore (>= 1.1.5)
+      rake
     activesupport (4.0.1)
       i18n (~> 0.6, >= 0.6.4)
       minitest (~> 4.2)
@@ -132,6 +143,7 @@ GEM
       mime-types
     pg (0.15.1)
     pg (0.15.1-x86-mingw32)
+    pg-hstore (1.2.0)
     polyglot (0.3.3)
     rack (1.5.2)
     rack-test (0.6.3)
@@ -235,6 +247,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  activerecord-postgres-hstore
   bcrypt-ruby (= 3.1.2)
   bootstrap-sass (= 2.3.2.0)
   capybara (= 2.2.0)
@@ -249,6 +262,7 @@ DEPENDENCIES
   fuubar
   geocoder (~> 1.1.8)
   honeypot-captcha
+  hstore_accessor!
   jbuilder (~> 1.2)
   jquery-rails
   kaminari

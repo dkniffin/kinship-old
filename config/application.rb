@@ -29,9 +29,12 @@ module Kinship
       :authentication       => :plain,
       :enable_starttls_auto => true
     }
-    
+
     config.action_mailer.default_url_options = {
       :host => "yourdomain.dev"
     }
+
+    # Load models from subdirs
+    config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**/}')]
   end
 end
