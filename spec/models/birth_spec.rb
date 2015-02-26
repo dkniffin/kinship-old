@@ -6,6 +6,7 @@ describe Birth do
 	subject { @birth }
 
 	it { is_expected.to respond_to(:date)}
+	it { is_expected.to respond_to(:person)}
 	it { is_expected.to respond_to(:place)}
 	it { is_expected.to respond_to(:child_id)}
 	it { is_expected.to respond_to(:mother_id)}
