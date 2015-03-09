@@ -15,15 +15,14 @@ Things to Document
 - Retirement [Period]
 - Promotion [Event]
 - Census [Event]
-- Religion [Fact]
-- Title [Fact]
-- SSN [Fact]
-- Military Enlistment [Event]
-- Battle
-- Military Discharge [Event]
+- Military Enlistment [Period]
 - Immigration [Event]
 - Emmigration [Event]
 - Naturalization [Event]
+
+- Religion [Fact]
+- Title [Fact]
+- SSN [Fact]
 
 - Custom Period [Period]
 - Custom Event [Event]
