@@ -9,19 +9,11 @@ Installation
 ============
 For development:
 
-- install rails
-- install postgres
-- create database and user
- - kinship-dev (pw: kinship)
-- `rake db:setup` - set up the database
+- `git clone git@github.com:dkniffin/kinship.git`
+- `cd kinship`
+- `bundle install`
+- `rake db:setup`
 - Optional: import gedcom file
-- `rails s` - start rails
+- `rails s`
 - Go to [http://localhost:3000]
 - Log in as user: admin, password: kinship
-
-In addition, for testing:
-
-- create database and user
- - kinship-test (pw: kinship)
-- `rake db:setup RAILS_ENV=test` - set up the database
-- `rspec` - run rspec tests
