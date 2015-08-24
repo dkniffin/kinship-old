@@ -29,7 +29,7 @@ gem "leaflet-rails", "~> 0.7.0"
 gem 'kaminari'
 
 # Database
-gem 'pg'
+gem 'sqlite3'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.2.0'
