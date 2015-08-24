@@ -9,7 +9,6 @@ describe Person do
 	it { is_expected.to respond_to(:last_name)}
 	it { is_expected.to respond_to(:gender)}
 	it { is_expected.to respond_to(:photo)}
-	it { is_expected.to respond_to(:life_events)}
 	it { is_expected.to respond_to(:birth)}
 	it { is_expected.to respond_to(:death)}
 	it { is_expected.to respond_to(:age)}
