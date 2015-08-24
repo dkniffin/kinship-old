@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Person do
-	before { @person = Person.create }
+	before { @person = Person.create() }
 
 	subject { @person }
 
@@ -40,33 +40,53 @@ describe Person do
 	end
 
 	describe :mother do
-		let(:mom) { Person.create }
-		before { @person.mother = mom }
+		context "when a person is associated as mother" do
+			let(:mom) { Person.create() }
+			before do
+				@person.update_attributes({
+					:birth_attributes => {
+						:mother_id => mom.id
+					}
+				})
+			end
 
-		it "is mom" do
-			expect(@person.mother).to be(mom)
+			it "has the mother" do
+				expect(@person.mother).to eq(mom)
+			end
 		end
-		it "is the birth mother" do
-			expect(@person.mother).to be(@person.birth.mother)
+		context "when there is no associated mother" do
+			specify "mother is nil" do
+				expect(@person.mother).to be_nil
+			end
 		end
 	end
 
 	describe :father do
-		let(:dad) { Person.create }
-		before { @person.father = dad }
+		context "when a person is associated as father" do
+			let(:dad) { Person.create() }
+			before do
+				@person.update_attributes({
+					:birth_attributes => {
+						:father_id => dad.id
+					}
+				})
+			end
 
-		it "is dad" do
-			expect(@person.father).to be(dad)
+			it "has that father" do
+				expect(@person.father).to eq(dad)
+			end
 		end
-		it "is the birth father" do
-			expect(@person.father).to be(@person.birth.father)
+		context "when there is no associated father" do
+			specify "father is nil" do
+				expect(@person.father).to be_nil
+			end
 		end
 	end
 
 	describe :age do
-		context "when birth date is not given" do
+		context "when birth is not given" do
 			before do
-				@person.birth.date = nil
+				@person.update_attributes({:birth_attributes => { :date => nil }})
 			end
 
 			specify { expect(@person.age).to be_nil }
@@ -74,12 +94,12 @@ describe Person do
 		context "when birth is given" do
 			let(:bdate) { Date.new(1990,01,01) }
 			before(:each) do
-				@person.birth.date = bdate
+				@person.update_attributes({:birth_attributes => { :date => bdate }})
 			end
 
 			context "when death is not given" do
 				before do
-					@person.death.date = nil
+					@person.update_attributes({:death_attributes => { :date => nil }})
 				end
 
 				specify "is age today" do
@@ -89,7 +109,7 @@ describe Person do
 			context "when death is given" do
 				let(:ddate) { Date.new(1991,01,02) }
 				before do
-					@person.death.date = ddate
+					@person.update_attributes({:death_attributes => { :date => ddate }})
 				end
 				specify "is age at death" do
 					expect(@person.age).to eq(1)

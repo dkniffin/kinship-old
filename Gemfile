@@ -30,8 +30,6 @@ gem 'kaminari'
 
 # Database
 gem 'pg'
-gem 'activerecord-postgres-hstore'
-gem "hstore_accessor"
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.2.0'

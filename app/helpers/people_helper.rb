@@ -1,7 +1,7 @@
 module PeopleHelper
 	def setup_person(person)
-		#person.birth ||= Birth.new
-    #person.death ||= Death.new
+		person.birth ||= Birth.new
+    person.death ||= Death.new
 		person
 	end
 

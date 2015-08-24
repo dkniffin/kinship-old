@@ -21,34 +21,22 @@ describe Birth do
 	end
 
 	describe :mother do
-		context "when defined" do
-			let(:mom) { Person.create }
-			before { @birth.mother = mom }
+		context "when mother is defined" do
+			let(:mom) { Person.create() }
+			before { @birth.mother_id = mom.id }
 
-			it "is defined" do
-				expect(@birth.mother).to be(mom)
+			it "has the mother" do
+				expect(@birth.mother).to eq(mom)
 			end
 		end
-		context "when not defined" do
-			specify "is nil" do
-				expect(@birth.mother).to be_nil
-			end
-		end
-	end
-
-	describe :father do
-		context "when defined" do
+		context "when father is defined" do
 			let(:dad) { Person.create() }
-			before { @birth.father = dad }
+			before { @birth.father_id = dad.id }
 
-			it "is defined" do
+			it "has the father" do
 				expect(@birth.father).to eq(dad)
 			end
 		end
-		context "when not defined" do
-			specify "is nil" do
-				expect(@birth.father).to be_nil
-			end
-		end
+
 	end
 end

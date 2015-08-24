@@ -1,14 +1,12 @@
-class Death < LifeEvent
-   hstore_accessor :other_attributes,
-    dead: :boolean,
-    cause: :string
-
+class Death < ActiveRecord::Base
    before_save :build_default_place
 
    before_validation :dead_if_date
 
    validates :dead, inclusion: { in: [true] }, if: "!date.nil?"
+   validate :date_in_past
 
+   belongs_to :person
    belongs_to :place, :autosave => true
    accepts_nested_attributes_for :place
    validates_associated :place
@@ -19,6 +17,10 @@ class Death < LifeEvent
       else
          person.full_name + ' died'
       end
+   end
+
+   def date_string
+      (date.nil?) ? 'Unknown date' : date.formatted
    end
 
    def cause_string
@@ -53,5 +55,9 @@ class Death < LifeEvent
       end
       def build_default_place
          build_place if place.nil?
+      end
+      def date_in_past
+         errors.add(:date, "must be in the past") if
+            !date.blank? and date >= Date.today
       end
 end
