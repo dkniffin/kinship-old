@@ -1,7 +1,9 @@
 module SessionsHelper
-  def authorize_user
-    unless signed_in? && current_user.authorized?(User::ROLE_MEMBER)
-      redirect_to sign_in, notice: "You must be signed in to an approved account to access this content"
+  def authorize_user(role=User::ROLE_MEMBER)
+    if ! signed_in?
+      redirect_to root_url, notice: "You must be signed in to access this content"
+    elsif current_user.authorized?(role)
+      redirect_to :back, notice: "You are not authorized to access this content"
     end
   end
 end

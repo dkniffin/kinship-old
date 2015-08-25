@@ -1,8 +1,9 @@
 class AdminController < ApplicationController
-	before_action :authorization
+	before_action :authenticate_user!
+	before_action :authorize_user(User::ROLE_ADMIN)
 	def home
 	end
-	
+
 	def look_and_feel
 		@blurb = Setting.homepage_blurb
 		@eventsFormat = Setting.eventsFormat
@@ -33,7 +34,7 @@ class AdminController < ApplicationController
 
 	private
 		def authorization
-			redirect_to root_url, 
+			redirect_to root_url,
 				notice: "Only admins can access the admin interface" unless user_role?(User::ROLE_ADMIN)
 		end
 end

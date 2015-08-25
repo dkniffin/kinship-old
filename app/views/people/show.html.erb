@@ -1,15 +1,14 @@
 <% provide(:title, @person.full_name) %>
 <!DOCTYPE html>
 <meta charset="utf-8">
-<p id="notice"><%= notice %></p>
 
 <div class="row">
 	<%= image_tag @person.photo.url(:medium), id: 'photo', class: 'span3' %>
 	<div class="span9">
-		<h3 id='full_name'> <%= @person.full_name %> (<%= @person.gender %>)</h3> 
+		<h3 id='full_name'> <%= @person.full_name %> (<%= @person.gender %>)</h3>
 
-                                                                  
-		<p>Birth date: 
+
+		<p>Birth date:
       <% if @person.birth.date != nil%>
         <%= @person.birth.date.formatted %>
       <% end %>
@@ -102,64 +101,64 @@
     <div id="tree-container"></div>
     <script src="http://d3js.org/d3.v2.min.js?2.9.4"></script>
     <script>
-    
+
     var margin = {top: 0, right: 320, bottom: 0, left: 0},
         width = 960 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom;
-    
+
     var tree = d3.layout.tree()
         .separation(function(a, b) { return a.parent === b.parent ? 1 : .5; })
         .children(function(d) { return d.parents; })
         .size([height, width]);
-    
+
     var svg = d3.select("#tree-container").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
       .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    
+
       var json = '<%= @json_pedigree_tree.to_json.to_s.html_safe %>';
       json = JSON.parse(json);
       var nodes = tree.nodes(json);
-    
+
       var link = svg.selectAll(".link")
           .data(tree.links(nodes))
         .enter().append("path")
           .attr("class", "link")
           .attr("d", elbow);
-    
+
       var node = svg.selectAll(".node")
           .data(nodes)
         .enter().append("g")
           .attr("class", "node")
           .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; })
-    
+
       node.append("text")
           .attr("class", "name")
           .attr("x", 8)
           .attr("y", -6)
           .text(function(d) { return d.name; });
-    
+
       node.append("text")
           .attr("x", 8)
           .attr("y", 8)
           .attr("dy", ".71em")
           .attr("class", "about lifespan")
           .text(function(d) { return d.born + "–" + d.died; });
-    
+
       node.append("text")
           .attr("x", 8)
           .attr("y", 8)
           .attr("dy", "1.86em")
           .attr("class", "about location")
           .text(function(d) { return d.location; });
-    
+
     function elbow(d, i) {
       return "M" + d.source.y + "," + d.source.x
            + "H" + d.target.y + "V" + d.target.x
            + (d.target.children ? "" : "h" + margin.right);
     }
-    
+
     </script>
 
   </div>
@@ -171,17 +170,17 @@
     }
     </style>
     <script>
-      $("body").on('shown','#map-tab-link', function() { 
+      $("body").on('shown','#map-tab-link', function() {
         map.invalidateSize(false);
       });
     </script>
-    <%= 
+    <%=
       map(:center => {
           # TODO: Make these coords an admin setting
           :latlng => [24.45,-27.60],
           :zoom => 2
       },
-      :markers => @person.markers.map{|marker| 
+      :markers => @person.markers.map{|marker|
         {
           :latlng => marker[:latlng],
           :popup => '<h3 class="popup-header">' + h(marker[:title]) + '</h3><br/>' +
@@ -190,10 +189,10 @@
         }
       })
     %>
-    
+
   </div>
 </div>
-<br><br><br>    
+<br><br><br>
 <%= link_to people_path, :class => 'btn btn-info' do %>
   <i class="icon-arrow-left icon-white"></i> Back to Person Index
 <% end %>
