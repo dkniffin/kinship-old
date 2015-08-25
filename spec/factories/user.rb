@@ -14,10 +14,4 @@ FactoryGirl.define do
       role 'admin'
     end
   end
-
-  factory :person do
-  end
-
-  factory :birth do
-  end
 end
