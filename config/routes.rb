@@ -1,4 +1,5 @@
 Kinship::Application.routes.draw do
+  devise_for :users
   #resources :places
 
   match '/people/stats', to: 'people#stats', via: 'get'

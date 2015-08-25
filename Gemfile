@@ -3,11 +3,13 @@ source 'http://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.0'
-gem 'bcrypt-ruby', '3.1.2'
 
-# For security
-gem 'honeypot-captcha'
-gem 'simple_captcha', :git => 'git://github.com/pludoni/simple-captcha.git'
+# Database
+gem 'sqlite3'
+
+# User authentication
+gem 'devise'
+
 
 # For file attachments
 gem "paperclip", "~> 3.0"
@@ -22,8 +24,7 @@ gem "leaflet-rails", "~> 0.7.0"
 # For pagination
 gem 'kaminari'
 
-# Database
-gem 'sqlite3'
+gem 'email_validator'
 
 # Front-end
 gem 'sass-rails', '~> 4.0.0'

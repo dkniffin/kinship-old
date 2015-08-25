@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131209182633) do
+ActiveRecord::Schema.define(version: 20150825083744) do
 
-  create_table "births", force: true do |t|
+  create_table "births", force: :cascade do |t|
     t.date     "date"
     t.integer  "child_id"
     t.integer  "father_id"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20131209182633) do
     t.integer  "place_id"
   end
 
-  create_table "deaths", force: true do |t|
+  create_table "deaths", force: :cascade do |t|
     t.integer  "person_id"
     t.date     "date"
     t.integer  "place_id"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20131209182633) do
     t.boolean  "dead"
   end
 
-  create_table "people", force: true do |t|
+  create_table "people", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.string   "gender"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20131209182633) do
     t.integer  "spouse_id"
   end
 
-  create_table "places", force: true do |t|
+  create_table "places", force: :cascade do |t|
     t.string   "country"
     t.string   "state"
     t.string   "county"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20131209182633) do
     t.float    "lon"
   end
 
-  create_table "settings", force: true do |t|
+  create_table "settings", force: :cascade do |t|
     t.string   "var",                   null: false
     t.text     "value"
     t.integer  "thing_id"
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20131209182633) do
 
   add_index "settings", ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
 
-  create_table "simple_captcha_data", force: true do |t|
+  create_table "simple_captcha_data", force: :cascade do |t|
     t.string   "key",        limit: 40
     t.string   "value",      limit: 6
     t.datetime "created_at"
@@ -79,18 +79,24 @@ ActiveRecord::Schema.define(version: 20131209182633) do
 
   add_index "simple_captcha_data", ["key"], name: "idx_key"
 
-  create_table "users", force: true do |t|
-    t.string   "username"
-    t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "password_digest"
-    t.string   "remember_token"
-    t.string   "role"
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.integer  "person_id"
+    t.string   "role"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

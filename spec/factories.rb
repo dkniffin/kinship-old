@@ -1,15 +1,23 @@
 FactoryGirl.define do
   factory :user do
-    username "jschmoe"
-    email    "jschmoe@example.com"
-    password "foobar"
-    password_confirmation "foobar"
-  end
+    email { Faker::Internet.email }
+    password { Faker::Internet.password }
+    role 'member'
 
-  factory :admin, :parent => :user do
-   	role User::ROLE_ADMIN
+    factory :unauthorized_user do
+      role 'unauthorized'
+    end
+    factory :editor do
+      role 'editor'
+    end
+    factory :admin do
+      role 'admin'
+    end
   end
 
   factory :person do
+  end
+
+  factory :birth do
   end
 end

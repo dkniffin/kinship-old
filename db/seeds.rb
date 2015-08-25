@@ -7,12 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'open-uri'
 
-# Admin user
-User.create(username: 'admin', 
-			email: 'nobody@none.com', 
-			role: User::ROLE_ADMIN,
-			password: 'kinship', 
-			password_confirmation: 'kinship')
+User.create :email => 'nobody@none.com', :password => 'kinship'
 
 # Default settings
 Setting.create(var: 'site_header', value: 'Your Kinship Site')
@@ -23,4 +18,3 @@ admin interface.</p>
 eos
 )
 Setting.create(var: 'eventsFormat', value: 'timeline')
-
