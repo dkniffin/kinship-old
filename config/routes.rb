@@ -20,19 +20,6 @@ Kinship::Application.routes.draw do
 
   # Help page
   match 'help' => 'help#new', via: [:get, :post]
-  # Request an account, Signin, Signout
-  match '/signup', to: 'users#new',         via: 'get'
-  match '/signin', to: 'sessions#new',      via: 'get'
-  match '/signout', to: 'sessions#destroy',  via: 'delete'
-  resources :users do
-    member do
-      patch 'update_role'
-    end
-    member do
-      patch 'update_person'
-    end
-  end
-  resources :sessions, only: [:new, :create, :destroy]
 
   # Admin
   match '/admin', to: 'admin#home', via: 'get'

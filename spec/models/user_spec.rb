@@ -46,7 +46,7 @@ describe User, type: :model do
 
 		it "role" do
 			expect(invalid_role).to_not be_valid
-      expect(no_password.errors).to include(:role)
+      expect(invalid_role.errors).to include(:role)
 		end
   end
 end

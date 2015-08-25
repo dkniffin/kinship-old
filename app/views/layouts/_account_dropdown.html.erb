@@ -7,9 +7,9 @@
     <% if ! current_user.person_id.nil? %>
     <li><%= link_to "My Person", current_user.person %></li>
     <% end %>
-    <% if user_role?(User::ROLE_ADMIN) %>
-    <li class="divider"></li>
-    <li><%= link_to "Admin", admin_path %></li>
+    <% if signed_in? && current_user.authorized?(User::ROLE_ADMIN) %>
+      <li class="divider"></li>
+      <li><%= link_to "Admin", admin_path %></li>
     <% end %>
     <li class="divider"></li>
     <li><%= link_to "Sign out", signout_path, method: "delete" %></li>

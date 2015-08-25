@@ -1,7 +1,8 @@
 class PeopleController < ApplicationController
   include PeopleHelper
   before_action :set_person, only: [:show, :edit, :update, :destroy]
-  before_action :authorization
+  before_action :authenticate_user!
+  before_action :authorize_user
   # GET /people
   # GET /people.json
   def index
@@ -153,10 +154,5 @@ class PeopleController < ApplicationController
         birth_attributes: [:id, :date, {place_attributes: [:id, :place_string]}, :father_id, :mother_id],
         death_attributes: [:id, :dead, {place_attributes: [:id, :place_string]}, :date, :cause]
       )
-    end
-
-    def authorization
-      redirect_to root_url,
-        notice: "You must be signed in to an approved account to access this content" unless user_role?(User::ROLE_MEMBER)
     end
 end
