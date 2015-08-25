@@ -37,11 +37,15 @@ gem 'bootstrap-sass', '2.3.2.0'
 
 group :development, :test do
   gem 'byebug'
+
   gem 'fuubar'
   gem 'rspec-rails', '~> 3.2.0'
   gem 'factory_girl_rails'
   # gem 'faker', path: '/home/dkniffin/repos/faker'
   gem 'faker', github: 'dkniffin/faker', branch: 'temp_master'
+
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
 end
 
 group :test do

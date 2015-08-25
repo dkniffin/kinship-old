@@ -11,8 +11,9 @@
           <% if signed_in? %>
             <%= render 'layouts/navigation_dropdown' %>
             <%= render 'layouts/account_dropdown' %>
+            <li><%= link_to('Log out', destroy_user_session_path, :method => :delete) %></li>
           <% else %>
-            <li><%= link_to "Sign in", signin_path %></li>
+            <%= link_to('Log in', new_user_session_path)  %>
           <% end %>
         </ul>
       </nav>
