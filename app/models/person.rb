@@ -3,7 +3,7 @@ class Person < ActiveRecord::Base
    before_create :build_default_birth, :build_default_death
 
    # Photo stuff
-   has_attached_file :photo, 
+   has_attached_file :photo,
       :styles => { :medium => "256x256#", :small => "64x64#", :tiny => "24x24#" },
       :default_url => :set_default_avatar,
       :url  => "/assets/photos/:id/:style/:basename.:extension",
@@ -137,7 +137,7 @@ class Person < ActiveRecord::Base
                :place => event.place.place_string,
                :date => event.date_string
             })
-         end   
+         end
       end
       event_markers
    end
@@ -161,10 +161,10 @@ class Person < ActiveRecord::Base
          self.spouse_id ||= ''
       end
       def build_default_birth
-         build_birth if birth.nil? 
+         build_birth if birth.nil?
       end
       def build_default_death
-         build_death if death.nil? 
+         build_death if death.nil?
       end
     def set_default_avatar
       if gender == "F"

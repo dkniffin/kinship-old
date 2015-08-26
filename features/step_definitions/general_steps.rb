@@ -8,14 +8,17 @@ end
 When(/^I click "?(.*?)"?$/) do |target|
   case target
   when /^submit$/i
-    find('input[type="submit"]').click
+    find('[type="submit"]').click
   when /(Edit|Delete)" for the person "(.*)/
     find(:xpath, "//tr[contains(.,'#{$2}')]/td/div/a", :text => $1).click
   when /the "?(.*?)"? button/i
-    find('input[type="submit"]', $1).click
+    find('[type="submit"]', $1).click
   else
     click_on(target)
   end
+end
+When(/^I enter "(.*?)" for "(.*?)"$/) do |value, field|
+  fill_in(field, with: value)
 end
 
 Then(/^I am redirected to the home page$/) do
@@ -33,4 +36,8 @@ end
 
 Then(/^I see an error "(.*?)"$/) do |error_message|
   expect(page).to have_css(".alert", error_message)
+end
+
+When(/^I confirm the prompt$/) do
+  page.driver.browser.accept_js_confirms
 end

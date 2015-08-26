@@ -73,10 +73,6 @@ class PeopleController < ApplicationController
   # DELETE /people/1.json
   def destroy
     @person.destroy
-    respond_to do |format|
-      format.html { redirect_to people_url }
-      format.json { head :no_content }
-    end
     # Clear the record of the person in Birth
     Birth.where(:father_id => @person.id).each do |child|
       child.father_id = nil
@@ -85,6 +81,11 @@ class PeopleController < ApplicationController
     Birth.where(:mother_id => @person.id).each do |child|
       child.mother_id = nil
       child.save
+    end
+
+    respond_to do |format|
+      format.html { redirect_to people_url, notice: "#{@person.full_name} has been deleted" }
+      format.json { head :no_content }
     end
   end
 

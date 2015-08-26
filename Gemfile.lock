@@ -56,6 +56,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-webkit (1.6.0)
+      capybara (>= 2.3.0, < 2.5.0)
+      json
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.7)
@@ -234,6 +237,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass (= 2.3.2.0)
   byebug
+  capybara-webkit
   codeclimate-test-reporter
   coffee-rails (~> 4.0.0)
   cucumber-rails

@@ -23,6 +23,9 @@
 		<%= link_to edit_person_path(@person), :class => 'btn btn-primary' do %>
       <i class="icon-edit icon-white"></i> Edit
     <% end %>
+		<%= link_to @person, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' do %>
+      <i class="icon-trash icon-white"></i> Delete
+    <% end %>
 	</div>
 </div>
 
