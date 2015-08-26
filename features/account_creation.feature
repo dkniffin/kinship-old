@@ -1,5 +1,5 @@
 Feature: User Account Creation
-  Scenario: Valid Account
+  Scenario: Account Creation
     Given I do not have an account on the site
     When I visit the login path
     Then I am presented with a login page
@@ -7,6 +7,7 @@ Feature: User Account Creation
     And I enter my email address
     And I enter a password with correct confirmation
     And I click submit
+    Then my account is unapproved
 
   Scenario: Invalid Password
     Given I do not have an account on the site

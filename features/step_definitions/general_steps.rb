@@ -11,6 +11,8 @@ When(/^I click "?(.*?)"?$/) do |target|
     find('input[type="submit"]').click
   when /(Edit|Delete)" for the person "(.*)/
     find(:xpath, "//tr[contains(.,'#{$2}')]/td/div/a", :text => $1).click
+  when /the "?(.*?)"? button/i
+    find('input[type="submit"]', $1).click
   else
     click_on(target)
   end
@@ -27,4 +29,8 @@ Then(/^I( don't)? see "(.*?)"$/) do |negate, content|
   else
     expect(page).to have_content(content)
   end
+end
+
+Then(/^I see an error "(.*?)"$/) do |error_message|
+  expect(page).to have_css(".alert", error_message)
 end

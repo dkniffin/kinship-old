@@ -1,16 +1,17 @@
 Given(/^I do not have an account on the site$/) do
   User.delete_all
-  @account_details = {
-    :email => 'bogus@nowhere.com',
-    :password => 'notApw'
-  }
+  @account_details = { :email => 'new_account@nowhere.com', :password => '123!newpw' }
 end
-Given(/^I have an account on the site$/) do
+Given(/^I have an? (unapproved|member|editor|admin) account(?: on the site)?$/) do |role|
   @account_details = {
-    :email => 'testing@nowhere.com',
-    :password => 'test123!'
+    :email    => 'testing@nowhere.com',
+    :password => 'test123!',
+    :role     => User.role_from_string(role)
   }
-  @account_id = User.create(@account_details).id
+  @account = User.create(@account_details)
+end
+Given(/^my account has been approved?$/) do
+  @account.update(role: User::ROLE_MEMBER)
 end
 Given(/^I log in$/) do
   step 'I visit the login page'
@@ -18,8 +19,8 @@ Given(/^I log in$/) do
   step 'I enter my password'
   step 'I click submit'
 end
-Given(/^I am logged into the site$/) do
-  step 'I have an account on the site'
+Given(/^I am logged in as an? (member|editor|admin)$/) do |role|
+  step "I have a #{role} account"
   step 'I log in'
 end
 
@@ -46,6 +47,10 @@ When(/^I enter a password with (in)?correct(?: password)? confirmation$/) do |in
 end
 
 
+
+Then(/^my account is unapproved$/) do
+    User.where(email: @account_details[:email]).present?
+end
 
 Then(/^I am presented with a login page$/) do
   expect(page).to have_content('Log in')
