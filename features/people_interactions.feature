@@ -1,11 +1,11 @@
-Feature: Person Interaction
-  Scenario: A member can see a person
+Feature: Interactions with People
+  Scenario: A member can see people
     Given I am logged in as a member
     And there is 1 person in the database
     When I visit the person index page
     Then I see the person
 
-  Scenario: An editor can create a person
+  Scenario: An editor can create a Person
     Given I am logged in as an editor
     When I visit the new person page
     And I fill in valid person data
