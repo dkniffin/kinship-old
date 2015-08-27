@@ -1,35 +1,29 @@
 Kinship::Application.routes.draw do
-  devise_for :users
-  #resources :places
+  # Root
+  root 'static_pages#home'
 
-  match '/people/stats', to: 'people#stats', via: 'get'
+  devise_for :users
+
   resources :people
-  match '/people/new', to: 'people#new', via: 'post'
+  get 'people/stats', to: 'people#stats', as: 'people_stats'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  # Root
-  root 'static_pages#home'
 
   # "Static" Pages
-  get "static_pages/home"
-  match '/home',   to: 'static_pages#home', via: 'get'
-  get "static_pages/about"
-  match '/about',   to: 'static_pages#about', via: 'get'
+  get "home",   to: 'static_pages#home'
+  get "about",  to: 'static_pages#about'
 
   # Help page
-  match 'help' => 'help#new', via: [:get, :post]
+  get 'help', to: 'help#new'
 
   # Admin
-  match '/admin', to: 'admin#home', via: 'get'
-  get "admin/home"
+  get "home", to: 'admin#home'
+  get "look_and_feel", to: 'admin#update_look_and_feel'
 
-  get "admin/look_and_feel"
-  match "admin/look_and_feel", to: 'admin#update_look_and_feel', via: 'post'
+  get "privacy", to: 'admin#privacy'
+  get "users", to: 'admin#users'
 
-  get "admin/privacy"
-  get "admin/users"
-
-  get "admin/logs"
+  get "logs", to: 'admin#logs'
 end
