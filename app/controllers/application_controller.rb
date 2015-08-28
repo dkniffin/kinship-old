@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
   def get_site_header
     @site_header = Setting.site_header
   end
+
+  def access_denied(exception)
+    redirect_to root_path, notice: exception.message
+  end
 end

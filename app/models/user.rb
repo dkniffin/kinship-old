@@ -48,6 +48,10 @@ class User < ActiveRecord::Base
     super && approved?
   end
 
+  def is_admin?
+    authorized?(ROLE_ADMIN)
+  end
+
   def inactive_message
     if !approved?
       :not_approved

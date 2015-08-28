@@ -7,7 +7,9 @@ gem 'rails', '~> 4.0'
 gem 'sqlite3'
 
 # User authentication
+gem 'activeadmin', '~> 1.0.0.pre1'
 gem 'devise'
+# gem 'cancancan'
 
 
 # For file attachments
