@@ -1,7 +1,9 @@
 Kinship::Application.routes.draw do
-  ActiveAdmin.routes(self)
   # Root
   root 'static_pages#home'
+
+  ActiveAdmin.routes(self)
+  mount ActiveadminSettingsCached::Engine => '/admin' 
 
   devise_for :users
 

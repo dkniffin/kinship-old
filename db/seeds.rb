@@ -7,14 +7,14 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'open-uri'
 
-User.create :email => 'nobody@none.com', :password => 'kinship'
+User.create :email => 'admin@nowhere.com', :password => 'kinship123', :role => 'admin'
 
 # Default settings
-Setting.create(var: 'site_header', value: 'Your Kinship Site')
+Setting.create(var: 'site_title', value: 'Your Kinship Site')
 Setting.create(var: 'homepage_blurb', value: <<-eos
 <p>Welcome to your new genealogy site! This blurb is just a filler, until you
 get around to putting your own content here. It can be configured through the
 admin interface.</p>
 eos
 )
-Setting.create(var: 'eventsFormat', value: 'timeline')
+Setting.create(var: 'events_format', value: 'timeline')

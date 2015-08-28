@@ -16,7 +16,8 @@ gem 'devise'
 gem "paperclip", "~> 3.0"
 
 # For global settings
-gem "rails-settings-cached", "0.3.1"
+gem "rails-settings-cached", "0.4.1"
+gem 'activeadmin_settings_cached', github: 'dkniffin/activeadmin_settings_cached'
 
 # For places and map
 gem "geocoder", "~> 1.1.8"

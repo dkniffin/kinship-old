@@ -18,7 +18,7 @@ class PeopleController < ApplicationController
   # GET /people/1.json
   def show
     @person = Person.find(params[:id])
-    @eventsFormat = Setting.eventsFormat
+    @events_format = Setting.events_format
     @children = @person.children
     if @person.spouse_id
        @spouse = Person.find(@person.spouse_id)
