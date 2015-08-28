@@ -17,7 +17,7 @@ When(/^I click "?(.*?)"?$/) do |target|
     click_on(target)
   end
 end
-When(/^I enter "(.*?)" for "(.*?)"$/) do |value, field|
+When(/^I (?:enter|fill in) "(.*?)" for "(.*?)"$/) do |value, field|
   fill_in(field, with: value)
 end
 

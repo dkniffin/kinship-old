@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/dkniffin/activeadmin_settings_cached.git
-  revision: c187e3789affc3d898f9c9af70fe329442eac14e
+  revision: 32be126e7f3169b59f999fe2283b68d7e9c9a03c
   specs:
-    activeadmin_settings_cached (0.1.1)
+    activeadmin_settings_cached (0.1.0)
       activeadmin
       rails-settings-cached
 
