@@ -4,6 +4,10 @@ end
 When(/^I (?:visit|goto|go to) the login (?:path|page)$/) do
   visit new_user_session_path
 end
+Then(/^I am on the home page$/) do
+  expect(page.current_path).to eq('/')
+end
+
 
 When(/^I click "?(.*?)"?$/) do |target|
   case target
