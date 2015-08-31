@@ -9,11 +9,14 @@ Installation
 ============
 For development:
 
-- `git clone git@github.com:dkniffin/kinship.git`
-- `cd kinship`
-- `bundle install`
-- `rake db:setup`
-- Optional: import gedcom file
-- `rails s`
-- Go to [http://localhost:3000]
-- Log in as user: admin, password: kinship
+````
+git clone git@github.com:dkniffin/kinship.git
+cd kinship
+bundle install
+rake db:setup
+rake import:gedcom[file,verbosity] # Optional
+rails s
+````
+
+Then, visit [http://localhost:3000] to view the site. The db is seeded with an
+admin user. email: admin@nowhere.com, pw: kinship
