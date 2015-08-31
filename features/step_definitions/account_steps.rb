@@ -17,7 +17,7 @@ Given(/^I log in$/) do
   step 'I visit the login page'
   step 'I enter my email'
   step 'I enter my password'
-  step 'I click submit'
+  step 'I click "submit"'
 end
 Given(/^I am logged in as an? (member|editor|admin)$/) do |role|
   step "I have a #{role} account"

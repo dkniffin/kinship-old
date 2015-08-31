@@ -9,17 +9,18 @@ Then(/^I am on the home page$/) do
 end
 
 
-When(/^I click "?(.*?)"?$/) do |target|
+When(/^I click "(.*?)"$/) do |target|
   case target
   when /^submit$/i
     find('[type="submit"]').click
   when /(Edit|Delete)" for the person "(.*)/
     find(:xpath, "//tr[contains(.,'#{$2}')]/td/div/a", :text => $1).click
-  when /the "?(.*?)"? button/i
-    find('[type="submit"]', $1).click
   else
     click_on(target)
   end
+end
+When(/^I click the "(.*?)" button$/) do |btn_text|
+  find('[type="submit"]', btn_text).click
 end
 When(/^I (?:enter|fill in) "(.*?)" for "(.*?)"$/) do |value, field|
   fill_in(field, with: value)
