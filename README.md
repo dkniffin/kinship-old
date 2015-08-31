@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/dkniffin/kinship.svg?branch=master)](https://travis-ci.org/dkniffin/kinship)
 [![Code Climate](https://codeclimate.com/github/dkniffin/kinship/badges/gpa.svg)](https://codeclimate.com/github/dkniffin/kinship)
-[![Test Coverage](https://codeclimate.com/github/dkniffin/kinship/badges/coverage.svg)](https://codeclimate.com/github/dkniffin/kinship)
+[![Test Coverage](https://d3s6mut3hikguw.cloudfront.net/github/dkniffin/kinship/badges/coverage.svg)](https://codeclimate.com/github/dkniffin/kinship)
 Kinship
 =======
 Kinship is a Ruby on Rails application for managing and displaying genealogical data.
