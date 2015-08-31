@@ -13,4 +13,4 @@ script:
   - bundle exec cucumber
 addons:
   code_climate:
-    repo_token: 4ced2eeae257b14047076ec5a32a4721dd26fb72c93756ad1e2b7a3700e4cf9d
+    repo_token: f241ee42b8789671ef3e0a8e85d7f91734e503d1cafe1b76503df91a9aa5e556
