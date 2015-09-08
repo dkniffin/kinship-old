@@ -29,7 +29,8 @@ gem "leaflet-rails", "~> 0.7.0"
 gem 'kaminari'
 
 # For import/export of gedcom files
-gem 'gedcom_ruby', path: '/home/dkniffin/repos/gedcom-ruby'
+#gem 'gedcom_ruby', path: '/home/dkniffin/repos/gedcom-ruby'
+gem 'gedcom_ruby'
 
 # Front-end
 gem 'sass-rails', '~> 4.0.0'
