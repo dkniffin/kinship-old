@@ -10,6 +10,7 @@ gem 'sqlite3'
 gem 'activeadmin', '~> 1.0.0.pre1'
 gem 'devise'
 # gem 'cancancan'
+gem 'email_validator'
 
 
 # For file attachments
@@ -27,7 +28,8 @@ gem "leaflet-rails", "~> 0.7.0"
 # For pagination
 gem 'kaminari'
 
-gem 'email_validator'
+# For import/export of gedcom files
+gem 'gedcom_ruby', path: '/home/dkniffin/repos/gedcom-ruby'
 
 # Front-end
 gem 'sass-rails', '~> 4.0.0'

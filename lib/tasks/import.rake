@@ -3,11 +3,17 @@ namespace :import do
   task :gedcom, [:file, :verbosity]  => :environment do |t, args|
     require_relative '../import/import.rb'
     file = args.file
-    verbosity = args.verbosity.to_i || 0
-    i = Import.new do 
-      @opts = { :v => verbosity }
+
+    i = Import.new do
+      @opts = {
+        verbosity: args.verbosity.to_i,
+        total_lines: File.open(file,"r").readlines.size
+      }
     end
+
+    print "Importing Gedcom"
     i.parse(file)
+    puts "Done"
     #i.printPeople
   end
 

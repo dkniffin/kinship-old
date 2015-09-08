@@ -1,52 +1,54 @@
 #!/usr/bin/ruby
 
-require_relative 'gedcom-ruby/lib/gedcom.rb'
+require 'gedcom_ruby'
 require 'pp'
 
 class Import < GEDCOM::Parser
-   def initialize
-      super
-
+   def after_initialize
       @currentId = nil
 
       # Individuals
-      before  [ "INDI" ], method( :startPerson )
-      before  [ "INDI", "NAME" ], method( :registerName )
-      before  [ "INDI", "SEX" ], method( :registerGender )
-      before  [ "INDI", "BIRT", "DATE" ], method( :registerBirthdate )
-      #before  [ "INDI", "BIRT", "PLAC" ], method( :registerBirthplace )
-      before  [ "INDI", "DEAT", "DATE" ], method( :registerDeathdate )
-      #before  [ "INDI", "DEAT", "PLAC" ], method( :registerDeathplace )
-      after [ "INDI" ], method( :endPerson )
+      before(["INDI"], :startPerson)
+      before(["INDI", "NAME"], :registerName)
+      before(["INDI", "SEX"], :registerGender)
+      before(["INDI", "BIRT", "DATE"], :registerBirthdate)
+      before(["INDI", "DEAT", "DATE"], :registerDeathdate)
+      after(["INDI"], :endPerson)
 
       @currentPerson = nil
       @allPeople = {}
 
       # Families
-      before [ "FAM" ], method( :startFamily )
-      before [ "FAM", "HUSB" ], method( :registerHusband )
-      before [ "FAM", "WIFE" ], method( :registerWife )
-      before [ "FAM", "CHIL" ], method( :registerChild )
-      after [ "FAM" ], method( :endFamily )
+      before ["FAM"], method(:startFamily)
+      before ["FAM", "HUSB"], method(:registerHusband)
+      before ["FAM", "WIFE"], method(:registerWife)
+      before ["FAM", "CHIL"], method(:registerChild)
+      after ["FAM"], method(:endFamily)
 
       @currentFamily = nil
 
+      default_verbosity = 1
+      @verbosity = @opts[:verbosity] || default_verbosity
+
+      total_lines = @opts[:total_lines] || 0
+      @dot_increment = 10
+      @dot_counter = 0
    end
 
    ######################################################################
    # People
    ######################################################################
 
-   def startPerson( data )
-      if @opts[:v] >= 2
+   def startPerson(data)
+      if @verbosity >= 2
          puts "Creating new person"
       end
       @currentPerson = Person.create
       @currentId = data
    end
 
-   def registerName( data )
-      if @opts[:v] >= 2
+   def registerName(data)
+      if @verbosity >= 2
          puts "Updating person's name: #{data}"
       end
       first_name, last_name  = data.split(/\//)
@@ -57,45 +59,45 @@ class Import < GEDCOM::Parser
       @currentPerson.last_name = last_name.rstrip
    end
 
-   def registerGender( data )
-      if @opts[:v] >= 3
+   def registerGender(data)
+      if @verbosity >= 3
          puts "updating person's gender: #{data}"
       end
       gender = data || ''
       @currentPerson.gender = gender unless (data.nil? || data.empty?)
    end
 
-   def registerBirthdate( data )
-      if @opts[:v] >= 3
+   def registerBirthdate(data)
+      if @verbosity >= 3
          puts "updating person's birthdate: #{data}"
       end
       @currentPerson.birth.date = data unless (data.nil? || data.empty?)
    end
 
-   def registerBirthplace( data )
-      if @opts[:v] >= 3
+   def registerBirthplace(data)
+      if @verbosity >= 3
          puts "updating person's birthplace: #{data}"
       end
       @currentPerson.birth.place.place_string = data unless (data.nil? || data.empty?)
    end
 
-   def registerDeathdate( data )
-      if @opts[:v] >= 3
+   def registerDeathdate(data)
+      if @verbosity >= 3
          puts "updating person's deathdate #{data}"
       end
       @currentPerson.death.date = data unless (data.nil? || data.empty?)
    end
 
-   def registerDeathplace( data )
-      if @opts[:v] >= 3
+   def registerDeathplace(data)
+      if @verbosity >= 3
          puts "updating person's deathplace #{data}"
       end
       @currentPerson.death.place.place_string = data unless (data.nil? || data.empty?)
    end
 
-   def endPerson( data )
+   def endPerson(data)
       @allPeople[@currentId] = @currentPerson
-      if @opts[:v] >= 1
+      if @verbosity >= 2
          puts "saving #{@currentPerson.full_name}"
       end
       if ! @currentPerson.death.date.nil? || ! @currentPerson.death.place.empty?
@@ -104,14 +106,16 @@ class Import < GEDCOM::Parser
       @currentPerson.save!
       @currentPerson = nil
       @currentId = nil
+
+      dot_handler
    end
 
    ######################################################################
    # Families
    ######################################################################
 
-   def startFamily( data )
-      if @opts[:v] >= 1
+   def startFamily(data)
+      if @verbosity >= 2
          puts "Starting new family"
       end
       @currentFamily = {
@@ -122,18 +126,18 @@ class Import < GEDCOM::Parser
       @currentId = data
    end
 
-   def registerHusband( data )
+   def registerHusband(data)
       @currentFamily[:husband] = data
    end
-   def registerWife( data )
+   def registerWife(data)
       @currentFamily[:wife] = data
    end
-   def registerChild( data )
+   def registerChild(data)
       @currentFamily[:children].push data
    end
 
-   def endFamily( data )
-      if @opts[:v] >= 2
+   def endFamily(data)
+      if @verbosity >= 2
          puts "Processing family"
       end
 
@@ -153,9 +157,19 @@ class Import < GEDCOM::Parser
 
       @currentFamily = nil
       @currentId = nil
+
+      dot_handler
    end
 
    def printPeople
       pp @allPeople
+   end
+
+   private
+   def dot_handler
+     if @dot_counter % @dot_increment == 0
+       print '.'
+     end
+     @dot_counter += 1
    end
 end
