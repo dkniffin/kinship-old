@@ -1,0 +1,5 @@
+<% if @events_format == 'data-list' %>
+  <%= render partial: "people/tabs/events/data-list" %>
+<% elsif @events_format == 'timeline' %>
+  <%= render partial: "people/tabs/events/timeline" %>
+<% end %>
