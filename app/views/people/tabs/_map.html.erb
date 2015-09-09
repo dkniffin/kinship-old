@@ -9,17 +9,16 @@
   });
 </script>
 <%=
-  map(:center => {
-      # TODO: Make these coords an admin setting
-      :latlng => [24.45,-27.60],
-      :zoom => 2
-  },
-  :markers => @person.markers.map{|marker|
-    {
-      :latlng => marker[:latlng],
-      :popup => '<h3 class="popup-header">' + h(marker[:title]) + '</h3><br/>' +
-                h(marker[:place]) + '<br/>' +
-                h(marker[:date])
-    }
-  })
+  map_options = {
+    :center => {
+        :latlng => Setting.map_lat_lng,
+        :zoom => Setting.map_zoom
+    },
+    :tile_layer => Setting.map_tile_url,
+    :subdomains => Setting.map_subdomains.split(/,?\s*/),
+    :markers => markers_for_map(@person.markers)
+  }
+
+  #leaflet-rails helper
+  map(map_options)
 %>

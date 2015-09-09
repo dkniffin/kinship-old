@@ -27,3 +27,7 @@ end
 Then(/^the user's role is "(.*?)"$/) do |arg1|
   expect(@unapproved_user.reload.role).to eq(User::ROLE_MEMBER)
 end
+
+Then(/^the (map_tile_url|map_lat_lng|map_zoom) setting is "(.*?)"$/) do |setting, value|
+  expect(Setting.send(setting).to_s).to eq(value)
+end
