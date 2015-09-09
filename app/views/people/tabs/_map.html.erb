@@ -1,0 +1,24 @@
+<style>
+#map {
+  height: 500px;
+}
+</style>
+<script>
+  $("body").on('shown','#map-tab-link', function() {
+    map.invalidateSize(false);
+  });
+</script>
+<%=
+  map_options = {
+    :center => {
+        :latlng => Setting.map_lat_lng,
+        :zoom => Setting.map_zoom
+    },
+    :tile_layer => Setting.map_tile_url,
+    :subdomains => Setting.map_subdomains.split(/,?\s*/),
+    :markers => markers_for_map(@person.markers)
+  }
+
+  #leaflet-rails helper
+  map(map_options)
+%>

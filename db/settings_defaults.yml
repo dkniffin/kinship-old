@@ -1,0 +1,10 @@
+site_title: "Your Kinship Site"
+homepage_blurb: >
+  <p>Welcome to your new genealogy site! This blurb is just a filler, until you
+   get around to putting your own content here. It can be configured through
+   the admin interface.</p>
+events_format: "timeline"
+map_tile_url: https://{s}.tiles.mapbox.com/v4/oddityoverseer13.geh9ajmb/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoib2RkaXR5b3ZlcnNlZXIxMyIsImEiOiIwTEp5a1JnIn0.kzeYyqB2YOj2XXXECKKnJg
+map_subdomains: a,b,c
+map_lat_lng: 24.45,-27.60
+map_zoom: 2

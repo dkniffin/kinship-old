@@ -33,4 +33,14 @@ module PeopleHelper
     return json_pedigree_tree
   end
 
+	def markers_for_map(markers)
+		markers.map do |marker|
+	    {
+	      :latlng => marker[:latlng],
+	      :popup => '<h3 class="popup-header">' + h(marker[:title]) + '</h3><br/>' +
+	                h(marker[:place]) + '<br/>' +
+	                h(marker[:date])
+	    }
+		end
+	end
 end
