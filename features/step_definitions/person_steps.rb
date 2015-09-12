@@ -21,17 +21,6 @@ When(/^I visit the edit page for that person$/) do
   visit "/people/#{@person.id}/edit"
 end
 
-Then(/^I am on the person show page$/) do
-  expect(page.current_path).to eq("/people/#{@person.id}")
-end
-Then(/^I am on the person index page$/) do
-  expect(page.current_path).to eq("/people")
-end
-
-Then(/^I see the person$/) do
-  step "I see \"#{@person.full_name}\""
-end
-
 When(/^I fill in valid person data$/) do
   @person_attributes = attributes_for(:person)
   # Name
@@ -42,6 +31,21 @@ When(/^I fill in valid person data$/) do
   # Birth date
   select(@person_attributes[:birth_date], from: "Birth Date")
 end
+
+
+
+Then(/^I am on the person show page$/) do
+  expect(page.current_path).to match(/\/people\/(\d+)/)
+end
+Then(/^I am on the person index page$/) do
+  expect(page.current_path).to eq("/people")
+end
+
+Then(/^I see the person$/) do
+  full_name = @person.try(:full_name) || @person_attributes[:full_name]
+  step "I see \"#{full_name}\""
+end
+
 Then(/^the person should be created$/) do
   ppl = Person.where(@person_attributes)
   expect(ppl.count).to be >= 1
