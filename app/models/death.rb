@@ -7,7 +7,7 @@ class Death < ActiveRecord::Base
    validate :date_in_past
 
    belongs_to :person
-   belongs_to :place, :autosave => true
+   has_one :place, as: :locatable
    accepts_nested_attributes_for :place
    validates_associated :place
 

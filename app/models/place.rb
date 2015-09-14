@@ -6,9 +6,7 @@ class Place < ActiveRecord::Base
 
    before_create :default_values
 
-   has_many :births
-   has_many :deaths
-
+   belongs_to :locatables, polymorphic: true
 
    def has_valid_latlng?
       # TODO: Add a check to see if it is actually valid (real coords)
@@ -25,7 +23,7 @@ class Place < ActiveRecord::Base
    end
 
    def place_string
-      [self.street_address, self.city, self.postal_code, 
+      [self.street_address, self.city, self.postal_code,
          self.county, self.state, self.country].join(', ').gsub(/( ,)+|^,/, "")
    end
    def place_string=(input="")

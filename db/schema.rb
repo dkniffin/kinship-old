@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150828164507) do
+ActiveRecord::Schema.define(version: 20150914114528) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -35,13 +35,11 @@ ActiveRecord::Schema.define(version: 20150828164507) do
     t.integer  "mother_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "place_id"
   end
 
   create_table "deaths", force: :cascade do |t|
     t.integer  "person_id"
     t.date     "date"
-    t.integer  "place_id"
     t.string   "cause"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -72,6 +70,8 @@ ActiveRecord::Schema.define(version: 20150828164507) do
     t.datetime "updated_at"
     t.float    "lat"
     t.float    "lon"
+    t.integer  "locatable_id"
+    t.string   "locatable_type"
   end
 
   create_table "settings", force: :cascade do |t|
