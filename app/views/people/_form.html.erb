@@ -1,77 +1,28 @@
-<%= form_for setup_person(@person), :html => { :multipart => true} do |f| %>
-  <% if @person.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
-
-      <ul>
-      <% @person.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :gender %><br>
-    <%= f.select :gender, [' '] + Person.all_genders %>
-  </div>
-  <div class="field">
-    <%= f.label :spouse_id, "Spouse" %>
-    <%= f.collection_select :spouse_id, Person.all, :id, :full_name_and_id, {include_blank: true} %>
-  </div>
-  <%= f.fields_for :birth do |ff| %>
-    <div class="field">
-      <%= ff.label :date, "Birth Date" %>
-      <%= ff.date_field :date %>
-    </div>
-    <%= ff.fields_for :place do |fff| %>
-      <div class="field">
-        <%= fff.label :place_string, "Birth Place" %>
-        <%= fff.text_field :place_string %>
-      </div>
+<%= simple_form_for setup_person(@person), html: { multipart: true} do |f| %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :gender, collection: Person.all_genders %>
+  <%= f.simple_fields_for :birth do |ff| %>
+    <%= ff.input :date %>
+    <%= ff.simple_fields_for :place do |fff| %>
+      <%= fff.input :place_string %>
     <% end %>
-    <div class="field">
-      <%= ff.label :father_id, "Father" %>
-      <%= ff.collection_select :father_id, Person.all, :id, :full_name_and_id, {include_blank: true} %>
-    </div>
-    <div class="field">
-      <%= ff.label :mother_id, "Mother" %>
-      <%= ff.collection_select :mother_id, Person.all, :id, :full_name_and_id, {include_blank: true} %>
-    </div>
+    <%= ff.input :father_id, collection: Person.all %>
+    <%= ff.input :mother_id, collection: Person.all %>
   <% end %>
-  <%= f.fields_for :death do |ff| %>
-    <div class="field">
-      <%= ff.label :dead, "Dead" %>
-      <%= ff.check_box :dead %>
-    </div>
-    <%= ff.fields_for :place do |fff| %>
-      <div class="field">
-        <%= fff.label :place_string, "Death Place" %>
-        <%= fff.text_field :place_string %>
-      </div>
+  <%= f.simple_fields_for :death do |ff| %>
+    <%= ff.input :dead %>
+    <%= ff.input :date %>
+    <%= ff.simple_fields_for :place do |fff| %>
+      <%= fff.input :place_string %>
     <% end %>
-    <div class="field">
-      <%= ff.label :date, "Death Date" %>
-      <%= ff.date_field :date %>
-    </div>
-    <div class="field">
-      <%= ff.label :cause, "Cause of Death" %>
-      <%= ff.text_field :cause %>
-    </div>
+    <%= ff.input :cause %>
   <% end %>
-  <div class="field">
-    <%= f.label :photo %><br>
-    <%= f.file_field :photo %>
-  </div>
-  <div class="actions">
-    <%= button_tag 'Submit', :class => 'btn' %>
-  </div>
+  <%= f.input :photo %>
+
+  <%= f.button :submit, :class => 'btn' %>
+
+
+  <!-- TODO: Change the following to simple_form inputs -->
+
 <% end %>
