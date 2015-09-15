@@ -14,6 +14,7 @@ describe Person do
 
 	it { is_expected.to respond_to(:father)}
 	it { is_expected.to respond_to(:mother)}
+	it { is_expected.to respond_to(:parents)}
 	it { is_expected.to respond_to(:children)}
 
 	it { is_expected.to respond_to(:age)}
@@ -22,10 +23,6 @@ describe Person do
 	it { is_expected.to respond_to(:user)}
 
 	describe "#gender" do
-		context "when blank" do
-			subject(:person) { build(:person, gender: "")}
-			it { is_expected.to be_valid }
-		end
 		context "when male" do
 			subject(:person) { build(:person, gender: "M")}
 			it { is_expected.to be_valid }
@@ -34,88 +31,46 @@ describe Person do
 			subject(:person) { build(:person, gender: "F")}
 			it { is_expected.to be_valid }
 		end
+		context "when nil" do
+			subject(:person) { build(:person, gender: nil)}
+			it { is_expected.to be_valid }
+		end
 
-		context "when gender is not M,F,<blank>" do
+		context "when not M,F,nil" do
 			subject(:person) { build(:person, gender: "X")}
 			it { is_expected.to be_invalid }
 		end
 	end
 
-	describe :mother do
-		context "when a person is associated as mother" do
-			let(:mom) { Person.create() }
+	describe "#parents" do
+		let(:mom) { build(:person, gender: 'F') }
+		let(:dad) { build(:person, gender: 'M') }
+		context "with a mother and a father" do
 			before do
-				person.update_attributes({
-					:birth_attributes => {
-						:mother_id => mom.id
-					}
-				})
+				person.update(birth_attributes: {parent_1: mom, parent_2: dad})
 			end
 
-			it "has the mother" do
-				expect(person.mother).to eq(mom)
-			end
-		end
-		context "when there is no associated mother" do
-			specify "mother is nil" do
-				expect(person.mother).to be_nil
+			it { is_expected.to be_valid }
+
+			it "has both parents" do
+				expect(person.parents).to include(mom)
+				expect(person.parents).to include(dad)
 			end
 		end
 	end
-
-	describe :father do
-		context "when a person is associated as father" do
-			let(:dad) { Person.create() }
+	describe "#children" do
+		let(:parent) { build(:person) }
+		let(:child1) { build(:person) }
+		let(:child2) { build(:person) }
+		context "with two children" do
 			before do
-				person.update_attributes({
-					:birth_attributes => {
-						:father_id => dad.id
-					}
-				})
+				child1.update(birth_attributes: {parent_1: parent})
+				child2.update(birth_attributes: {parent_2: parent})
 			end
 
-			it "has that father" do
-				expect(person.father).to eq(dad)
-			end
-		end
-		context "when there is no associated father" do
-			specify "father is nil" do
-				expect(person.father).to be_nil
-			end
-		end
-	end
-
-	describe "#age" do
-		context "when birth date is not given" do
-			before do
-				person.update_attributes({:birth_attributes => { :date => nil }})
-			end
-
-			specify { expect(person.age).to be_nil }
-		end
-		context "when birth is given" do
-			let(:bdate) { Date.new(1990,01,01) }
-			before(:each) do
-				person.update_attributes({:birth_attributes => { :date => bdate }})
-			end
-
-			context "when death is not given" do
-				before do
-					person.update_attributes({:death_attributes => { :date => nil }})
-				end
-
-				specify "is age today" do
-					expect(person.age).to eq(Date.today.year - bdate.year)
-				end
-			end
-			context "when death is given" do
-				let(:ddate) { Date.new(1991,01,02) }
-				before do
-					person.update_attributes({:death_attributes => { :date => ddate }})
-				end
-				specify "is age at death" do
-					expect(person.age).to eq(1)
-				end
+			it "returns both children" do
+				expect(parent.children).to include(child1)
+				expect(parent.children).to include(child2)
 			end
 		end
 	end

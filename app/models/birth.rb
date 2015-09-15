@@ -1,29 +1,29 @@
 class Birth < ActiveRecord::Base
    before_save :build_default_place
 
-   belongs_to :child, :class_name => "Person"
+   belongs_to :child, class_name: "Person", foreign_key: "child_id"
+   belongs_to :parent_1, class_name: "Person", foreign_key: "parent_1_id"
+   belongs_to :parent_2, class_name: "Person", foreign_key: "parent_2_id"
+
+   scope :with_parent, ->(parent) { where("parent_1_id = :parent_id OR births.parent_2_id = :parent_id", parent_id: parent.id) }
 
    has_one :place, as: :locatable
    accepts_nested_attributes_for :place
    validates_associated :place
 
-   validate :parents_born_before_child
+   #validate :parents_born_before_child
    validate :date_in_past
 
+   def parents
+     [parent_1, parent_2].compact
+   end
+
    def father
-      if father_id
-         Person.find(father_id)
-      else
-         nil
-      end
+     parents.select{ |p| p.gender == Person::MALE }.first
    end
 
    def mother
-      if mother_id
-         Person.find(mother_id)
-      else
-         nil
-      end
+     parents.select{ |p| p.gender == Person::FEMALE }.first
    end
 
    def parents_string

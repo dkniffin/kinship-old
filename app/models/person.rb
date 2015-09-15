@@ -33,17 +33,33 @@ class Person < ActiveRecord::Base
    validates :spouse_id, :presence => true, :allow_blank => true
 
    VALID_GENDERS = ['M', 'F']
-   validates :gender, :presence => true, inclusion: {in: VALID_GENDERS},:allow_blank => true
+   validates :gender, :presence => true, inclusion: {in: VALID_GENDERS}, :allow_blank => true
 
    scope :gender, ->(genders = VALID_GENDERS) { where(gender: genders) }
    scope :filter, ->(query) { where('first_name LIKE ? OR last_name LIKE ?', "%#{query}%", "%#{query}%") }
 
+   def parents
+     birth.parents
+   end
+
    def father
-      birth.father
+     birth.father
    end
 
    def mother
-      birth.mother
+     birth.mother
+   end
+
+   def parent_births
+     Birth.with_parent(self)
+   end
+
+   def children
+     parent_births.map(&:child)
+   end
+
+   def events
+     [birth, death].flatten
    end
 
    def full_name
@@ -56,13 +72,6 @@ class Person < ActiveRecord::Base
 
    def alive?
       return !death.dead
-   end
-
-   def children
-      # TODO: Might be able to minimize the search here by basing it on gender
-      children_ids = Birth.where(:father_id => id).map {|elt| elt.child_id}
-      children_ids += Birth.where(:mother_id => id).map {|elt| elt.child_id}
-      return Person.where(:id => children_ids)
    end
 
    def age(date=Date.today)
@@ -78,8 +87,8 @@ class Person < ActiveRecord::Base
    end
 
    def siblings(mod=:full)
-      father_id = birth.father_id
-      mother_id = birth.mother_id
+      father_id = birth.father.id
+      mother_id = birth.mother.id
       siblings = []
       sibling_ids = []
 
