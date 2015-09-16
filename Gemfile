@@ -12,6 +12,8 @@ gem 'devise'
 # gem 'cancancan'
 gem 'email_validator'
 
+# Forms
+gem 'simple_form'
 
 # For file attachments
 gem "paperclip", "~> 3.0"
