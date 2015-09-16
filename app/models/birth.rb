@@ -79,6 +79,6 @@ class Birth < ActiveRecord::Base
       end
       def date_in_past
          errors.add(:date, "must be in the past") if
-            !date.blank? and date >= Date.today
+            date.present? and date >= Date.today
       end
 end

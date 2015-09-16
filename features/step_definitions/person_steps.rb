@@ -38,9 +38,9 @@ When(/^I fill in valid person data$/) do
   fill_in("First name", with: @person_attributes[:first_name])
   fill_in("Last name", with: @person_attributes[:last_name])
   # Gender
-  select(@person_attributes[:gender], :from => "Gender")
+  select(@person_attributes[:gender], from: "Gender")
   # Birth date
-  fill_in("Birth Date", with: @person_attributes[:birth_date])
+  select(@person_attributes[:birth_date], from: "Birth Date")
 end
 Then(/^the person should be created$/) do
   ppl = Person.where(@person_attributes)
