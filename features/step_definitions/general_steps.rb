@@ -25,6 +25,9 @@ end
 When(/^I (?:enter|fill in) "(.*?)" for "(.*?)"$/) do |value, field|
   fill_in(field, with: value)
 end
+When(/^I select "(.*)" for "(.*?)"$/) do |value, field|
+    select(value, from: field)
+end
 
 Then(/^I am redirected to the home page$/) do
   expect(current_path).to eq(root_path)
@@ -37,6 +40,10 @@ Then(/^I( don't)? see "(.*?)"$/) do |negate, content|
   else
     expect(page).to have_content(content)
   end
+end
+Then(/^I( don't)? see the date "(.*?)"$/) do |negate, in_date_str|
+  reformatted_date = Date.parse(in_date_str).formatted
+  step "I#{negate} see \"#{reformatted_date}\""
 end
 
 Then(/^I see an error "(.*?)"$/) do |error_message|

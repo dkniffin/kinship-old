@@ -74,11 +74,11 @@ class PeopleController < ApplicationController
   def destroy
     @person.destroy
     # Clear the record of the person in Birth
-    Birth.where(:father_id => @person.id).each do |child|
+    Birth.where(:parent_1_id => @person.id).each do |child|
       child.father_id = nil
       child.save
     end
-    Birth.where(:mother_id => @person.id).each do |child|
+    Birth.where(:parent_1_id => @person.id).each do |child|
       child.mother_id = nil
       child.save
     end

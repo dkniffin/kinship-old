@@ -8,8 +8,8 @@
   <%= hidden_field_tag "last_name_sort", true if @last_name_header %>
   Genders:
   <% @all_genders.each do |gender| %>
-     <%= gender %>
-     <%= check_box_tag "genders[#{gender}]", 1, @genders.include?(gender), :id => "genders_#{gender}" %>
+    <%= gender %>
+    <%= check_box_tag "genders[#{gender}]", 1, @genders.include?(gender), :id => "genders_#{gender}" %>
   <% end %>
   <br><br>
   <%= text_field_tag :query, params[:query] %><br>
@@ -17,7 +17,7 @@
 <% end %>
 
 <% if @people.empty?  then %>
-   <h4>No results matched your search</h4>
+  <h4>No results matched your search</h4>
 <%else %>
 
   <table class="table table-striped">
@@ -32,7 +32,7 @@
         <th>Death Date</th>
       </tr>
     </thead>
-  
+
     <tbody>
       <% @people.each do |person| %>
         <tr>
@@ -41,15 +41,15 @@
           <td><%= person.gender %></td>
           <td><%= link_to image_tag(person.photo.url(:small)), person %></td>
           <td>
-              <% if !person.birth.date.nil? %>
-                  <%= person.birth.date.formatted %>
-              <%end%>
+            <% if !person.birth.date.nil? %>
+              <%= person.birth.date.formatted %>
+            <%end%>
           </td>
           <td><%= person.birth.place.place_string %></td>
           <td>
-              <% if !person.death.date.nil? %>
-                  <%= person.death.date.formatted %>
-              <%end%>
+            <% if !person.death.date.nil? %>
+              <%= person.death.date.formatted %>
+            <%end%>
           </td>
         </tr>
       <% end %>

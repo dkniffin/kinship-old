@@ -1,21 +1,16 @@
 <dl class="dl-horizontal">
-  <dt>Mother</dt>
-  <dd>
-    <% if @person.mother %>
-      <p><%= link_to @person.mother.full_name, @person.mother%></p>
-    <% else %>
-      <p><%= link_to new_person_path, :class => 'btn btn-primary' do %><i class="icon-plus icon-white"></i> Add Mother<%end%></p>
-    <% end %>
-  </dd>
-  <dt>Father</dt>
-  <dd>
-    <% if @person.father %>
-      <p><%= link_to @person.father.full_name, @person.father%></p>
-    <% else %>
-      <p><%= link_to new_person_path, :class => 'btn btn-primary' do %><i class="icon-plus icon-white"></i> Add Father<%end%></p>
-    <% end %>
-  </dd>
-  <% if ! @children.nil? %>
+  <% @person.parents.each do |parent| %>
+    <dt><%= parent_title(parent.gender) %></dt>
+    <dd><%= link_to parent.full_name, parent%></dd>
+  <% end %>
+  <dt></dt>
+  <% if @person.parents.length < 2 %>
+    <dd><%= link_to new_person_path, class: 'btn btn-primary' do %>
+        <i class="icon-plus icon-white"></i><span>Add Parent</span>
+    <%end%></dd>
+  <% end %>
+
+  <% if @children.present? %>
     <% @children.each do |child| %>
       <dt>Child</dt>
       <dd>
@@ -24,7 +19,7 @@
     <% end %>
   <% end %>
   <br>
-  <% if ! @primary_siblings.nil? %>
+  <% if @primary_siblings.present? %>
     <% @primary_siblings.each do |sibling| %>
       <dt>Sibling</dt>
       <dd>
@@ -33,7 +28,7 @@
     <% end %>
   <% end %>
   <br>
-  <% if ! @half_siblings.nil? %>
+  <% if @half_siblings.present? %>
     <% @half_siblings.each do |half_sibling| %>
       <dt>Half Sibling</dt>
       <dd>
