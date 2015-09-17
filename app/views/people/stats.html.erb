@@ -3,16 +3,15 @@
 <div id='men-women-pie'>
     <h4>Men vs. Women</h4>
     <div class="chart">
-        <script type="text/javascript">
-
+      <script type="text/javascript">
         var r = 100,                        //radius
         w = 2 * r,                          //width
         h = 300,                            //height
         l = w / 2,                          //distance from left
         color = d3.scale.category20c();     //builtin range of colors
-        data = [{"label":"men (<%=@men.length%>)", "value":<%=@men.length%>}, 
+        data = [{"label":"men (<%=@men.length%>)", "value":<%=@men.length%>},
                 {"label":"women (<%=@women.length%>)", "value":<%=@women.length%>}];
-        
+
         var vis = d3.select("#men-women-pie>.chart") // Select "the element with id men-women-pie"s child who has the class of chart
             .append("svg:svg")              //create the SVG element inside of it
             .data([data])                   //associate our data with the document
@@ -28,7 +27,7 @@
             .value(function(d) { return d.value; });    //we must tell it how to access the value of each element in our data array
 
         var arcs = vis.selectAll("g.slice")     //this selects all <g> elements with class slice (there aren't any yet)
-            .data(pie)                          //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties) 
+            .data(pie)                          //associate the generated pie data (an array of arcs, each having startAngle, endAngle and value properties)
             .enter()                            //this will create <g> elements for every "extra" data element that should be associated with a selection. The result is creating a <g> for every object in the data array
                 .append("svg:g")                //create a group to hold each slice (we will have a <path> and a <text> element associated with each slice)
                     .attr("class", "slice");    //allow us to style things in the slices (like text)
@@ -46,7 +45,7 @@
                 })
                 .attr("text-anchor", "middle")                          //center the text on it's origin
                 .text(function(d, i) { return data[i].label; });        //get the label from our original data array
-            
+
         </script>
     </div>
 </div>
@@ -78,7 +77,7 @@
         }
     </style>
         <script>
-        
+
             var margin = {top: 20, right: 20, bottom: 30, left: 40},
             width = 960 - margin.left - margin.right,
             height = 500 - margin.top - margin.bottom;
@@ -142,7 +141,7 @@
                   .attr("width", 10)
                   .attr("y", function(d) { return y(d); })
                   .attr("height", function(d) { return height - y(d); });
-        
+
         </script>
     </div>
 </div>
@@ -152,23 +151,23 @@
 
         <script>
           var fill = d3.scale.category20();
-        
+
           var fontSize = d3.scale.log().range([10, 100]);
           var layout = d3.layout.cloud()
             .size([960, 600])
             .timeInterval(10)
             .text(function(d) { return d.key; })
             .font("Impact")
-            .fontSize(function(d) { 
+            .fontSize(function(d) {
               console.log(d);
-              return fontSize(+d.value); 
+              return fontSize(+d.value);
             })
             .rotate(function(d) { return ~~(Math.random() * 5) * 30 - 60; })
             .padding(1)
             .on("end", draw)
             .words(<%=@surname_word_data.to_s.html_safe %>)
             .start();
-        
+
           function draw(words) {
             d3.select("#surname-word-cloud>.chart").append("svg")
                 .attr("width", 600)
@@ -196,23 +195,23 @@
 
         <script>
           var fill = d3.scale.category20();
-        
+
           var fontSize = d3.scale.log().range([10, 100]);
           var layout = d3.layout.cloud()
             .size([960, 600])
             .timeInterval(10)
             .text(function(d) { return d.key; })
             .font("Impact")
-            .fontSize(function(d) { 
+            .fontSize(function(d) {
               console.log(d);
-              return fontSize(+d.value); 
+              return fontSize(+d.value);
             })
             .rotate(function(d) { return ~~(Math.random() * 5) * 30 - 60; })
             .padding(1)
             .on("end", draw)
             .words(<%=@first_name_word_data.to_s.html_safe %>)
             .start();
-        
+
           function draw(words) {
             d3.select("#firstname-word-cloud>.chart").append("svg")
                 .attr("width", 600)

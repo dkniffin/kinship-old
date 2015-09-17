@@ -10,9 +10,6 @@ Kinship::Application.routes.draw do
   resources :people
   get 'people/stats', to: 'people#stats', as: 'people_stats'
 
-#home'
   get "about",  to: 'static_pages#about'
-
-  # Help page
   get 'help', to: 'help#new'
 end
