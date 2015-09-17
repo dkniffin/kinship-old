@@ -43,4 +43,14 @@ module PeopleHelper
       }
     end
   end
+
+  def parent_title(gender)
+    if gender == Person::MALE
+      'Father'
+    elsif gender == Person::FEMALE
+      'Mother'
+    else
+      'Parent'
+    end
+  end
 end
