@@ -25,6 +25,9 @@ end
 When(/^I (?:enter|fill in) "(.*?)" for "(.*?)"$/) do |value, field|
   fill_in(field, with: value)
 end
+When(/^I select "(.*)" for "(.*?)"$/) do |value, field|
+    select(value, from: field)
+end
 
 Then(/^I am redirected to the home page$/) do
   expect(current_path).to eq(root_path)

@@ -28,8 +28,6 @@ When(/^I fill in valid person data$/) do
   fill_in("Last name", with: @person_attributes[:last_name])
   # Gender
   select(@person_attributes[:gender], from: "Gender")
-  # Birth date
-  select(@person_attributes[:birth_date], from: "Birth Date")
 end
 
 
