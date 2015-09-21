@@ -47,31 +47,43 @@ describe Person do
     let(:dad) { build(:person, gender: 'M') }
     context "with a mother and a father" do
       before do
-        person.update(birth_attributes: {parent_1: mom, parent_2: dad})
+        subject.update(birth_attributes: {parent_1: mom, parent_2: dad})
       end
 
       it { is_expected.to be_valid }
 
       it "has both parents" do
-        expect(person.parents).to include(mom)
-        expect(person.parents).to include(dad)
+        expect(subject.parents).to include(mom)
+        expect(subject.parents).to include(dad)
       end
     end
   end
+
   describe "#children" do
-    let(:parent) { build(:person) }
     let(:child1) { build(:person) }
     let(:child2) { build(:person) }
     context "with two children" do
       before do
-        child1.update(birth_attributes: {parent_1: parent})
-        child2.update(birth_attributes: {parent_2: parent})
+        child1.update(birth_attributes: {parent_1: subject})
+        child2.update(birth_attributes: {parent_2: subject})
       end
 
       it "returns both children" do
-        expect(parent.children).to include(child1)
-        expect(parent.children).to include(child2)
+        expect(subject.children).to include(child1)
+        expect(subject.children).to include(child2)
       end
+    end
+  end
+
+  describe "#marriages" do
+    let(:spouse_1) { create(:person) }
+    let(:spouse_2) { create(:person) }
+    let!(:marriage_1) { create(:marriage, person_1: spouse_1, person_2: subject) }
+    let!(:marriage_2) { create(:marriage, person_1: subject, person_2: spouse_2) }
+
+    it "includes all marriages that involve the person" do
+      expect(subject.marriages).to include(marriage_1)
+      expect(subject.marriages).to include(marriage_2)
     end
   end
 end

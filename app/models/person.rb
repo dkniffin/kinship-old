@@ -56,6 +56,10 @@ class Person < ActiveRecord::Base
     Birth.with_parent(self)
   end
 
+  def marriages
+    Marriage.with_person(self)
+  end
+
   def children
     parent_births.map(&:child)
   end
@@ -104,18 +108,16 @@ class Person < ActiveRecord::Base
   def events
     e = []
 
-    if !birth.nil?
-      e.push(birth)
-    end
-    if death.dead
-      e.push(death)
-    end
+    e.push(birth)
+    e.push(marriages)
+    e.push(death)
+
     # TODO: Add sibling births and deaths
     # TODO: Add child births and deaths
     # TODO: Add parent births and deaths
     # TODO: Add spouse births and deaths
 
-    e
+    e.flatten
   end
 
   def markers
