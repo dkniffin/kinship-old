@@ -3,7 +3,7 @@ Given(/^there (?:is|are) (\d+) (?:person|people) in the database$/) do |num|
   create_list(:person, num)
   @person = Person.first if num == 1
 end
-Given(/^there is a person with name "(.*?)"$/) do |name|
+Given(/^there is a person with the name "(.*?)"$/) do |name|
   first,last = name.split(' ')
   @person = create(:person, first_name: first, last_name: last)
 end
@@ -13,6 +13,10 @@ When(/^I visit the person index page$/) do
 end
 When(/^I visit the new person page$/) do
   visit '/people/new'
+end
+When(/^I visit the show page for "(.*?)"$/) do |name|
+  person = Person.where(name: name)
+  visit "people/#{person.id}"
 end
 When(/^I visit the show page for that person$/) do
   visit "/people/#{@person.id}"
@@ -34,6 +38,10 @@ end
 
 Then(/^I am on the person show page$/) do
   expect(page.current_path).to match(/\/people\/(\d+)/)
+end
+Then(/^I am on the show page for "(.*?)"$/) do |name|
+  person = Person.where(name: name)
+  expect(page.current_path).to eq("/people/#{person.id}")
 end
 Then(/^I am on the person index page$/) do
   expect(page.current_path).to eq("/people")

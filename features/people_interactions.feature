@@ -29,7 +29,7 @@ Feature: Interactions with People
   @javascript
   Scenario: An editor can delete a Person
     Given I am logged in as an editor
-    And there is a person with name "John Smith"
+    And there is a person with the name "John Smith"
     When I visit the show page for that person
     And I click "Delete"
     And I confirm the prompt
