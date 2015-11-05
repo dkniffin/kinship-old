@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Birth do
+describe LifeEvent::Birth, type: :model do
   subject(:birth) { build(:birth) }
 
   it { is_expected.to respond_to(:child)}

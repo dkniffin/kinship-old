@@ -1,0 +1,14 @@
+<%= simple_form_for @marriage do |f| %>
+  <%= f.association :person_1,
+    label: 'Spouse 1',
+    label_method: :full_name,
+    value_method: :id %>
+  <%= f.association :person_2,
+    label: 'Spouse 2',
+    label_method: :full_name,
+    value_method: :id  %>
+
+  <%= f.input :date %>
+
+  <%= f.submit 'Submit', class: 'btn' %>
+<% end %>

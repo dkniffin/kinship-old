@@ -8,6 +8,9 @@ Kinship::Application.routes.draw do
   devise_for :users
 
   resources :people
+  namespace :life_event do
+    resources :marriages, except: ['index']
+  end
   get 'people/stats', to: 'people#stats', as: 'people_stats'
 
   get "about",  to: 'static_pages#about'

@@ -12,12 +12,12 @@ class Person < ActiveRecord::Base
   validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png']
 
   # Birth
-  has_one :birth, :foreign_key => "child_id"
+  has_one :birth, class_name: "LifeEvent::Birth", foreign_key: "child_id"
   accepts_nested_attributes_for :birth
   validates_associated :birth
 
   # Death
-  has_one :death
+  has_one :death, class_name: "LifeEvent::Death"
   accepts_nested_attributes_for :death
   validates_associated :death
 
@@ -53,11 +53,11 @@ class Person < ActiveRecord::Base
   end
 
   def parent_births
-    Birth.with_parent(self)
+    LifeEvent::Birth.with_parent(self)
   end
 
   def marriages
-    Marriage.with_person(self)
+    LifeEvent::Marriage.with_person(self)
   end
 
   def children

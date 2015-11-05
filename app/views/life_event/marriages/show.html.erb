@@ -1,0 +1,15 @@
+<% provide(:title, "#{@marriage.person_1} & #{@marriage.person_2}") %>
+
+<div class='person-pane'>
+  <%= render @marriage.person_1 %>
+</div>
+
+<div class='marriage-details'>
+  <span class='marriage-date'>
+    <%= @marriage.date %>
+  </span>
+</div>
+
+<div class='person-pane'>
+  <%= render @marriage.person_2 %>
+</div>

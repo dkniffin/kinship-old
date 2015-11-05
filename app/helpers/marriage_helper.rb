@@ -1,0 +1,2 @@
+module MarriageHelper
+end
