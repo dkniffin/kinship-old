@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :birth, class: "LifeEvent::Birth" do
-    date { Date.yesterday }
+    date { 1.week.ago }
   end
 end

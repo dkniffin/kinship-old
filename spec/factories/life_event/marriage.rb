@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :marriage, class: "LifeEvent::Marriage" do
-    date { Date.yesterday }
+    date { 1.week.ago }
 
     trait :with_1_spouse do
       person_1 { build(:person) }

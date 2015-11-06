@@ -85,8 +85,9 @@ module LifeEvent
       end
 
       def date_in_past
-        errors.add(:date, "must be in the past") if
-        date.present? and date >= Date.today
+        if date.present? and date >= Date.today
+          errors.add(:date, "must be in the past")
+        end
       end
   end
 end
