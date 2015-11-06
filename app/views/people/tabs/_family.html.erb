@@ -31,8 +31,8 @@
   <% end %>
 
   <!-- Spouses -->
-  <% if @spouses.present? %>
-    <% @spouses.each do |spouse| %>
+  <% if @person.spouses.present? %>
+    <% @person.spouses.each do |spouse| %>
       <dt>Spouse</dt>
       <dd>
         <%= link_to spouse.full_name, spouse %><br>
@@ -41,7 +41,9 @@
   <% end %>
 
   <dd>
-    <%= link_to new_life_event_marriage_path(marriage: { person_1_id: @person.id}), class: 'btn btn-primary' do %>
+    <%= link_to new_life_event_marriage_path(life_event_marriage: {
+        person_1_id: @person.id
+      }), class: 'btn btn-primary' do %>
       <i class="icon-plus icon-white"></i><span>Add Marriage</span>
     <%end%>
   </dd>

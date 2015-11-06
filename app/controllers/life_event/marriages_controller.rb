@@ -13,7 +13,8 @@ module LifeEvent
 
       respond_to do |format|
         if @marriage.save
-          format.html { redirect_to @marriage, notice: 'Marriage was successfully created.' }
+          format.html { redirect_to @marriage,
+            notice: "#{@marriage.event_name} was successfully created." }
           format.json { render action: 'show', status: :created, location: @marriage }
         else
           format.html { render action: 'new' }
@@ -30,7 +31,8 @@ module LifeEvent
 
       respond_to do |format|
         if @marriage.save
-          format.html { redirect_to @marriage, notice: 'Marriage was successfully updated.' }
+          format.html { redirect_to @marriage,
+            notice: "#{@marriage.event_name} has been updated." }
           format.json { render action: 'show', status: :updated, location: @marriage }
         else
           format.html { render action: 'edit' }
@@ -46,7 +48,7 @@ module LifeEvent
     end
 
     def marriage_params
-      params.require(:marriage).permit(
+      params.require(:life_event_marriage).permit(
         :person_1_id,
         :person_2_id,
         :date

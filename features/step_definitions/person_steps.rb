@@ -8,6 +8,13 @@ Given(/^there is a person with the name "(.*?)"$/) do |name|
   @person = create(:person, first_name: first, last_name: last)
 end
 
+Given(/^the following (?:people|person) exists?:$/) do |table|
+  table.hashes.each do |hash|
+    create(:person, hash)
+  end
+end
+
+
 When(/^I visit the person index page$/) do
   visit '/people'
 end
@@ -15,8 +22,9 @@ When(/^I visit the new person page$/) do
   visit '/people/new'
 end
 When(/^I visit the show page for "(.*?)"$/) do |name|
-  person = Person.where(name: name)
-  visit "people/#{person.id}"
+  first_name, last_name = name.split(' ')
+  person = Person.where(first_name: first_name, last_name: last_name).first
+  visit "/people/#{person.id}"
 end
 When(/^I visit the show page for that person$/) do
   visit "/people/#{@person.id}"
@@ -33,8 +41,6 @@ When(/^I fill in valid person data$/) do
   # Gender
   select(@person_attributes[:gender], from: "Gender")
 end
-
-
 
 Then(/^I am on the person show page$/) do
   expect(page.current_path).to match(/\/people\/(\d+)/)

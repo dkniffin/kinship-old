@@ -1,3 +1,5 @@
+require 'capybara-screenshot/cucumber'
+
 Capybara.javascript_driver = :webkit
 
 DatabaseCleaner.strategy = :transaction

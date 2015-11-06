@@ -1,7 +1,7 @@
 <% provide(:title, "#{@marriage.person_1} & #{@marriage.person_2}") %>
 
 <div class='person-pane'>
-  <%= render @marriage.person_1 %>
+  <%= @marriage.person_1 %>
 </div>
 
 <div class='marriage-details'>
@@ -11,5 +11,5 @@
 </div>
 
 <div class='person-pane'>
-  <%= render @marriage.person_2 %>
+  <%= @marriage.person_2 %>
 </div>
