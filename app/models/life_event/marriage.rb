@@ -19,5 +19,19 @@ module LifeEvent
     def build_default_place
       build_place if place.nil?
     end
+
+    def spouse_ids
+      [person_1_id, person_2_id]
+    end
+
+    def spouses
+      Person.where(id: spouse_ids)
+    end
+
+    def spouse_of(person)
+      raise "person not in marriage" unless spouse_ids.include?(person.id)
+      spouse_id = spouse_ids - [person.id]
+      Person.where(id: spouse_id)
+    end
   end
 end

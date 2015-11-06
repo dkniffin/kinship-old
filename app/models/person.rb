@@ -24,8 +24,6 @@ class Person < ActiveRecord::Base
   # User
   has_one :user
 
-  # Spouse
-
   # Other Validations
   # Allow blank values; see private method default_values for details
   validates :first_name, :presence => true, :allow_blank => true
@@ -58,6 +56,10 @@ class Person < ActiveRecord::Base
 
   def marriages
     LifeEvent::Marriage.with_person(self)
+  end
+
+  def spouses
+    LifeEvent::Marriage.with_person(self).map{|m| m.spouse_of(self) }.flatten
   end
 
   def children

@@ -86,4 +86,16 @@ describe Person do
       expect(subject.marriages).to include(marriage_2)
     end
   end
+
+  describe "#spouses" do
+    let(:spouse_1) { create(:person) }
+    let(:spouse_2) { create(:person) }
+    let!(:marriage_1) { create(:marriage, person_1: spouse_1, person_2: subject) }
+    let!(:marriage_2) { create(:marriage, person_1: subject, person_2: spouse_2) }
+
+    it "includes all spouses of subject" do
+      expect(subject.spouses).to include(spouse_1)
+      expect(subject.spouses).to include(spouse_2)
+    end
+  end
 end
