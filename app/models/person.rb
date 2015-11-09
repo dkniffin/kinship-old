@@ -37,6 +37,7 @@ class Person < ActiveRecord::Base
 
   scope :gender, ->(genders = VALID_GENDERS) { where(gender: genders) }
   scope :filter, ->(query) { where('first_name LIKE ? OR last_name LIKE ?', "%#{query}%", "%#{query}%") }
+  scope :with_name, ->(name) { where('first_name || " " || last_name = ?', name) }
 
   def parents
     birth.parents

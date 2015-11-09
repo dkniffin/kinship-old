@@ -98,4 +98,12 @@ describe Person do
       expect(subject.spouses).to include(spouse_2)
     end
   end
+
+  describe ".with_name" do
+    subject!(:person) { create(:person) }
+
+    it "returns a person with that name" do
+      expect(Person.with_name(person.full_name)).to include(person)
+    end
+  end
 end
