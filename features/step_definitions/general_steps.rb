@@ -6,6 +6,10 @@ When(/^I (?:visit|goto|go to) the login (?:path|page)$/) do
   visit new_user_session_path
 end
 
+When(/^I visit "([^"]*?)"$/) do |path|
+  visit path
+end
+
 Then(/^I am on the home page$/) do
   expect(page.current_path).to eq('/')
 end
