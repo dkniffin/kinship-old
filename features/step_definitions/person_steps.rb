@@ -14,21 +14,33 @@ Given(/^the following (?:people|person) exists?:$/) do |table|
   end
 end
 
+When(/^I enter the following details for (?:a new person|new people):$/) do |table|
+  # table is a Cucumber::Ast::Table
+  table.hashes.each do |hash|
+    fill_in("First name", with: hash[:first_name])
+    fill_in("Last name", with: hash[:last_name])
+    select(hash[:gender], from: "Gender")
+  end
+end
 
 When(/^I visit the person index page$/) do
   visit '/people'
 end
+
 When(/^I visit the new person page$/) do
   visit '/people/new'
 end
+
 When(/^I visit the show page for "(.*?)"$/) do |name|
   first_name, last_name = name.split(' ')
   person = Person.where(first_name: first_name, last_name: last_name).first
   visit "/people/#{person.id}"
 end
+
 When(/^I visit the show page for that person$/) do
   visit "/people/#{@person.id}"
 end
+
 When(/^I visit the edit page for that person$/) do
   visit "/people/#{@person.id}/edit"
 end
@@ -45,10 +57,12 @@ end
 Then(/^I am on the person show page$/) do
   expect(page.current_path).to match(/\/people\/(\d+)/)
 end
+
 Then(/^I am on the show page for "(.*?)"$/) do |name|
   person = Person.where(name: name)
   expect(page.current_path).to eq("/people/#{person.id}")
 end
+
 Then(/^I am on the person index page$/) do
   expect(page.current_path).to eq("/people")
 end

@@ -31,11 +31,12 @@
   <% end %>
 
   <!-- Spouses -->
-  <% if @person.spouses.present? %>
-    <% @person.spouses.each do |spouse| %>
+  <% if @person.marriages.present? %>
+    <% @person.marriages.each do |marriage| %>
       <dt>Spouse</dt>
       <dd>
-        <%= link_to spouse.full_name, spouse %><br>
+        <% spouse = marriage.spouse_of(@person) %>
+        <%= link_to spouse.full_name, spouse %>&nbsp;(m. <%= marriage.date.try(:formatted) %>)<br>
       </dd>
     <% end %>
   <% end %>

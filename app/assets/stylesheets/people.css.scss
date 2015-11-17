@@ -28,3 +28,13 @@
   stroke-width: 1.5px;
 }
 
+.inline-form {
+	div.input {
+		display: inline-block;
+		width: 33%;
+
+		input {
+			width: 80%;
+		}
+	}
+}

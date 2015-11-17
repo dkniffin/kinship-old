@@ -5,6 +5,9 @@ module LifeEvent
     belongs_to :person_1, class_name: "Person", foreign_key: "person_1_id"
     belongs_to :person_2, class_name: "Person", foreign_key: "person_2_id"
 
+    accepts_nested_attributes_for :person_1
+    accepts_nested_attributes_for :person_2
+
     scope :with_person, ->(person) do
       where("person_1_id = :person_id OR person_2_id = :person_id",
         person_id: person.id)
@@ -36,7 +39,7 @@ module LifeEvent
     def spouse_of(person)
       raise "person not in marriage" unless spouse_ids.include?(person.id)
       spouse_id = spouse_ids - [person.id]
-      Person.where(id: spouse_id)
+      Person.where(id: spouse_id).first
     end
 
     def event_name

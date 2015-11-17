@@ -8,8 +8,8 @@ class PeopleController < ApplicationController
   # GET /people.json
   def index
     # Get people
-    @genders = params[:genders].nil? ? Person.all_genders : params[:genders].keys
-    @people = Person.gender(@genders).filter(params[:query]).order(params[:sort]).page(params[:page])
+    # @genders = params[:genders].nil? ? Person.all_genders : params[:genders].keys
+    @people = Person.filter(params[:query]).order(params[:sort]).page(params[:page])
 
     # Get genders
     @all_genders = Person.all_genders
