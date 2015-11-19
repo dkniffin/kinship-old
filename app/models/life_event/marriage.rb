@@ -49,5 +49,9 @@ module LifeEvent
     def short_description
       "#{person_1.full_name} married #{person_2.full_name}"
     end
+
+    def icon_class
+      'icon-rings'
+    end
   end
 end

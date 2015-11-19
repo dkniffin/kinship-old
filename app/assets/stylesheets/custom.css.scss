@@ -105,33 +105,15 @@ footer {
 }
 
 /* Custom Icons */
-i.icon-baby {
-  background-image: url("baby-24.png");
+i.icon {
   background-position: 0, 0;
   height: 24px;
   width: 24px;
 }
-
-i.icon-cemetery {
-  background-image: url("cemetery-24.png");
-  background-position: 0, 0;
-  height: 24px;
-  width: 24px;
-}
-
-i.icon-college {
-  background-image: url("college-24.png");
-  background-position: 0, 0;
-  height: 24px;
-  width: 24px;
-}
-
-i.icon-rings {
-  background-image: url("rings-24.png");
-  background-position: 0, 0;
-  height: 24px;
-  width: 24px;
-}
+i.icon-baby { background-image: url("timeline_icons/baby-24.png"); }
+i.icon-cemetery { background-image: url("timeline_icons/cemetery-24.png"); }
+i.icon-college { background-image: url("timeline_icons/college-24.png"); }
+i.icon-rings { background-image: url("timeline_icons/rings-24.png"); }
 
 a.btn {
   color: white;

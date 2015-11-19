@@ -12,7 +12,7 @@
       <%= event.place.place_string %>
     </td>
     <td class="span1">
-      <i class='<%= event.try(:icon_class) || 'circle' %>'></i>
+      <i class="icon <%= event.try(:icon_class) %>"></i>
     </td>
     <td class="span6"><%= event.short_description %></td>
   </tr>
