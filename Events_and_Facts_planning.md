@@ -38,4 +38,3 @@ Things to Document
 - Custom Period [Period]
 - Custom Event [Event]
 - Custom Fact [Fact]
-- 
