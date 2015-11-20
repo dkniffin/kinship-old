@@ -1,43 +1,43 @@
 require 'spec_helper'
 
 describe Person do
-  subject(:person) { build(:person) }
+  subject(:person) { create(:person) }
 
-  it { is_expected.to respond_to(:first_name)}
-  it { is_expected.to respond_to(:last_name)}
-  it { is_expected.to respond_to(:gender)}
+  it { is_expected.to respond_to(:first_name) }
+  it { is_expected.to respond_to(:last_name) }
+  it { is_expected.to respond_to(:gender) }
 
-  it { is_expected.to respond_to(:photo)}
+  it { is_expected.to respond_to(:photo) }
 
-  it { is_expected.to respond_to(:birth)}
-  it { is_expected.to respond_to(:death)}
+  it { is_expected.to respond_to(:birth) }
+  it { is_expected.to respond_to(:death) }
 
-  it { is_expected.to respond_to(:father)}
-  it { is_expected.to respond_to(:mother)}
-  it { is_expected.to respond_to(:parents)}
-  it { is_expected.to respond_to(:children)}
+  it { is_expected.to respond_to(:father) }
+  it { is_expected.to respond_to(:mother) }
+  it { is_expected.to respond_to(:parents) }
+  it { is_expected.to respond_to(:children) }
 
-  it { is_expected.to respond_to(:age)}
-  it { is_expected.to respond_to(:full_name)}
+  it { is_expected.to respond_to(:age) }
+  it { is_expected.to respond_to(:full_name) }
 
-  it { is_expected.to respond_to(:user)}
+  it { is_expected.to respond_to(:user) }
 
   describe "#gender" do
     context "when male" do
-      subject(:person) { build(:person, gender: "M")}
+      subject(:person) { build(:person, gender: "M") }
       it { is_expected.to be_valid }
     end
     context "when female" do
-      subject(:person) { build(:person, gender: "F")}
+      subject(:person) { build(:person, gender: "F") }
       it { is_expected.to be_valid }
     end
     context "when nil" do
-      subject(:person) { build(:person, gender: nil)}
+      subject(:person) { build(:person, gender: nil) }
       it { is_expected.to be_valid }
     end
 
     context "when not M,F,nil" do
-      subject(:person) { build(:person, gender: "X")}
+      subject(:person) { build(:person, gender: "X") }
       it { is_expected.to be_invalid }
     end
   end
@@ -72,6 +72,40 @@ describe Person do
         expect(parent.children).to include(child1)
         expect(parent.children).to include(child2)
       end
+    end
+  end
+
+  context 'with marriages' do
+    let(:spouse_1) { create(:person) }
+    let(:spouse_2) { create(:person) }
+    let!(:marriage_1) do
+      create(:marriage, person_1: spouse_1, person_2: subject)
+    end
+    let!(:marriage_2) do
+      create(:marriage, person_1: subject, person_2: spouse_2)
+    end
+
+    describe "#marriages" do
+      it "includes all marriages that involve the person" do
+        expect(subject.marriages).to include(marriage_1)
+        expect(subject.marriages).to include(marriage_2)
+      end
+    end
+
+    describe "#spouses" do
+      it "includes all spouses of subject" do
+        expect(subject.spouses).to include(spouse_1)
+        expect(subject.spouses).to include(spouse_2)
+      end
+    end
+  end
+
+  describe ".with_name" do
+    before do
+      person
+    end
+    it "returns a person with that name" do
+      expect(Person.with_name(person.full_name)).to include(person)
     end
   end
 end

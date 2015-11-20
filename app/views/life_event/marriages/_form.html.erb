@@ -1,0 +1,22 @@
+<%= simple_form_for @marriage do |f| %>
+  <%= f.input :person_1_id, label: 'Spouse 1' do %>
+    <%= f.select :person_1_id,
+      [''] + Person.all.map{|p| [p.full_name,p.id]} + [['New Person', :new]] %>
+  <% end %>
+  <div id='person_1_new_person_fields' class='inline-form' style='display: none;'>
+    <%= render partial: 'people/embeddable_form', locals: {f:f, person_field_id: :person_2} %>
+  </div>
+
+  <%= f.input :person_2_id, label: 'Spouse 2' do %>
+    <%= f.select :person_2_id,
+      [''] + Person.all.map{|p| [p.full_name,p.id]} + [['New Person', :new]] %>
+  <% end %>
+  <div id='person_2_new_person_fields' class='inline-form' style='display: none;'>
+    <%= render partial: 'people/embeddable_form', locals: {f:f, person_field_id: :person_2} %>
+  </div>
+
+
+  <%= f.input :date %>
+
+  <%= f.submit 'Submit', class: 'btn' %>
+<% end %>

@@ -1,6 +1,0 @@
-<dl class="dl-horizontal">
-<% @person.events.each do |event| %>
-  <dt><%= event.title_string %></dt>
-  <dd><%= event.details.join('<br />').html_safe  %></dd>
-<% end %>
-</dl>

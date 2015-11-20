@@ -1,24 +1,18 @@
 <dl class="dl-horizontal">
+  <!-- Parents -->
   <% @person.parents.each do |parent| %>
     <dt><%= parent_title(parent.gender) %></dt>
     <dd><%= link_to parent.full_name, parent%></dd>
   <% end %>
-  <dt></dt>
   <% if @person.parents.length < 2 %>
-    <dd><%= link_to new_person_path, class: 'btn btn-primary' do %>
+    <dd>
+      <%= link_to new_person_path, class: 'btn btn-primary' do %>
         <i class="icon-plus icon-white"></i><span>Add Parent</span>
-    <%end%></dd>
+      <%end%>
+    </dd>
   <% end %>
 
-  <% if @children.present? %>
-    <% @children.each do |child| %>
-      <dt>Child</dt>
-      <dd>
-      <%= link_to child.full_name, child %><br>
-      </dd>
-    <% end %>
-  <% end %>
-  <br>
+  <!-- Siblings -->
   <% if @primary_siblings.present? %>
     <% @primary_siblings.each do |sibling| %>
       <dt>Sibling</dt>
@@ -27,12 +21,40 @@
       </dd>
     <% end %>
   <% end %>
-  <br>
   <% if @half_siblings.present? %>
     <% @half_siblings.each do |half_sibling| %>
       <dt>Half Sibling</dt>
       <dd>
       <%= link_to half_sibling.full_name, half_sibling %><br>
+      </dd>
+    <% end %>
+  <% end %>
+
+  <!-- Spouses -->
+  <% if @person.marriages.present? %>
+    <% @person.marriages.each do |marriage| %>
+      <dt>Spouse</dt>
+      <dd>
+        <% spouse = marriage.spouse_of(@person) %>
+        <%= link_to spouse.full_name, spouse %>&nbsp;(m. <%= marriage.date.try(:formatted) %>)<br>
+      </dd>
+    <% end %>
+  <% end %>
+
+  <dd>
+    <%= link_to new_life_event_marriage_path(life_event_marriage: {
+        person_1_id: @person.id
+      }), class: 'btn btn-primary' do %>
+      <i class="icon-plus icon-white"></i><span>Add Marriage</span>
+    <%end%>
+  </dd>
+
+  <!-- Children -->
+  <% if @children.present? %>
+    <% @children.each do |child| %>
+      <dt>Child</dt>
+      <dd>
+      <%= link_to child.full_name, child %><br>
       </dd>
     <% end %>
   <% end %>

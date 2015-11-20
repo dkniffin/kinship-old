@@ -3,9 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #facts-box dt {
-	background-color: #000000;
-	color: #999;
-	padding: 5px;
+  background-color: #000000;
+  color: #999;
+  padding: 5px;
 }
 
 .node {
@@ -28,3 +28,13 @@
   stroke-width: 1.5px;
 }
 
+.inline-form {
+  div.input {
+    display: inline-block;
+    width: 33%;
+
+    input {
+      width: 80%;
+    }
+  }
+}

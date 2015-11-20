@@ -8,4 +8,22 @@ module ApplicationHelper
       "#{base_title} | #{page_title}"
     end
   end
+
+  def path_exists?(path)
+
+    if path.class == String
+      begin
+        Rails.application.routes.recognize_path(path)
+      rescue
+        return false
+      end
+    else
+      begin
+        polymorphic_path(path)
+      rescue
+        return false
+      end
+    end
+    true
+  end
 end

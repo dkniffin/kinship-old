@@ -12,19 +12,17 @@ class Person < ActiveRecord::Base
   validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/png']
 
   # Birth
-  has_one :birth, :foreign_key => "child_id"
+  has_one :birth, class_name: "LifeEvent::Birth", foreign_key: "child_id"
   accepts_nested_attributes_for :birth
   validates_associated :birth
 
   # Death
-  has_one :death
+  has_one :death, class_name: "LifeEvent::Death"
   accepts_nested_attributes_for :death
   validates_associated :death
 
   # User
   has_one :user
-
-  # Spouse
 
   # Other Validations
   # Allow blank values; see private method default_values for details
@@ -39,6 +37,7 @@ class Person < ActiveRecord::Base
 
   scope :gender, ->(genders = VALID_GENDERS) { where(gender: genders) }
   scope :filter, ->(query) { where('first_name LIKE ? OR last_name LIKE ?', "%#{query}%", "%#{query}%") }
+  scope :with_name, ->(name) { where('first_name || " " || last_name = ?', name) }
 
   def parents
     birth.parents
@@ -53,7 +52,15 @@ class Person < ActiveRecord::Base
   end
 
   def parent_births
-    Birth.with_parent(self)
+    LifeEvent::Birth.with_parent(self)
+  end
+
+  def marriages
+    LifeEvent::Marriage.with_person(self)
+  end
+
+  def spouses
+    LifeEvent::Marriage.with_person(self).map { |m| m.spouse_of(self) }.flatten
   end
 
   def children
@@ -104,18 +111,16 @@ class Person < ActiveRecord::Base
   def events
     e = []
 
-    if !birth.nil?
-      e.push(birth)
-    end
-    if death.dead
-      e.push(death)
-    end
+    e.push(birth)
+    e.push(marriages)
+    e.push(death)
+
     # TODO: Add sibling births and deaths
     # TODO: Add child births and deaths
     # TODO: Add parent births and deaths
     # TODO: Add spouse births and deaths
 
-    e
+    e.flatten
   end
 
   def markers

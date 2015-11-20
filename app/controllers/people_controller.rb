@@ -3,12 +3,13 @@ class PeopleController < ApplicationController
   before_action :set_person, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
   before_action :authorize_user
+
   # GET /people
   # GET /people.json
   def index
     # Get people
-    @genders = params[:genders].nil? ? Person.all_genders : params[:genders].keys
-    @people = Person.gender(@genders).filter(params[:query]).order(params[:sort]).page(params[:page])
+    # @genders = params[:genders].nil? ? Person.all_genders : params[:genders].keys
+    @people = Person.filter(params[:query]).order(params[:sort]).page(params[:page])
 
     # Get genders
     @all_genders = Person.all_genders
@@ -72,16 +73,9 @@ class PeopleController < ApplicationController
   # DELETE /people/1
   # DELETE /people/1.json
   def destroy
-    @person.destroy
     # Clear the record of the person in Birth
-    Birth.where(:parent_1_id => @person.id).each do |child|
-      child.father_id = nil
-      child.save
-    end
-    Birth.where(:parent_1_id => @person.id).each do |child|
-      child.mother_id = nil
-      child.save
-    end
+    @person.parent_births.each{ |birth| birth.remove_parent(@person) }
+    @person.destroy
 
     respond_to do |format|
       format.html { redirect_to people_url, notice: "#{@person.full_name} has been deleted" }

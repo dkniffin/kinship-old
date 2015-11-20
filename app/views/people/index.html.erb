@@ -6,11 +6,6 @@
 <%= form_tag people_path, :method => :get, :id => 'gender_form' do %>
   <%= hidden_field_tag "first_name_sort", true if @first_name_header %>
   <%= hidden_field_tag "last_name_sort", true if @last_name_header %>
-  Genders:
-  <% @all_genders.each do |gender| %>
-    <%= gender %>
-    <%= check_box_tag "genders[#{gender}]", 1, @genders.include?(gender), :id => "genders_#{gender}" %>
-  <% end %>
   <br><br>
   <%= text_field_tag :query, params[:query] %><br>
   <%= button_tag 'Search', :id => 'genders_submit', :class => 'btn' %>

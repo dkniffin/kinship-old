@@ -1,7 +1,7 @@
 module PeopleHelper
   def setup_person(person)
-    person.birth ||= Birth.new
-    person.death ||= Death.new
+    person.birth ||= LifeEvent::Birth.new
+    person.death ||= LifeEvent::Death.new
     person
   end
 
@@ -16,7 +16,13 @@ module PeopleHelper
     else
       deathday = "?"
     end
-    json_pedigree_tree = { :name => person.full_name, :born => birthday, :died => deathday, :location => person.birth.place.city, :parents => []}
+    json_pedigree_tree = {
+      name: person.full_name,
+      born: birthday,
+      died: deathday,
+      location: person.birth.place.city,
+      parents: []
+    }
     father = person.birth.father
     mother = person.birth.mother
     if father && !mother

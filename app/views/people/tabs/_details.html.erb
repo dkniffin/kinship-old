@@ -1,0 +1,29 @@
+<table>
+  <tr>
+    <th>Event/Fact</th>
+    <th>Details</th>
+    <th>Actions</th>
+  </tr>
+
+  <% @person.events.each do |event| %>
+    <tr id='<%= dom_id(event) %>'>
+      <td class="span2"><%= event.title_string %></td>
+      <td class="span12"><%= event.details.join('<br />').html_safe %></td>
+      <td class="span2">
+        <% if path_exists?([:edit, event]) %>
+          <%= link_to [:edit, event],
+            class: 'btn btn-primary',
+            title: 'Edit Event' do %>
+            <i class="icon-pencil icon-white"></i>
+          <% end %>
+        <% end %>
+        <% if path_exists?(event) %>
+          <%= link_to event,
+            class: 'btn btn-primary',
+            title: 'Event Details' do %>
+            <i class="icon-file icon-white"></i>
+          <% end %>
+        <% end %>
+      </td>
+  <% end %>
+</table>
