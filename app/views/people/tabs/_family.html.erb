@@ -1,10 +1,10 @@
 <dl class="dl-horizontal">
   <!-- Parents -->
-  <% @person.parents.each do |parent| %>
+  <% person.parents.each do |parent| %>
     <dt><%= parent_title(parent.gender) %></dt>
     <dd><%= link_to parent.full_name, parent%></dd>
   <% end %>
-  <% if @person.parents.length < 2 %>
+  <% if person.parents.length < 2 %>
     <dd>
       <%= link_to new_person_path, class: 'btn btn-primary' do %>
         <i class="icon-plus icon-white"></i><span>Add Parent</span>
@@ -31,11 +31,11 @@
   <% end %>
 
   <!-- Spouses -->
-  <% if @person.marriages.present? %>
-    <% @person.marriages.each do |marriage| %>
+  <% if person.marriages.present? %>
+    <% person.marriages.each do |marriage| %>
       <dt>Spouse</dt>
       <dd>
-        <% spouse = marriage.spouse_of(@person) %>
+        <% spouse = marriage.spouse_of(person) %>
         <%= link_to spouse.full_name, spouse %>&nbsp;(m. <%= marriage.date.try(:formatted) %>)<br>
       </dd>
     <% end %>
@@ -43,7 +43,7 @@
 
   <dd>
     <%= link_to new_life_event_marriage_path(life_event_marriage: {
-        person_1_id: @person.id
+        person_1_id: person.id
       }), class: 'btn btn-primary' do %>
       <i class="icon-plus icon-white"></i><span>Add Marriage</span>
     <%end%>

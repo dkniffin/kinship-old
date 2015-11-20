@@ -67,16 +67,8 @@ class Person < ActiveRecord::Base
     parent_births.map(&:child)
   end
 
-  def events
-    [birth, death].flatten
-  end
-
   def full_name
-    first_name + ' ' + last_name
-  end
-
-  def full_name_and_id
-    first_name + ' ' + last_name + " \(#{id}\)"
+    "#{first_name} #{last_name}"
   end
 
   def alive?
@@ -86,13 +78,8 @@ class Person < ActiveRecord::Base
   def age(date=Date.today)
     return nil if birth.date.nil?
 
-    if death.date
-      date = death.date
-    end
-
-    diff = date - birth.date
-    age = (diff / 365.25).floor
-    age
+    age = Date.today.year - birth.date.year
+    age -= 1 if Date.today < birth.date + age.years
   end
 
   def siblings(mod=:all)
@@ -121,22 +108,6 @@ class Person < ActiveRecord::Base
     # TODO: Add spouse births and deaths
 
     e.flatten
-  end
-
-  def markers
-    event_markers = []
-
-    events.each do |event|
-    if event.place.has_valid_latlng?
-      event_markers.push({
-        :latlng => [event.place.lat, event.place.lon],
-        :title => event.title_string,
-        :place => event.place.place_string,
-        :date => event.date_string
-      })
-      end
-    end
-    event_markers
   end
 
   def self.all_genders

@@ -1,4 +1,4 @@
-<%= simple_form_for setup_person(@person), html: { multipart: true} do |f| %>
+<%= simple_form_for setup_person(person), html: { multipart: true} do |f| %>
   <%= f.input :first_name %>
   <%= f.input :last_name %>
   <%= f.input :gender, collection: Person.all_genders %>

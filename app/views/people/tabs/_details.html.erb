@@ -5,7 +5,7 @@
     <th>Actions</th>
   </tr>
 
-  <% @person.events.each do |event| %>
+  <% person.events.each do |event| %>
     <tr id='<%= dom_id(event) %>'>
       <td class="span2"><%= event.title_string %></td>
       <td class="span12"><%= event.details.join('<br />').html_safe %></td>
