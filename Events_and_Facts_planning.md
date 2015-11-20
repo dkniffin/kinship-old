@@ -34,7 +34,6 @@ Things to Document
 
 - Religion [Fact]
 - Title [Fact]
-- SSN [Fact]
 
 - Custom Period [Period]
 - Custom Event [Event]
