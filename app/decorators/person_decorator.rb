@@ -1,6 +1,8 @@
 class PersonDecorator < Draper::Decorator
   delegate_all
 
+  decorates_association :events
+
   def full_name_and_id
     "#{object.full_name} (#{object.id})"
   end
