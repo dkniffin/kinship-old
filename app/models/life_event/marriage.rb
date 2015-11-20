@@ -53,5 +53,19 @@ module LifeEvent
     def icon_class
       'icon-rings'
     end
+
+    def title_string
+      'Marriage'
+    end
+
+
+    def details
+      [
+        'Spouse: ' + person_1.full_name,
+        'Spouse: ' + person_2.full_name,
+        'Date: ' + date_string,
+        'Place: ' + place.place_string
+      ]
+    end
   end
 end

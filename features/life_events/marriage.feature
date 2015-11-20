@@ -60,39 +60,25 @@ Feature: Person Marriage
         | George     | Gant      | M      |
         | Betty      | Baker     | F      |
       And there is a marriage between "John Jacob" and "Susie Smith"
-    # TODO:
-    # When I visit the show page for "John Jacob"
-      # And I click "Family"
-      # And I click the marriage
-    # When I visit "/life_event/marriages/1"
-    # Then I am on the marriage show page
-    # When I click "Edit"
-    When I visit "/life_event/marriages/1/edit"
+    When I visit the show page for "John Jacob"
+      And I click "Details"
+      And I click "Event Details" for the marriage
+    Then I am on the marriage show page
+    When I click "Edit"
     # Edit Spouse 1
     And I select "George Gant" for "Spouse 1"
       And I click "Submit"
     Then I am on the marriage show page
       And I see "The marriage between George Gant and Susie Smith has been updated."
     # Edit Spouse 2
-    # When I click "Edit"
-    When I visit "/life_event/marriages/1/edit"
+    When I click "Edit"
       And I select "Betty Baker" for "Spouse 2"
       And I click "Submit"
     Then I am on the marriage show page
       And I see "The marriage between George Gant and Betty Baker has been updated."
     # Edit the date
-    # When I click "Edit"
-    When I visit "/life_event/marriages/1/edit"
+    When I click "Edit"
       And I select the date "3/3/2012" for "Date"
       And I click "Submit"
     Then I see "The marriage between George Gant and Betty Baker has been updated."
       And I see the date "3/3/2012"
-
-  # Scenario: Marriages require two people
-  #   Given the following people exist:
-  #       | first_name | last_name | gender |
-  #       | John       | Jacob     | M      |
-  #       | Jane       | Smith     | F      |
-  #     And there is a marriage between "John Jacob" and "Jane Smith"
-  #   When I visit the show page for "John Jacob"
-  #   Then TODO

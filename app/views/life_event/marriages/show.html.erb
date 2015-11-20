@@ -1,12 +1,16 @@
 <% provide(:title, "#{@marriage.person_1} & #{@marriage.person_2}") %>
 
+<%= link_to edit_life_event_marriage_path(@marriage), :class => 'btn btn-primary' do %>
+  <i class="icon-edit icon-white"></i> Edit
+<% end %>
+
 <div class='person-pane'>
   <%= @marriage.person_1.full_name %>
 </div>
 
 <div class='marriage-details'>
   <span class='marriage-date'>
-    <%= @marriage.date.formatted %>
+    <%= @marriage.date.try(:formatted) %>
   </span>
 </div>
 

@@ -21,7 +21,7 @@
     <% end %>
 
     <%= link_to edit_person_path(@person), :class => 'btn btn-primary' do %>
-      <i class="icon-edit icon-white"></i> Edit
+      <i class="icon-pencil icon-white"></i> Edit
     <% end %>
     <%= link_to @person, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' do %>
       <i class="icon-trash icon-white"></i> Delete
@@ -30,15 +30,20 @@
 </div>
 
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#events-tab" data-toggle="tab">Events</a></li>
+  <li class="active"><a href="#timeline-tab" data-toggle="tab">Timeline</a></li>
+  <li><a href="#details-tab" data-toggle="tab">Details</a></li>
   <li><a href="#family-tab" data-toggle="tab">Family</a></li>
   <li><a href="#tree-tab" data-toggle="tab">Tree</a></li>
   <li><a href="#map-tab" data-toggle="tab" id="map-tab-link">Map</a></li>
 </ul>
 
 <div id="tabs" class="tab-content">
-  <div id="events-tab" class="tab-pane active"> <!--id="facts-box" -->
-    <%= render partial: "people/tabs/events" %>
+  <div id="timeline-tab" class="tab-pane active">
+    <%= render partial: "people/tabs/timeline" %>
+  </div>
+
+  <div id="details-tab" class="tab-pane">
+    <%= render partial: "people/tabs/details" %>
   </div>
 
   <div id="family-tab" class="tab-pane">
