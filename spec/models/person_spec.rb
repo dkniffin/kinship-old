@@ -84,7 +84,7 @@ describe Person do
     let!(:marriage_2) do
       create(:marriage, person_1: subject, person_2: spouse_2)
     end
-    
+
     describe "#marriages" do
       it "includes all marriages that involve the person" do
         expect(subject.marriages).to include(marriage_1)

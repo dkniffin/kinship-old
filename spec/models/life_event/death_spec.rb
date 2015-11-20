@@ -17,7 +17,7 @@ describe LifeEvent::Death, type: :model do
 
   describe "#dead" do
     context "when date is in the past" do
-      before { death.date = Date.new(1900,01,01) }
+      before { death.date = Date.new(1900, 01, 01) }
 
       specify "is true" do
         expect(death.dead).to be_truthy

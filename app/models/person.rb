@@ -60,7 +60,7 @@ class Person < ActiveRecord::Base
   end
 
   def spouses
-    LifeEvent::Marriage.with_person(self).map{|m| m.spouse_of(self) }.flatten
+    LifeEvent::Marriage.with_person(self).map { |m| m.spouse_of(self) }.flatten
   end
 
   def children

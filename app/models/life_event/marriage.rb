@@ -39,7 +39,7 @@ module LifeEvent
     def spouse_of(person)
       raise "person not in marriage" unless spouse_ids.include?(person.id)
       spouse_id = spouse_ids - [person.id]
-      Person.where(id: spouse_id).first
+      Person.find_by(id: spouse_id)
     end
 
     def event_name

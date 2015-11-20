@@ -1,9 +1,9 @@
 Then(/^I am on the new marriage page$/) do
-  expect(page).to have_current_path(/\/life_event\/marriages\/new/)
+  expect(page).to have_current_path(%r{/life_event/marriages/new})
 end
 
 Then(/^I am on the marriage show page$/) do
-  expect(current_path).to match(/\life_event\/marriages\/\d+/)
+  expect(current_path).to match(%r{/life_event/marriages/\d+})
 end
 
 Given(/^there is a marriage between "(.*?)" and "(.*?)"$/) do |name_1, name_2|

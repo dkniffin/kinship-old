@@ -34,6 +34,6 @@ module Kinship
       :host => "yourdomain.dev"
     }
 
-    config.autoload_paths += Dir[Rails.root.join('app','models','{**}')]
+    config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**}')]
   end
 end

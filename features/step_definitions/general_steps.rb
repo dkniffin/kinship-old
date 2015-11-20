@@ -53,9 +53,9 @@ def select_date(date, options = {})
   day_format = options[:day_format] || '%-d'
   day = date.strftime(day_format)
 
-  select year,  :from => "#{base_id}_1i"
-  select month, :from => "#{base_id}_2i"
-  select day,   :from => "#{base_id}_3i"
+  select year,  from: "#{base_id}_1i"
+  select month, from: "#{base_id}_2i"
+  select day,   from: "#{base_id}_3i"
 end
 
 When(/^I select the date "([^"]*)" for "(.*?)"$/) do |in_date_str, field|
