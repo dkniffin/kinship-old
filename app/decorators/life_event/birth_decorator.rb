@@ -3,6 +3,10 @@ class LifeEvent::BirthDecorator < LifeEventDecorator
     'Birth'
   end
 
+  def short_description
+    "#{object.child.full_name} was born"
+  end
+
   def details_hash
     {
       parents: parents_string,

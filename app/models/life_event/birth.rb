@@ -35,9 +35,6 @@ module LifeEvent
       end
     end
 
-    def short_description
-      child.full_name + ' was born'
-    end
     private
 
       def parents_born_before_child
