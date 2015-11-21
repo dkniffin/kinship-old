@@ -5,6 +5,8 @@ module LifeEvent
     before_action :authenticate_user!
     before_action :authorize_user
 
+    decorates_assigned :marriage
+
     def new
       @marriage = LifeEvent::Marriage.new(marriage_params)
     end
@@ -15,7 +17,7 @@ module LifeEvent
       respond_to do |format|
         if @marriage.save
           format.html { redirect_to @marriage,
-            notice: "#{@marriage.event_name} was successfully created." }
+            notice: "#{@marriage.decorate.event_name} was successfully created." }
           format.json { render action: 'show', status: :created, location: @marriage }
         else
           format.html { render action: 'new', status: :unprocessable_entity, alert: @marriage.errors.full_messages }
@@ -33,7 +35,7 @@ module LifeEvent
       respond_to do |format|
         if @marriage.save
           format.html { redirect_to @marriage,
-            notice: "#{@marriage.event_name} has been updated." }
+            notice: "#{@marriage.decorate.event_name} has been updated." }
           format.json { render action: 'show', status: :updated, location: @marriage }
         else
           format.html { render action: 'edit' }
