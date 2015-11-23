@@ -40,7 +40,7 @@
               <%= person.birth.date.formatted %>
             <%end%>
           </td>
-          <td><%= person.birth.place.place_string %></td>
+          <td><%= person.birth.place.string %></td>
           <td>
             <% if !person.death.date.nil? %>
               <%= person.death.date.formatted %>

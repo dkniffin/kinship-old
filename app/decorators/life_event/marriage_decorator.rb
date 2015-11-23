@@ -7,7 +7,8 @@ class LifeEvent::MarriageDecorator < LifeEventDecorator
     {
       spouse_1: object.person_1.full_name,
       spouse_2: object.person_2.full_name,
-      date: date_string
+      date: date_string,
+      place: place.string
     }
   end
 

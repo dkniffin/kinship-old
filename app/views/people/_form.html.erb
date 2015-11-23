@@ -7,7 +7,7 @@
                         include_blank: true,
                         html5: true %>
     <%= ff.simple_fields_for :place do |fff| %>
-      <%= fff.input :place_string, label: "Birth Place" %>
+      <%= fff.input :string, label: "Birth Place" %>
     <% end %>
   <% end %>
   <%= f.simple_fields_for :death do |ff| %>
@@ -16,7 +16,7 @@
                         include_blank: true,
                         html5: true %>
     <%= ff.simple_fields_for :place do |fff| %>
-      <%= fff.input :place_string %>
+      <%= fff.input :string, label: "Death Place" %>
     <% end %>
     <%= ff.input :cause %>
   <% end %>
