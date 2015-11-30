@@ -26,6 +26,7 @@ class Place < ActiveRecord::Base
     s = "#{street_address}, #{city}, #{county}, #{state} #{postal_code} #{country}"
     s.gsub(/( ,)+|^,/, "")
   end
+  alias_method :to_s, :string
 
   def string=(input = "")
     retVal = Geocoder.search(input).first
