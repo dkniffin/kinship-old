@@ -27,7 +27,7 @@ class Place < ActiveRecord::Base
     s.gsub(/( ,)+|^,/, "")
   end
 
-  def string=(input="")
+  def string=(input = "")
     retVal = Geocoder.search(input).first
 
     if !retVal.nil?

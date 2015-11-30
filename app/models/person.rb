@@ -75,14 +75,15 @@ class Person < ActiveRecord::Base
     !death.dead
   end
 
-  def age(date=Date.today)
+  def age(date = Time.zone.today)
     return nil if birth.date.nil?
 
-    age = Date.today.year - birth.date.year
-    age -= 1 if Date.today < birth.date + age.years
+    age = date - birth.date.year
+    age -= 1 if date < birth.date + age.years
+    age
   end
 
-  def siblings(mod=:all)
+  def siblings(mod = :all)
     case mod
     when :all
       parents.map{|p| p.children }.flatten.uniq - [self]

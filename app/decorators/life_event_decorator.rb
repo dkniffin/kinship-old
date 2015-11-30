@@ -6,15 +6,15 @@ class LifeEventDecorator < Draper::Decorator
   end
 
   def details_html
-    details_hash.map do |k,v|
+    details_hash.map do |k, v|
       k_string = k.
         to_s.
         split('_').
-        map { |k| k.capitalize }.
+        map(&:capitalize).
         join(' ')
       "#{k_string}: #{v}"
     end.
-    join('<br />').html_safe
+      join('<br />').html_safe
   end
 
   # To be over-written by descendants
