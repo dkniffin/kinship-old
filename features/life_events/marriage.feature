@@ -12,7 +12,7 @@ Feature: Person Marriage
       | first_name | last_name | gender |
       | John       | Jacob     | M      |
       | Jane       | Smith     | F      |
-    When I visit the show page for "John Jacob"
+    When I visit the person show page for "John Jacob"
       And I click "Family"
       And I click "Add Marriage"
     Then I am on the new marriage page
@@ -22,7 +22,7 @@ Feature: Person Marriage
       And I click "Submit"
     Then I am on the marriage show page
       And I see "The marriage between John Jacob and Jane Smith was successfully created."
-    When I visit the show page for "John Jacob"
+    When I visit the person show page for "John Jacob"
       And I click "Family"
     Then I see "Spouse"
       And I see "Jane Smith"
@@ -33,7 +33,7 @@ Feature: Person Marriage
     Given the following person exists:
       | first_name | last_name | gender |
       | John       | Jacob     | M      |
-    When I visit the show page for "John Jacob"
+    When I visit the person show page for "John Jacob"
       And I click "Family"
       And I click "Add Marriage"
     Then I am on the new marriage page
@@ -46,7 +46,7 @@ Feature: Person Marriage
       And I click "Submit"
     Then I am on the marriage show page
       And I see "The marriage between John Jacob and Susie Sanders was successfully created."
-    When I visit the show page for "John Jacob"
+    When I visit the person show page for "John Jacob"
       And I click "Family"
     Then I see "Spouse"
       And I see "Susie Sanders"
@@ -60,7 +60,7 @@ Feature: Person Marriage
         | George     | Gant      | M      |
         | Betty      | Baker     | F      |
       And there is a marriage between "John Jacob" and "Susie Smith"
-    When I visit the show page for "John Jacob"
+    When I visit the person show page for "John Jacob"
       And I click "Details"
       And I click "Event Details" for the marriage
     Then I am on the marriage show page

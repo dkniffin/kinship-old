@@ -23,15 +23,7 @@ When(/^I enter the following details for (?:a new person|new people):$/) do |tab
   end
 end
 
-When(/^I visit the person index page$/) do
-  visit '/people'
-end
-
-When(/^I visit the new person page$/) do
-  visit '/people/new'
-end
-
-When(/^I visit the show page for "(.*?)"$/) do |name|
+When(/^I visit the person show page for "(.*?)"$/) do |name|
   first_name, last_name = name.split(' ')
   person = Person.where(first_name: first_name, last_name: last_name).first
   visit "/people/#{person.id}"
