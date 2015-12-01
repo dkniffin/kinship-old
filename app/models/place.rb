@@ -1,7 +1,7 @@
 class Place < ActiveRecord::Base
   before_validation :default_values, :cleanup_input
 
-  geocoded_by :place_string, :latitude  => :lat, :longitude => :lon
+  geocoded_by :string, latitude: :lat, longitude: :lon
   after_validation :geocode
 
   before_create :default_values
@@ -19,15 +19,16 @@ class Place < ActiveRecord::Base
 
 
   def full_address_and_id
-    place_string + " \(#{id}\)"
+    to_s + " \(#{id}\)"
   end
 
-  def place_string
-    [self.street_address, self.city, self.postal_code,
-    self.county, self.state, self.country].join(', ').gsub(/( ,)+|^,/, "")
+  def string
+    s = "#{street_address}, #{city}, #{county}, #{state} #{postal_code} #{country}"
+    s.gsub(/( ,)+|^,/, "")
   end
+  alias_method :to_s, :string
 
-  def place_string=(input="")
+  def string=(input = "")
     retVal = Geocoder.search(input).first
 
     if !retVal.nil?
@@ -57,7 +58,7 @@ class Place < ActiveRecord::Base
   end
 
   def empty?
-    self.place_string.rstrip.empty?
+    to_s.rstrip.empty?
   end
 
   private

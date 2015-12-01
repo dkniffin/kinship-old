@@ -19,11 +19,6 @@ module LifeEvent
 
     validates :person_1, :person_2, presence: true
 
-    # TODO: abstract this out to a decorator class
-    def date_string
-      (date.nil?) ? 'Unknown date' : date.formatted
-    end
-
     def build_default_place
       build_place if place.nil?
     end
@@ -40,32 +35,6 @@ module LifeEvent
       raise "person not in marriage" unless spouse_ids.include?(person.id)
       spouse_id = spouse_ids - [person.id]
       Person.find_by(id: spouse_id)
-    end
-
-    def event_name
-      "The marriage between #{person_1.full_name} and #{person_2.full_name}"
-    end
-
-    def short_description
-      "#{person_1.full_name} married #{person_2.full_name}"
-    end
-
-    def icon_class
-      'icon-rings'
-    end
-
-    def title_string
-      'Marriage'
-    end
-
-
-    def details
-      [
-        'Spouse: ' + person_1.full_name,
-        'Spouse: ' + person_2.full_name,
-        'Date: ' + date_string,
-        'Place: ' + place.place_string
-      ]
     end
   end
 end

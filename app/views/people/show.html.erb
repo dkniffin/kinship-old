@@ -1,29 +1,29 @@
-<% provide(:title, @person.full_name) %>
+<% provide(:title, person.full_name) %>
 <!DOCTYPE html>
 <meta charset="utf-8">
 
 <div class="row">
-  <%= image_tag @person.photo.url(:medium), id: 'photo', class: 'span3' %>
+  <%= image_tag person.photo.url(:medium), id: 'photo', class: 'span3' %>
   <div class="span9">
-    <h3 id='full_name'> <%= @person.full_name %> (<%= @person.gender %>)</h3>
+    <h3 id='full_name'> <%= person.full_name %> (<%= person.gender %>)</h3>
 
 
     <p>Birth date:
-      <% if @person.birth.date != nil%>
-        <%= @person.birth.date.formatted %>
+      <% if person.birth.date != nil%>
+        <%= person.birth.date.formatted %>
       <% end %>
     </p>
-    <% if !@person.death.date.nil? %>
-      <p>Death date: <%= @person.death.date.formatted %><%= " (age: " + @person.age.to_s + ")"%></p>
+    <% if !person.death.date.nil? %>
+      <p>Death date: <%= person.death.date.formatted %><%= " (age: " + person.age.to_s + ")"%></p>
     <% end %>
     <% if @spouse%>
       <p>Spouse: <%= link_to @spouse.full_name, @spouse %></p>
     <% end %>
 
-    <%= link_to edit_person_path(@person), :class => 'btn btn-primary' do %>
+    <%= link_to edit_person_path(person), :class => 'btn btn-primary' do %>
       <i class="icon-pencil icon-white"></i> Edit
     <% end %>
-    <%= link_to @person, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' do %>
+    <%= link_to person, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' do %>
       <i class="icon-trash icon-white"></i> Delete
     <% end %>
   </div>

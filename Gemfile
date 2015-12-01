@@ -27,6 +27,9 @@ gem 'activeadmin_settings_cached', github: 'dkniffin/activeadmin_settings_cached
 gem "geocoder", "~> 1.1.8"
 gem "leaflet-rails", "~> 0.7.0"
 
+# Decorator
+gem 'draper'
+
 # For pagination
 gem 'kaminari'
 
