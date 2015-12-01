@@ -5,6 +5,8 @@ module LifeEvent
     before_action :authenticate_user!
     before_action :authorize_user
 
+    decorates_assigned :marriage
+
     def new
       @marriage = LifeEvent::Marriage.new(marriage_params)
     end
@@ -14,12 +16,25 @@ module LifeEvent
 
       respond_to do |format|
         if @marriage.save
-          format.html { redirect_to @marriage,
-            notice: "#{@marriage.event_name} was successfully created." }
-          format.json { render action: 'show', status: :created, location: @marriage }
+          format.html do
+            redirect_to @marriage,
+              notice: "#{@marriage.decorate.event_name} was successfully created."
+          end
+          format.json do
+            render action: 'show',
+              status: :created,
+              location: @marriage
+          end
         else
-          format.html { render action: 'new', status: :unprocessable_entity, alert: @marriage.errors.full_messages }
-          format.json { render json: @marriage.errors, status: :unprocessable_entity }
+          format.html do
+            render action: 'new',
+              status: :unprocessable_entity,
+              alert: @marriage.errors.full_messages
+          end
+          format.json do
+            render json: @marriage.errors,
+              status: :unprocessable_entity
+          end
         end
       end
     end
@@ -32,12 +47,23 @@ module LifeEvent
 
       respond_to do |format|
         if @marriage.save
-          format.html { redirect_to @marriage,
-            notice: "#{@marriage.event_name} has been updated." }
-          format.json { render action: 'show', status: :updated, location: @marriage }
+          format.html do
+            redirect_to @marriage,
+              notice: "#{@marriage.decorate.event_name} has been updated."
+            end
+          format.json do
+            render action: 'show',
+              status: :updated,
+              location: @marriage
+          end
         else
-          format.html { render action: 'edit' }
-          format.json { render json: @marriage.errors, status: :unprocessable_entity }
+          format.html do
+            render action: 'edit'
+          end
+          format.json do
+            render json: @marriage.errors,
+              status: :unprocessable_entity
+          end
         end
       end
     end

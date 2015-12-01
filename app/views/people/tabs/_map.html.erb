@@ -16,7 +16,7 @@
     },
     :tile_layer => Setting.map_tile_url,
     :subdomains => Setting.map_subdomains.split(/,?\s*/),
-    :markers => markers_for_map(@person.markers)
+    :markers => markers_for_map(person.markers)
   }
 
   #leaflet-rails helper

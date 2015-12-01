@@ -4,12 +4,12 @@
     <th></th>
     <th>Details</th>
   </tr>
-<% @person.events.each do |event| %>
+<% person.events.each do |event| %>
   <tr>
     <td class="span4">
       <%= event.date_string %>
       <br />
-      <%= event.place.place_string %>
+      <%= event.place.string %>
     </td>
     <td class="span1">
       <i class="icon <%= event.try(:icon_class) %>"></i>
