@@ -18,8 +18,8 @@ public/assets
 /log/*.log
 /tmp
 
-# Ignore .secret file for security purposes
-.secret
+# Ignore secret file for security purposes
+/config/secrets.yml
 
 # Other untracked files
 database.yml
