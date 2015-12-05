@@ -9,10 +9,7 @@ class PeopleController < ApplicationController
 
   def index
     # Get people
-    @people = Person.
-      filter(params[:query]).
-      order(params[:sort]).
-      page(params[:page])
+    @people = Person.filter(params[:query]).order(params[:sort]).page(params[:page])
 
     respond_with(@people)
   end
@@ -113,9 +110,28 @@ class PeopleController < ApplicationController
   end
 
   def person_params
-    params.require(:person).permit(:first_name, :last_name, :gender, :spouse_id, :photo,
-      birth_attributes: [:id, :date, {place_attributes: [:id, :place_string]}, :father_id, :mother_id],
-      death_attributes: [:id, :dead, {place_attributes: [:id, :place_string]}, :date, :cause]
-    )
+    params.
+      require(:person).
+      permit(
+        :first_name,
+        :last_name,
+        :gender,
+        :spouse_id,
+        :photo,
+        birth_attributes: [
+          :id,
+          :date,
+          { place_attributes: [:id, :place_string] },
+          :father_id,
+          :mother_id
+        ],
+        death_attributes: [
+          :id,
+          :dead,
+          { place_attributes: [:id, :place_string] },
+          :date,
+          :cause
+        ]
+      )
   end
 end
