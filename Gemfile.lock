@@ -341,7 +341,7 @@ DEPENDENCIES
   pry-byebug
   rails (~> 4.2)
   rails-settings-cached (= 0.4.1)
-  responders (~> 2.0)
+  responders
   rspec-rails (~> 3.2.0)
   sass-rails (~> 4.0.0)
   simple_form

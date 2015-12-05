@@ -13,16 +13,16 @@
   <% end %>
 
   <!-- Siblings -->
-  <% if @primary_siblings.present? %>
-    <% @primary_siblings.each do |sibling| %>
+  <% if @person.siblings.present? %>
+    <% @person.siblings.each do |sibling| %>
       <dt>Sibling</dt>
       <dd>
       <%= link_to sibling.full_name, sibling %><br>
       </dd>
     <% end %>
   <% end %>
-  <% if @half_siblings.present? %>
-    <% @half_siblings.each do |half_sibling| %>
+  <% if @person.siblings(:half).present? %>
+    <% @person.siblings(:half).each do |half_sibling| %>
       <dt>Half Sibling</dt>
       <dd>
       <%= link_to half_sibling.full_name, half_sibling %><br>
@@ -50,8 +50,8 @@
   </dd>
 
   <!-- Children -->
-  <% if @children.present? %>
-    <% @children.each do |child| %>
+  <% if @person.children.present? %>
+    <% @person.children.each do |child| %>
       <dt>Child</dt>
       <dd>
       <%= link_to child.full_name, child %><br>

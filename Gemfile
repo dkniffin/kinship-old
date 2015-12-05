@@ -19,7 +19,7 @@ gem 'simple_form'
 gem "paperclip", "~> 3.0"
 
 # Controller responders
-gem 'responders', '~> 2.0'
+gem 'responders'
 
 # For global settings
 gem "rails-settings-cached", "0.4.1"

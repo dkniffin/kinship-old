@@ -34,5 +34,5 @@ Feature: Interactions with People
     And I click "Delete"
     And I confirm the prompt
     Then I am on the person index page
-    And I see "John Smith has been deleted"
+    And I see "Person was successfully destroyed"
     And the person no longer exists

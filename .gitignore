@@ -20,6 +20,7 @@ public/assets
 
 # Ignore secret file for security purposes
 /config/secrets.yml
+.secret
 
 # Other untracked files
 database.yml
