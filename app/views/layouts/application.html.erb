@@ -11,9 +11,8 @@
 
 	<%= render 'layouts/header' %>
 	<div class='container'>
-    <% flash.each do |type,message| %>
-      <p class="<%= type %>"><%= message %></p>
-    <% end %>
+    <%= render 'shared/flash_messages' %>
+
 		<%= content_for?(:content) ? yield(:content) : yield %>
 	</div>
 	<%= render 'layouts/footer' %>

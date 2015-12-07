@@ -7,86 +7,49 @@ class PeopleController < ApplicationController
   decorates_assigned :people
   decorates_assigned :person
 
-  # GET /people
-  # GET /people.json
   def index
     # Get people
-    # @genders = params[:genders].nil? ? Person.all_genders : params[:genders].keys
     @people = Person.filter(params[:query]).order(params[:sort]).page(params[:page])
 
-    # Get genders
-    @all_genders = Person.all_genders
+    respond_with(@people)
   end
 
-  # GET /people/1
-  # GET /people/1.json
   def show
     @person = Person.find(params[:id])
-    @events_format = Setting.events_format
-    @children = @person.children
-    if @person.spouse_id
-       @spouse = Person.find(@person.spouse_id)
-    end
+    respond_with(@person)
 
-    @primary_siblings = @person.siblings
-    @half_siblings = @person.siblings(:half)
     @json_pedigree_tree = get_json_pedigree_tree(@person)
-
   end
 
-  # GET /people/new
   def new
     @person = Person.new
+    respond_with(@person)
   end
 
-  # GET /people/1/edit
   def edit
   end
 
-  # POST /people
-  # POST /people.json
   def create
-    @person = Person.new(person_params)
-
-    respond_to do |format|
-      if @person.save
-        format.html { redirect_to @person, notice: 'Person was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @person }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @person.errors, status: :unprocessable_entity }
-      end
-    end
+    @person = Person.create(person_params)
+    respond_with(@person)
   end
 
-  # PATCH/PUT /people/1
-  # PATCH/PUT /people/1.json
   def update
-    respond_to do |format|
-      if  @person.update(person_params)
-        format.html { redirect_to @person, notice: 'Person was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @person.errors, status: :unprocessable_entity }
-      end
-    end
+    @person.update(person_params)
+    respond_with(@person)
   end
 
-  # DELETE /people/1
-  # DELETE /people/1.json
   def destroy
     # Clear the record of the person in Birth
+    # TODO: Move this to a before_destroy
     @person.parent_births.each{ |birth| birth.remove_parent(@person) }
     @person.destroy
 
-    respond_to do |format|
-      format.html { redirect_to people_url, notice: "#{@person.full_name} has been deleted" }
-      format.json { head :no_content }
-    end
+    respond_with(@person)
   end
 
   def stats
+    # TODO: Refactor this entire method and move it elsewhere
     # Gender distribution
     @women = Person.where(:gender => 'F')
     @men = Person.where(:gender => 'M')
@@ -141,16 +104,34 @@ class PeopleController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_person
-      @person = Person.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def person_params
-      params.require(:person).permit(:first_name, :last_name, :gender, :spouse_id, :photo,
-        birth_attributes: [:id, :date, {place_attributes: [:id, :place_string]}, :father_id, :mother_id],
-        death_attributes: [:id, :dead, {place_attributes: [:id, :place_string]}, :date, :cause]
+  def set_person
+    @person = Person.find(params[:id])
+  end
+
+  def person_params
+    params.
+      require(:person).
+      permit(
+        :first_name,
+        :last_name,
+        :gender,
+        :spouse_id,
+        :photo,
+        birth_attributes: [
+          :id,
+          :date,
+          { place_attributes: [:id, :place_string] },
+          :father_id,
+          :mother_id
+        ],
+        death_attributes: [
+          :id,
+          :dead,
+          { place_attributes: [:id, :place_string] },
+          :date,
+          :cause
+        ]
       )
-    end
+  end
 end

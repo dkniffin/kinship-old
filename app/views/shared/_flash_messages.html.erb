@@ -1,0 +1,6 @@
+<% flash.each do |type, message| %>
+  <% flash_to_bootstrap = { 'success'=> 'success', 'failure'=> 'danger' } %>
+  <div class="alert alert-<%= flash_to_bootstrap[type] %>">
+    <%= message %>
+  </div>
+<% end %>

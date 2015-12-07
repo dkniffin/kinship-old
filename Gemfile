@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.0'
+gem 'rails', '~> 4.2'
+gem 'web-console', '~> 2.0'
 
 # Database
 gem 'sqlite3'
@@ -17,6 +17,9 @@ gem 'simple_form'
 
 # For file attachments
 gem "paperclip", "~> 3.0"
+
+# Controller responders
+gem 'responders'
 
 # For global settings
 gem "rails-settings-cached", "0.4.1"
