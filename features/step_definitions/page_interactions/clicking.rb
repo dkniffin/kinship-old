@@ -10,5 +10,5 @@ When(/^I click "([^"]*?)"$/) do |target|
 end
 
 When(/^I confirm the prompt$/) do
-  page.driver.browser.accept_js_confirms
+  page.evaluate_script('window.confirm = function() { return true; }')
 end
