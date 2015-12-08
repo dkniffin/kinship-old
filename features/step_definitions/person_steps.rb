@@ -1,8 +1,3 @@
-Given(/^there (?:is|are) (\d+) (?:person|people) in the database$/) do |num|
-  num = num.to_i
-  create_list(:person, num)
-  @person = Person.first if num == 1
-end
 Given(/^there is a person with the name "(.*?)"$/) do |name|
   first,last = name.split(' ')
   @person = create(:person, first_name: first, last_name: last)
@@ -54,17 +49,9 @@ When(/^I fill in valid person data$/) do
   select(@person_attributes[:gender], from: "Gender")
 end
 
-Then(/^I am on the person show page$/) do
-  expect(page.current_path).to match(/\/people\/(\d+)/)
-end
-
-Then(/^I am on the show page for "(.*?)"$/) do |name|
+Then(/^I am on the person show page for "(.*?)"$/) do |name|
   person = Person.where(name: name)
   expect(page.current_path).to eq("/people/#{person.id}")
-end
-
-Then(/^I am on the person index page$/) do
-  expect(page.current_path).to eq("/people")
 end
 
 Then(/^I see the person$/) do
