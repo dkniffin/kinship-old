@@ -18,14 +18,6 @@ When(/^I enter the following details for (?:a new person|new people):$/) do |tab
   end
 end
 
-When(/^I visit the person index page$/) do
-  visit '/people'
-end
-
-When(/^I visit the new person page$/) do
-  visit '/people/new'
-end
-
 When(/^I visit the show page for "(.*?)"$/) do |name|
   first_name, last_name = name.split(' ')
   person = Person.where(first_name: first_name, last_name: last_name).first
@@ -51,16 +43,6 @@ end
 Then(/^I am on the person show page for "(.*?)"$/) do |name|
   person = Person.where(name: name)
   expect(page.current_path).to eq("/people/#{person.id}")
-end
-
-Then(/^the person should be created$/) do
-  ppl = Person.where(@person_attributes)
-  expect(ppl.count).to be >= 1
-  @person = ppl.first
-end
-
-Then(/^the person's first name should be "(.*?)"$/) do |first_name|
-  expect(@person.reload.first_name).to eq(first_name)
 end
 
 Then(/^the person no longer exists$/) do

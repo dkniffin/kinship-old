@@ -10,8 +10,7 @@ Feature: Person creation
       And I enter "Joe" for "First"
       And I enter "Smith" for "Last"
       And I click "Submit"
-    Then the person should be created
-      And I am on the person show page
+    Then I am on the person show page
       And I see "Joe Smith"
     When I visit the person index page
     Then I see "Joe Smith"
