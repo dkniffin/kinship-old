@@ -32,12 +32,11 @@ When(/^I visit the show page for "(.*?)"$/) do |name|
   visit "/people/#{person.id}"
 end
 
-When(/^I visit the show page for that person$/) do
-  visit "/people/#{@person.id}"
-end
-
-When(/^I visit the edit page for that person$/) do
-  visit "/people/#{@person.id}/edit"
+When(/^I visit the (edit|show) page for the person "([^"]*)"$/) do |page, name|
+  first, last = name.split(' ')
+  person = Person.find_by(first_name: first, last_name: last)
+  edit_url_segment = (page == 'edit') ? '/edit' : ''
+  visit "/people/#{person.id}#{edit_url_segment}"
 end
 
 When(/^I fill in valid person data$/) do
@@ -52,11 +51,6 @@ end
 Then(/^I am on the person show page for "(.*?)"$/) do |name|
   person = Person.where(name: name)
   expect(page.current_path).to eq("/people/#{person.id}")
-end
-
-Then(/^I see the person$/) do
-  full_name = @person.try(:full_name) || @person_attributes[:full_name]
-  step "I see \"#{full_name}\""
 end
 
 Then(/^the person should be created$/) do
