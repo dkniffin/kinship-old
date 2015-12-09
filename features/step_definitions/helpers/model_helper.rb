@@ -12,8 +12,7 @@ module ModelHelper
       Rails.application.eager_load!
       ActiveRecord::Base.descendants.
         map(&:name).
-        select{|m| m =~ /#{string.singularize}/i}.
-        first
+        find { |m| m =~ /#{string.singularize}/i }
     end
   end
 end

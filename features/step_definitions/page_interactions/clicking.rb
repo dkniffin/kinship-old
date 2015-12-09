@@ -3,7 +3,7 @@ When(/^I click "([^"]*?)"$/) do |target|
   when /^submit$/i
     find('[type="submit"]').click
   when /(Edit|Delete)" for the person "(.*)/
-    find(:xpath, "//tr[contains(.,'#{$2}')]/td/div/a", :text => $1).click
+    find(:xpath, "//tr[contains(.,'#{$2}')]/td/div/a", text: $1).click
   else
     click_on(target)
   end
