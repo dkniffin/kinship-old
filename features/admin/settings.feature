@@ -20,7 +20,7 @@ Feature: Changing site-wide settings via admin panel
 
   Scenario: Change the map settings
     Given I am logged in as an admin
-    And there is 1 person in the database
+    And the database is seeded with 1 person
     When I visit the admin settings page
     And I fill in "https://{s}.tiles.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoib2RkaXR5b3ZlcnNlZXIxMyIsImEiOiIwTEp5a1JnIn0.kzeYyqB2YOj2XXXECKKnJg" for "Map tile url"
     And I fill in "40.597,-95.889" for "Map lat lng"
