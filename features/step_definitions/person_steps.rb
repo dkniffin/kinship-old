@@ -1,8 +1,3 @@
-Given(/^there (?:is|are) (\d+) (?:person|people) in the database$/) do |num|
-  num = num.to_i
-  create_list(:person, num)
-  @person = Person.first if num == 1
-end
 Given(/^there is a person with the name "(.*?)"$/) do |name|
   first,last = name.split(' ')
   @person = create(:person, first_name: first, last_name: last)
@@ -29,12 +24,11 @@ When(/^I visit the person show page for "(.*?)"$/) do |name|
   visit "/people/#{person.id}"
 end
 
-When(/^I visit the show page for that person$/) do
-  visit "/people/#{@person.id}"
-end
-
-When(/^I visit the edit page for that person$/) do
-  visit "/people/#{@person.id}/edit"
+When(/^I visit the (edit|show) page for the person "([^"]*)"$/) do |page, name|
+  first, last = name.split(' ')
+  person = Person.find_by(first_name: first, last_name: last)
+  edit_url_segment = (page == 'edit') ? '/edit' : ''
+  visit "/people/#{person.id}#{edit_url_segment}"
 end
 
 When(/^I fill in valid person data$/) do
@@ -46,32 +40,9 @@ When(/^I fill in valid person data$/) do
   select(@person_attributes[:gender], from: "Gender")
 end
 
-Then(/^I am on the person show page$/) do
-  expect(page.current_path).to match(/\/people\/(\d+)/)
-end
-
-Then(/^I am on the show page for "(.*?)"$/) do |name|
+Then(/^I am on the person show page for "(.*?)"$/) do |name|
   person = Person.where(name: name)
   expect(page.current_path).to eq("/people/#{person.id}")
-end
-
-Then(/^I am on the person index page$/) do
-  expect(page.current_path).to eq("/people")
-end
-
-Then(/^I see the person$/) do
-  full_name = @person.try(:full_name) || @person_attributes[:full_name]
-  step "I see \"#{full_name}\""
-end
-
-Then(/^the person should be created$/) do
-  ppl = Person.where(@person_attributes)
-  expect(ppl.count).to be >= 1
-  @person = ppl.first
-end
-
-Then(/^the person's first name should be "(.*?)"$/) do |first_name|
-  expect(@person.reload.first_name).to eq(first_name)
 end
 
 Then(/^the person no longer exists$/) do
