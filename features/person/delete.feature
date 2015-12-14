@@ -12,5 +12,4 @@ Feature: Deleting people
       And I click "Delete"
       And I confirm the prompt
     Then I am on the person index page
-      And I see "Person was successfully destroyed"
-      And the person no longer exists
+      And I see a success message "Person was successfully destroyed"

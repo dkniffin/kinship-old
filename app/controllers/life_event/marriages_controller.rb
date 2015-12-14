@@ -12,31 +12,9 @@ module LifeEvent
     end
 
     def create
-      @marriage = LifeEvent::Marriage.new(marriage_params)
+      @marriage = LifeEvent::Marriage.create(marriage_params)
 
-      respond_to do |format|
-        if @marriage.save
-          format.html do
-            redirect_to @marriage,
-              notice: "#{@marriage.decorate.event_name} was successfully created."
-          end
-          format.json do
-            render action: 'show',
-              status: :created,
-              location: @marriage
-          end
-        else
-          format.html do
-            render action: 'new',
-              status: :unprocessable_entity,
-              alert: @marriage.errors.full_messages
-          end
-          format.json do
-            render json: @marriage.errors,
-              status: :unprocessable_entity
-          end
-        end
-      end
+      respond_with(@marriage)
     end
 
     def edit
@@ -45,27 +23,7 @@ module LifeEvent
     def update
       @marriage.update(marriage_params)
 
-      respond_to do |format|
-        if @marriage.save
-          format.html do
-            redirect_to @marriage,
-              notice: "#{@marriage.decorate.event_name} has been updated."
-            end
-          format.json do
-            render action: 'show',
-              status: :updated,
-              location: @marriage
-          end
-        else
-          format.html do
-            render action: 'edit'
-          end
-          format.json do
-            render json: @marriage.errors,
-              status: :unprocessable_entity
-          end
-        end
-      end
+      respond_with(@marriage)
     end
 
     private

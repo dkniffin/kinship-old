@@ -5,7 +5,7 @@ Feature: User Authentication
     And I enter my email
     And I enter my password
     And I click the "Log in" button
-    Then I see an error "Your account has not been approved by an administrator yet."
+    Then I see a notice message "Your account has not been approved by an administrator yet."
 
   Scenario: User successfully authenticates
     Given I have a member account on the site

@@ -3,12 +3,6 @@ Given(/^there is a person with the name "(.*?)"$/) do |name|
   @person = create(:person, first_name: first, last_name: last)
 end
 
-Given(/^the following (?:people|person) exists?:$/) do |table|
-  table.hashes.each do |hash|
-    create(:person, hash)
-  end
-end
-
 When(/^I enter the following details for (?:a new person|new people):$/) do |table|
   # table is a Cucumber::Ast::Table
   table.hashes.each do |hash|
@@ -32,19 +26,16 @@ When(/^I visit the (edit|show) page for the person "([^"]*)"$/) do |page, name|
 end
 
 When(/^I fill in valid person data$/) do
-  @person_attributes = attributes_for(:person)
+  # TODO: Generalize this
+  person_attributes = attributes_for(:person)
   # Name
-  fill_in("First name", with: @person_attributes[:first_name])
-  fill_in("Last name", with: @person_attributes[:last_name])
+  fill_in("First name", with: person_attributes[:first_name])
+  fill_in("Last name", with: person_attributes[:last_name])
   # Gender
-  select(@person_attributes[:gender], from: "Gender")
+  select(person_attributes[:gender], from: "Gender")
 end
 
 Then(/^I am on the person show page for "(.*?)"$/) do |name|
   person = Person.where(name: name)
   expect(page.current_path).to eq("/people/#{person.id}")
-end
-
-Then(/^the person no longer exists$/) do
-  expect(Person.exists?(Person)).to eq(false)
 end

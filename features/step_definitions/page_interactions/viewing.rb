@@ -11,10 +11,22 @@ Then(/^I( don't)? see the date "([^"]*?)"$/) do |negate, in_date_str|
   step "I#{negate} see \"#{reformatted_date}\""
 end
 
-Then(/^I see an (?:error|alert) "([^"]*?)"$/) do |error_message|
-  expect(page).to have_css(".alert", error_message)
+Then(/^I see a message "([^"]*?)"$/) do |message|
+  expect(page).to have_css(".alert", message)
 end
 
-Then(/^I see a (?:notification|notice) "([^"]*?)"$/) do |notice_message|
-  expect(page).to have_css(".notice", notice_message)
+Then(/^I see a success message "([^"]*?)"$/) do |message|
+  expect(page).to have_css(".alert-success", message)
+end
+
+Then(/^I see an error message "([^"]*?)"$/) do |message|
+  expect(page).to have_css(".alert-danger", message)
+end
+
+Then(/^I see a notice message "([^"]*?)"$/) do |message|
+  expect(page).to have_css(".alert-notice", message)
+end
+
+Then(/^I see an info message "([^"]*?)"$/) do |message|
+  expect(page).to have_css(".alert-info", message)
 end
