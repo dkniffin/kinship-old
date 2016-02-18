@@ -15,11 +15,12 @@ Feature: Reference creation
     Given the database is seeded with 1 person
     When I visit "/people/1"
       And I click "Details"
-      And I click "Edit" for the event "Birth"
-      And I click "Add source"
-      And I enter "2130 Census" for "Source"
+      And I click "Edit Event" for the event "Birth"
+      And I select "2130 Census" for "Source"
       And I click "Submit"
-      And I click "Details"
+    Then I am on "/people/1"
+      And I see "Birth was successfully updated"
+    When I click "Details"
     Then I see "2130 Census"
 
   @javascript
@@ -27,11 +28,11 @@ Feature: Reference creation
     Given the database is seeded with 1 person
     When I visit "/people/1"
       And I click "Details"
-      And I click "Edit" for the event "Death"
-      And I click "Add source"
-      And I enter "2130 Census" for "Source"
+      And I click "Edit Event" for the event "Death"
+      And I select "2130 Census" for "Source"
       And I click "Submit"
-      And I click "Details"
+    Then I am on "/life_event/death/1"
+    When I click "Details"
     Then I see "2130 Census"
 
   @javascript
@@ -45,7 +46,7 @@ Feature: Reference creation
       And I click "Add Marriage"
       And I select "Jane Doe" for "Spouse 2"
       And I click "Add Source"
-      And I select "2130 Census" for "Source"
+      And I select "2130 Census" for "Title"
       And I click "Submit"
       And I click "Details"
     Then I see "2130 Census"
