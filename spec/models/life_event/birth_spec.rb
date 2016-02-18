@@ -3,12 +3,15 @@ require 'spec_helper'
 describe LifeEvent::Birth, type: :model do
   subject(:birth) { build(:birth) }
 
-  it { is_expected.to respond_to(:child)}
-  it { is_expected.to respond_to(:parent_1)}
-  it { is_expected.to respond_to(:parent_2)}
-  it { is_expected.to respond_to(:mother)}
-  it { is_expected.to respond_to(:father)}
-  it { is_expected.to respond_to(:parents)}
+  it { is_expected.to respond_to(:child) }
+  it { is_expected.to respond_to(:parent_1) }
+  it { is_expected.to respond_to(:parent_2) }
+  it { is_expected.to respond_to(:mother) }
+  it { is_expected.to respond_to(:father) }
+  it { is_expected.to respond_to(:parents) }
+
+  it { is_expected.to respond_to(:references) }
+  it { is_expected.to respond_to(:sources) }
 
   describe "#parents" do
     let(:mom) { build(:person, gender: 'F') }

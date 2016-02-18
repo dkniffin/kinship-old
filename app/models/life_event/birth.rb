@@ -15,6 +15,10 @@ module LifeEvent
     #validate :parents_born_before_child
     validate :date_in_past
 
+    has_many :references, as: :referenceable
+    has_many :sources, through: :references
+    accepts_nested_attributes_for :references
+
     def parents
       [parent_1, parent_2].compact
     end

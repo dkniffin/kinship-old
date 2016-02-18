@@ -19,6 +19,10 @@ module LifeEvent
 
     validates :person_1, :person_2, presence: true
 
+    has_many :references, as: :referenceable
+    has_many :sources, through: :references
+    accepts_nested_attributes_for :references
+
     def build_default_place
       build_place if place.nil?
     end
