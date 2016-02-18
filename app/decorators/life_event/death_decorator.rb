@@ -11,9 +11,8 @@ class LifeEvent::DeathDecorator < LifeEventDecorator
     'icon-cemetery'
   end
 
-  def details_hash
+  def additional_details
     {
-      date: date_string,
       cause: cause_string
     }
   end
