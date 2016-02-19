@@ -1,0 +1,46 @@
+dl.dl-horizontal
+  /! Parents
+  - person.parents.each do |parent|
+    dt= parent_title(parent.gender)
+    dd= link_to parent.full_name, parent
+  - if person.parents.length < 2
+    dd
+      = link_to new_person_path, class: 'btn btn-primary' do
+        i.icon-plus.icon-white
+        span Add Parent
+  /! Siblings
+  - if @person.siblings.present?
+    - @person.siblings.each do |sibling|
+      dt Sibling
+      dd
+        = link_to sibling.full_name, sibling
+        br
+      end
+  - if @person.siblings(:half).present?
+    - @person.siblings(:half).each do |half_sibling|
+      dt Half Sibling
+      dd
+        = link_to half_sibling.full_name, half_sibling
+        br
+  /! Spouses
+  - if person.marriages.present?
+    - person.marriages.each do |marriage|
+      dt Spouse
+      dd
+        - spouse = marriage.spouse_of(person)
+        = link_to spouse.full_name, spouse
+        |  (m. #{marriage.date.try(:formatted)})
+        br
+  dd
+    = link_to new_life_event_marriage_path(life_event_marriage: { \
+        person_1_id: person.id                                    \
+      }), class: 'btn btn-primary' do
+      i.icon-plus.icon-white
+      span Add Marriage
+  /! Children
+  - if @person.children.present?
+    - @person.children.each do |child|
+      dt Child
+      dd
+        = link_to child.full_name, child
+        br

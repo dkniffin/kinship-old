@@ -1,0 +1,28 @@
+- provide(:title, "Places")
+h1 Listing places
+table.table.table-striped
+  thead
+    tr
+      th Country
+      th State
+      th County
+      th Postal code
+      th City
+      th Street address
+      th
+      th
+      th
+  tbody
+    - @places.each do |place|
+      tr
+        td= place.country
+        td= place.state
+        td= place.county
+        td= place.postal_code
+        td= place.city
+        td= place.street_address
+        td= link_to 'Show', place
+        td= link_to 'Edit', edit_place_path(place)
+        td= link_to 'Destroy', place, method: :delete, data:   confirm: 'Are you sure?'
+br/
+= link_to 'New Place', new_place_path

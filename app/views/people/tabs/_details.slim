@@ -1,0 +1,16 @@
+table
+  tr
+    th Event/Fact
+    th Details
+    th Actions
+  - person.events.each do |event|
+    tr id="#{dom_id(event)}"
+      td.span2= event.title_string
+      td.span12= event.details_html
+      td.span2
+        - if path_exists?([:edit, event])
+          = link_to [:edit, event], class: 'btn btn-primary', title: 'Edit Event' do
+            i.icon-pencil.icon-white
+        - if path_exists?(event)
+          = link_to event, class: 'btn btn-primary', title: 'Event Details' do
+            i.icon-file.icon-white

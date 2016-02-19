@@ -1,0 +1,53 @@
+body
+  - provide(:title, person.full_name)
+  meta charset="utf-8"
+  .row
+    = image_tag person.photo.url(:medium), id: 'photo', class: 'span3'
+    .span9
+      h3#full_name
+        = person.full_name
+        | (#{person.gender})
+      p
+        | Birth date:
+        - if person.birth.date != nil
+          = person.birth.date.formatted
+      - if !person.death.date.nil?
+        p
+          | Death date: #{person.death.date.formatted}#{" (age: " + person.age.to_s + ")"}
+      - if @spouse
+        p
+          | Spouse: #{link_to @spouse.full_name, @spouse}
+      = link_to edit_person_path(person), :class => 'btn btn-primary' do
+        i.icon-pencil.icon-white
+        | Edit
+      = link_to person, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' do
+        i.icon-trash.icon-white
+        | Delete
+  ul.nav.nav-tabs
+    li.active
+      a data-toggle="tab" href="#timeline-tab"  Timeline
+    li
+      a data-toggle="tab" href="#details-tab"  Details
+    li
+      a data-toggle="tab" href="#family-tab"  Family
+    li
+      a data-toggle="tab" href="#tree-tab"  Tree
+    li
+      a#map-tab-link data-toggle="tab" href="#map-tab"  Map
+  #tabs.tab-content
+    #timeline-tab.tab-pane.active
+      = render partial: "people/tabs/timeline"
+    #details-tab.tab-pane
+      = render partial: "people/tabs/details"
+    #family-tab.tab-pane
+      = render partial: "people/tabs/family"
+    #tree-tab.tab-pane
+      = render partial: "people/tabs/tree"
+    #map-tab.tab-pane
+      = render partial: "people/tabs/map"
+  br
+  br
+  br
+  = link_to people_path, :class => 'btn btn-info' do
+    i.icon-arrow-left.icon-white
+    | Back to Person Index

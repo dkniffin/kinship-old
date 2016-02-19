@@ -1,0 +1,12 @@
+li#fat-menu.dropdown
+  a.dropdown-toggle data-toggle="dropdown" href="#" 
+    | Account
+    b.caret
+  ul.dropdown-menu
+    li= link_to "My Account", edit_user_registration_path(current_user)
+    - if ! current_user.person_id.nil?
+      li= link_to "My Person", current_user.person
+    - if signed_in? && current_user.is_admin?
+      li.divider
+      li= link_to "Admin", admin_dashboard_path
+    li.divider

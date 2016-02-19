@@ -1,0 +1,15 @@
+table
+  tr
+    th Date  Place
+    th
+    th Details
+  - person.events.each do |event|
+    tr
+      td.span4
+        = event.date_string
+        br
+        = event.place.string
+      td.span1
+        i.icon
+        = event.try(:icon_class)
+    td.span6= event.short_description

@@ -43,3 +43,8 @@ Then(/^I am on the person show page for "(.*?)"$/) do |name|
   person = Person.where(name: name)
   expect(page.current_path).to eq("/people/#{person.id}")
 end
+
+Then(/^the table has the person "(.*)"$/) do |name|
+  first, last = name.split(' ')
+  expect(page).to have_css('tr', text: /#{first}.*#{last}/)
+end

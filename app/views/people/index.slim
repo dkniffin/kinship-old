@@ -1,0 +1,44 @@
+- provide(:title, "Person Index")
+h1 Person Index
+= paginate @people
+= form_tag people_path, :method => :get, :id => 'gender_form' do
+  = hidden_field_tag "first_name_sort", true if @first_name_header
+  = hidden_field_tag "last_name_sort", true if @last_name_header
+  br
+  br
+  = text_field_tag :query, params[:query]
+  br
+  = button_tag 'Search', :id => 'genders_submit', :class => 'btn'
+- if @people.empty?
+  .alert.alert-info No results matched your search
+- else
+  table.table.table-striped
+    thead
+      tr
+        th class="#{@first_name_header}" 
+          = link_to 'First Name', request.parameters.merge({:sort => 'first_name'}), :id => 'first_name_header'
+        th class="#{@last_name_header}" 
+          = link_to 'Last Name', request.parameters.merge({:sort => 'last_name'}), :id => 'last_name_header'
+        th Gender
+        th Photo
+        th Birth Date
+        th Birth Place
+        th Death Date
+    tbody
+      - @people.each do |person|
+        tr
+          td= link_to person.first_name, person
+          td= link_to person.last_name, person
+          td= person.gender
+          td= link_to image_tag(person.photo.url(:small)), person
+          td
+            - if !person.birth.date.nil?
+              = person.birth.date.formatted
+          td= person.birth.place.string
+          td
+            - if !person.death.date.nil?
+              = person.death.date.formatted
+br
+= link_to new_person_path, :class => 'btn btn-primary' do
+  | Add Person
+  i.icon-plus.icon-white

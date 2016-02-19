@@ -1,0 +1,21 @@
+p
+  strong Country:
+  = @place.country
+p
+  strong State:
+  = @place.state
+p
+  strong County:
+  = @place.county
+p
+  strong Postal code:
+  = @place.postal_code
+p
+  strong City:
+  = @place.city
+p
+  strong Street address:
+  = @place.street_address
+= link_to 'Edit', edit_place_path(@place)
+| \
+= link_to 'Back', places_path

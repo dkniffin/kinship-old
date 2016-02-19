@@ -6,6 +6,7 @@ Kinship::Application.routes.draw do
 
   devise_for :users
 
+  get 'people/stats', to: 'people#stats', as: 'people_stats'
   resources :people
   namespace :life_event do
     resources :births, except: [:index]
@@ -13,8 +14,6 @@ Kinship::Application.routes.draw do
     resources :marriages, except: [:index]
   end
   resources :sources
-
-  get 'people/stats', to: 'people#stats', as: 'people_stats'
 
   get "about",  to: 'static_pages#about'
   get 'help', to: 'help#new'
