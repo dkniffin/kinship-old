@@ -78,7 +78,7 @@ class Person < ActiveRecord::Base
   def age(date = Time.zone.today)
     return nil if birth.date.nil?
 
-    age = date - birth.date.year
+    age = date.year - birth.date.year
     age -= 1 if date < birth.date + age.years
     age
   end

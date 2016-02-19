@@ -11,3 +11,7 @@ Feature: Viewing people
   Scenario: A member can view people
     When I visit the person index page
     Then I see "John Smith"
+
+  # TODO: search
+  # TODO: sort
+  # TODO: pagination

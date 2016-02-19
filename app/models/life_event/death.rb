@@ -12,6 +12,10 @@ module LifeEvent
     accepts_nested_attributes_for :place
     validates_associated :place
 
+    has_many :references, as: :referenceable
+    has_many :sources, through: :references
+    accepts_nested_attributes_for :references
+
     def date=(value)
       self.dead = true
       self[:date] = value

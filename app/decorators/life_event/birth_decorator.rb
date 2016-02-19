@@ -7,10 +7,9 @@ class LifeEvent::BirthDecorator < LifeEventDecorator
     "#{object.child.full_name} was born"
   end
 
-  def details_hash
+  def additional_details
     {
-      parents: parents_string,
-      date: date_string
+      parents: parents_string
       # place: place_string
     }
   end

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Source Index</h1>
+
+<%= paginate @sources %>
+
+<table id='sources' class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Url</th>
+      <th>Citation body</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sources.each do |source| %>
+      <tr>
+        <td><%= source.title %></td>
+        <td><%= source.url %></td>
+        <td><%= source.citation_body %></td>
+        <td><%= link_to 'Show', source %></td>
+        <td><%= link_to 'Edit', edit_source_path(source) %></td>
+        <td><%= link_to 'Destroy', source, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Source', new_source_path %>

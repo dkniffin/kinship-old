@@ -1,5 +1,4 @@
 Kinship::Application.routes.draw do
-  # Root
   root 'static_pages#home'
 
   ActiveAdmin.routes(self)
@@ -9,8 +8,12 @@ Kinship::Application.routes.draw do
 
   resources :people
   namespace :life_event do
-    resources :marriages, except: ['index']
+    resources :births, except: [:index]
+    resources :deaths, except: [:index]
+    resources :marriages, except: [:index]
   end
+  resources :sources
+
   get 'people/stats', to: 'people#stats', as: 'people_stats'
 
   get "about",  to: 'static_pages#about'

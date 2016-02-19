@@ -35,5 +35,16 @@ When(/^I select the date "([^"]*)" for "(.*?)"$/) do |in_date_str, field|
 end
 
 Then(/^"([^"]*?)" is filled in with "([^"]*?)"$/) do |field, value|
-  expect(page).to have_select(field, selected: value)
+  field_obj = find_field(field)
+  tag_name = field_obj.tag_name
+  if tag_name == 'select'
+    expect(page).to have_select(field, selected: value)
+  else
+    expect(page).to have_field(field, with: value)
+  end
+end
+
+Then(/^the "([^"]*)" field has the error "([^"]*)"$/) do |field, error|
+  field = find('.field_with_errors', text: field)
+  expect(field).to have_content(error)
 end

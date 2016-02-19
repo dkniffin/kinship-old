@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150918115605) do
+ActiveRecord::Schema.define(version: 20151130133156) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -82,6 +82,17 @@ ActiveRecord::Schema.define(version: 20150918115605) do
     t.string   "locatable_type"
   end
 
+  create_table "references", force: :cascade do |t|
+    t.integer  "referenceable_id"
+    t.string   "referenceable_type"
+    t.integer  "source_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "references", ["referenceable_id"], name: "index_references_on_referenceable_id"
+  add_index "references", ["source_id"], name: "index_references_on_source_id"
+
   create_table "settings", force: :cascade do |t|
     t.string   "var",                   null: false
     t.text     "value"
@@ -101,6 +112,14 @@ ActiveRecord::Schema.define(version: 20150918115605) do
   end
 
   add_index "simple_captcha_data", ["key"], name: "idx_key"
+
+  create_table "sources", force: :cascade do |t|
+    t.string   "title"
+    t.string   "url"
+    t.text     "citation_body"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

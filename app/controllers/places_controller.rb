@@ -3,7 +3,6 @@ class PlacesController < ApplicationController
 
   def index
     @places = Place.all
-    respond_with(@places)
   end
 
   def show
@@ -11,15 +10,13 @@ class PlacesController < ApplicationController
 
   def new
     @place = Place.new
-    respond_with(@place)
   end
 
   def edit
   end
 
   def create
-    @place = Place.new(place_params)
-
+    @place = Place.create(place_params)
     respond_with(@place)
   end
 

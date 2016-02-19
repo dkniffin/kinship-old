@@ -11,9 +11,9 @@
   <%= button_tag 'Search', :id => 'genders_submit', :class => 'btn' %>
 <% end %>
 
-<% if @people.empty?  then %>
-  <h4>No results matched your search</h4>
-<%else %>
+<% if @people.empty? %>
+  <div class='alert alert-info'>No results matched your search</div>
+<% else %>
 
   <table class="table table-striped">
     <thead>
