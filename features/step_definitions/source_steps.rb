@@ -16,3 +16,7 @@ end
 Then(/^the table is paginated$/) do
   expect(page).to have_css('.pagination')
 end
+
+When(/^I visit the show page for the first source$/) do
+  visit "/sources/#{Source.first.id}"
+end

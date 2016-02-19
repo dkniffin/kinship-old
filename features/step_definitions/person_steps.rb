@@ -25,6 +25,10 @@ When(/^I visit the (edit|show) page for the person "([^"]*)"$/) do |page, name|
   visit "/people/#{person.id}#{edit_url_segment}"
 end
 
+When(/^I visit the show page for the first person$/) do
+  visit "/people/#{Person.first.id}"
+end
+
 When(/^I fill in valid person data$/) do
   # TODO: Generalize this
   person_attributes = attributes_for(:person)

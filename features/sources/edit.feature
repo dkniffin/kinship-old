@@ -11,7 +11,7 @@ Feature: Source modification
     | 2130 Census | http://census.org/2030-census | some people lived somewhere |
 
   Scenario: Successful edit
-    When I visit "/sources/1"
+    When I visit the show page for the first source
       And I click "Edit"
     Then I am on the source edit page
       And "Title" is filled in with "2130 Census"

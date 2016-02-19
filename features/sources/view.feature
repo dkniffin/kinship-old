@@ -21,7 +21,7 @@ Feature: Source viewing
       And the table is paginated
 
   Scenario: Show page
-    When I visit "/sources/1"
+    When I visit the show page for the first source
     Then I see "2130 Census"
       And I see "http://census.org/2030-census"
       And I see "some people lived somewhere"

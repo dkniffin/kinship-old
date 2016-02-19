@@ -13,12 +13,12 @@ Feature: Reference creation
   @javascript
   Scenario: Add a source for a birth
     Given the database is seeded with 1 person
-    When I visit "/people/1"
+    When I visit the show page for the first person
       And I click "Details"
       And I click "Edit Event" for the event "Birth"
       And I select "2130 Census" for "Source"
       And I click "Submit"
-    Then I am on "/people/1"
+    Then I am on the person show page
       And I see "Birth was successfully updated"
     When I click "Details"
     Then I see "2130 Census"
@@ -26,13 +26,13 @@ Feature: Reference creation
   @javascript
   Scenario: Add a source for a death
     Given the database is seeded with 1 person
-    When I visit "/people/1"
+    When I visit the show page for the first person
       And I click "Details"
       And I click "Edit Event" for the event "Death"
       And I select the date "2010-01-02" for "Date"
       And I select "2130 Census" for "Source"
       And I click "Submit"
-    Then I am on "/people/1"
+    Then I am on the person show page
     When I click "Details"
     Then I see "2130 Census"
 
@@ -42,12 +42,12 @@ Feature: Reference creation
     | first_name | last_name |
     | John       | Smith     |
     | Jane       | Doe       |
-    And there is a marriage between "John Smith" and "Jane Doe"
-    When I visit "/people/1"
+      And there is a marriage between "John Smith" and "Jane Doe"
+    When I visit the show page for the first person
       And I click "Details"
       And I click "Edit Event" for the event "Marriage"
       And I select "2130 Census" for "Source"
       And I click "Submit"
-      And I visit "/people/1"
+      And I visit the show page for the first person
     When I click "Details"
     Then I see "2130 Census"
