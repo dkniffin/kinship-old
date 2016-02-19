@@ -12,8 +12,10 @@ Feature: Person Birth
 
   Scenario: An editor can modify birth info after Person creation
     Given I am logged in as an editor
-      And the database is seeded with 1 person
-    When I visit "/people/1/edit"
+      And there is a person with the name "John Smith"
+    When I visit the person index page
+      And I click "John"
+      And I click "Edit"
       And I enter "2/2/1900" for "Birth Date"
       And I click "Submit"
     Then I am on the person show page
