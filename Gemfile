@@ -24,7 +24,6 @@ gem 'responders'
 # For global settings
 gem "rails-settings-cached", "0.4.1"
 gem 'activeadmin_settings_cached', github: 'dkniffin/activeadmin_settings_cached'
-# gem 'activeadmin_settings_cached', path: "/home/dkniffin/repos/activeadmin_settings_cached"
 
 # For places and map
 gem "geocoder", "~> 1.1.8"
@@ -46,6 +45,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'd3-rails', '~> 3.3.7'
 gem 'bootstrap-sass', '2.3.2.0'
+gem 'slim'
 
 group :development, :test do
   gem 'pry-byebug'
@@ -56,7 +56,7 @@ group :development, :test do
   # gem 'faker', path: '/home/dkniffin/repos/faker'
   gem 'faker', github: 'dkniffin/faker', branch: 'temp_master'
 
-  gem 'cucumber-rails', :require => false
+  gem 'cucumber-rails', require: false
   gem 'capybara-webkit'
   gem 'capybara-screenshot', github: 'dkniffin/capybara-screenshot'
   gem 'database_cleaner'

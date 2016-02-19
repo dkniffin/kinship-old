@@ -13,4 +13,4 @@ Feature: Person creation
     Then I am on the person show page
       And I see "Joe Smith"
     When I visit the person index page
-    Then I see "Joe Smith"
+    Then the table has the person "Joe Smith"

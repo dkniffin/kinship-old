@@ -1,0 +1,11 @@
+- provide(:title, "#{@marriage.person_1} & #{@marriage.person_2}")
+= link_to edit_life_event_marriage_path(@marriage), :class => 'btn btn-primary' do
+  i.icon-edit.icon-white
+  | Edit
+.person-pane
+  = @marriage.person_1.full_name
+.marriage-details
+  span.marriage-date
+    = @marriage.date.try(:formatted)
+.person-pane
+  = @marriage.person_2.full_name

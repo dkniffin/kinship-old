@@ -1,0 +1,13 @@
+p#notice= notice
+p
+  strong Title:
+  = @source.title
+p
+  strong Url:
+  = @source.url
+p
+  strong Citation body:
+  = @source.citation_body
+= link_to 'Edit', edit_source_path(@source)
+| \
+= link_to 'Back', sources_path

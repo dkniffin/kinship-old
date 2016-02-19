@@ -1,6 +1,0 @@
-<%= f.simple_fields_for person_field_id, Person.new do |ff| %>
-  <%= ff.input :first_name, input_html: {value: nil} %>
-  <%= ff.input :last_name, input_html: {value: nil} %>
-  <%= ff.input :gender, collection: Person.all_genders,
-    include_blank: '', selected: ''%>
-<% end %>

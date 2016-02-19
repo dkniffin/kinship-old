@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type"
+    title= full_title(yield(:title))
+    = stylesheet_link_tag    "application", media: "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    = render 'layouts/shim'
+  body
+    = render 'layouts/header'
+    .container
+      = render 'shared/flash_messages'
+      = content_for?(:content) ? yield(:content) : yield
+    = render 'layouts/footer'
+    br

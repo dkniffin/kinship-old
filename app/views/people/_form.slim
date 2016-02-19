@@ -1,0 +1,16 @@
+= simple_form_for setup_person(person), html: { multipart: true} do |f|
+  = f.input :first_name
+  = f.input :last_name
+  = f.input :gender, collection: Person.all_genders
+  = f.simple_fields_for :birth do |ff|
+    = ff.input :date, label: "Birth Date", include_blank: true, html5: true
+    = ff.simple_fields_for :place do |fff|
+      = fff.input :string, label: "Birth Place"
+  = f.simple_fields_for :death do |ff|
+    = ff.input :dead
+    = ff.input :date, label: "Death Date", include_blank: true, html5: true
+    = ff.simple_fields_for :place do |fff|
+      = fff.input :string, label: "Death Place"
+    = ff.input :cause
+  = f.input :photo
+  = f.button :submit, :class => 'btn'
