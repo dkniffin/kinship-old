@@ -58,7 +58,7 @@ group :development, :test do
 
   gem 'cucumber-rails', :require => false
   gem 'capybara-webkit'
-  gem 'capybara-screenshot'
+  gem 'capybara-screenshot', github: "dkniffin/capybara-screenshot"
   gem 'database_cleaner'
 end
 

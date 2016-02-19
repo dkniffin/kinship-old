@@ -7,6 +7,14 @@ GIT
       rails-settings-cached
 
 GIT
+  remote: git://github.com/dkniffin/capybara-screenshot.git
+  revision: 29d6f1b2aa75de8cbc2d344abad7912ef0b73be9
+  specs:
+    capybara-screenshot (1.0.11)
+      capybara (>= 1.0, < 3)
+      launchy
+
+GIT
   remote: git://github.com/dkniffin/faker.git
   revision: 95a45b3c942d95023361e55a616c48c1d727f2f3
   branch: temp_master
@@ -65,7 +73,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    addressable (2.3.8)
+    addressable (2.4.0)
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (6.0.3)
@@ -86,9 +94,6 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    capybara-screenshot (1.0.11)
-      capybara (>= 1.0, < 3)
-      launchy
     capybara-webkit (1.7.1)
       capybara (>= 2.3.0, < 2.6.0)
       json
@@ -319,7 +324,7 @@ DEPENDENCIES
   activeadmin (~> 1.0.0.pre1)
   activeadmin_settings_cached!
   bootstrap-sass (= 2.3.2.0)
-  capybara-screenshot
+  capybara-screenshot!
   capybara-webkit
   codeclimate-test-reporter
   coffee-rails (~> 4.0.0)
@@ -350,4 +355,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
