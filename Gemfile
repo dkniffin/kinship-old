@@ -4,7 +4,7 @@ gem 'rails', '~> 4.2'
 gem 'web-console', '~> 2.0'
 
 # Database
-gem 'sqlite3'
+gem 'pg'
 
 # User authentication
 gem 'activeadmin', '~> 1.0.0.pre1'
@@ -58,7 +58,7 @@ group :development, :test do
 
   gem 'cucumber-rails', :require => false
   gem 'capybara-webkit'
-  gem 'capybara-screenshot', github: "dkniffin/capybara-screenshot"
+  gem 'capybara-screenshot', github: 'dkniffin/capybara-screenshot'
   gem 'database_cleaner'
 end
 
