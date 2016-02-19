@@ -19,7 +19,7 @@ When(/^I visit the person show page for "(.*?)"$/) do |name|
 end
 
 When(/^I visit the (edit|show) page for the person "([^"]*)"$/) do |page, name|
-
+  first, last = name.split(' ')
   person = Person.find_by(first_name: first, last_name: last)
   edit_url_segment = (page == 'edit') ? '/edit' : ''
   visit "/people/#{person.id}#{edit_url_segment}"
