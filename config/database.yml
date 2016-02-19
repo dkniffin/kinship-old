@@ -1,16 +1,16 @@
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
   pool: 5
   timeout: 5000
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  database: kinship_development
 
 test: &test
   <<: *default
-  database: db/test.sqlite3
+  database: kinship_test
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  database: kinship
