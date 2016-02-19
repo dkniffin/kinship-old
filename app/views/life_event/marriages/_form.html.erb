@@ -15,8 +15,9 @@
     <%= render partial: 'people/embeddable_form', locals: {f:f, person_field_id: :person_2} %>
   </div>
 
-
   <%= f.input :date %>
+
+  <%= f.association :sources, include_blank: false %>
 
   <%= f.submit 'Submit', class: 'btn' %>
 <% end %>

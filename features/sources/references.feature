@@ -29,9 +29,10 @@ Feature: Reference creation
     When I visit "/people/1"
       And I click "Details"
       And I click "Edit Event" for the event "Death"
+      And I select the date "2010-01-02" for "Date"
       And I select "2130 Census" for "Source"
       And I click "Submit"
-    Then I am on "/life_event/death/1"
+    Then I am on "/people/1"
     When I click "Details"
     Then I see "2130 Census"
 
@@ -41,12 +42,12 @@ Feature: Reference creation
     | first_name | last_name |
     | John       | Smith     |
     | Jane       | Doe       |
+    And there is a marriage between "John Smith" and "Jane Doe"
     When I visit "/people/1"
-      And I click "Family"
-      And I click "Add Marriage"
-      And I select "Jane Doe" for "Spouse 2"
-      And I click "Add Source"
-      And I select "2130 Census" for "Title"
-      And I click "Submit"
       And I click "Details"
+      And I click "Edit Event" for the event "Marriage"
+      And I select "2130 Census" for "Source"
+      And I click "Submit"
+      And I visit "/people/1"
+    When I click "Details"
     Then I see "2130 Census"

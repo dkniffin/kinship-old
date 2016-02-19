@@ -1,0 +1,9 @@
+<%= simple_form_for @death do |f| %>
+  <%= f.association :person, label: 'Person', disabled: true, label_method: :full_name %>
+
+  <%= f.input :date, start_year: 0, max_years_allowed: 3000 %>
+
+  <%= f.association :sources, include_blank: false %>
+
+  <%= f.submit 'Submit', class: 'btn' %>
+<% end %>
