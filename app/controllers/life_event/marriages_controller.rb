@@ -38,7 +38,8 @@ module LifeEvent
         :person_2_id,
         :date,
         person_1_attributes: [:first_name, :last_name, :gender],
-        person_2_attributes: [:first_name, :last_name, :gender]
+        person_2_attributes: [:first_name, :last_name, :gender],
+        source_ids: []
       )
     end
 

@@ -8,7 +8,9 @@ Kinship::Application.routes.draw do
 
   resources :people
   namespace :life_event do
-    resources :marriages, except: ['index']
+    resources :births, except: [:index]
+    resources :deaths, except: [:index]
+    resources :marriages, except: [:index]
   end
   resources :sources
 
