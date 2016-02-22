@@ -17,6 +17,7 @@
 //= require leaflet
 
 //= require charts/d3.layout.cloud.js
+//= require charts/gender-pie.js.coffee
 
 //= require pages/admin.js.coffee
 //= require pages/marriage.js.coffee

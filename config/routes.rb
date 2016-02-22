@@ -14,6 +14,7 @@ Kinship::Application.routes.draw do
   end
   resources :sources
 
+  get 'statistics', to: 'stats#show'
   get 'stats/gender_distribution', to: 'stats#gender_distribution'
   get 'stats/average_lifespan_by_century', to: 'stats#average_lifespan_by_century'
   get 'stats/name_popularity', to: 'stats#name_popularity'
