@@ -15,4 +15,8 @@
 //= require bootstrap
 //= require d3
 //= require leaflet
-//= require_tree .
+
+//= require charts/d3.layout.cloud.js
+
+//= require pages/admin.js.coffee
+//= require pages/marriage.js.coffee
