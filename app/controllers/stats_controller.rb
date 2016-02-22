@@ -1,4 +1,8 @@
 class StatsController < ApplicationController
+  def show
+    render 'stats'
+  end
+
   def gender_distribution
     render json: {
       male: Person.where(gender: Person::MALE).count,
@@ -8,6 +12,13 @@ class StatsController < ApplicationController
 
   def average_lifespan_by_century
     render json: lifespans
+  end
+
+  def name_popularity
+    render json: {
+      first_names: Person.all.group(:first_name).count,
+      last_names: Person.all.group(:last_name).count
+    }
   end
 
   private
@@ -25,32 +36,4 @@ class StatsController < ApplicationController
       end
       .to_h
   end
-
-  # def stats
-  #   # For surname word cloud
-  #   surnameCount = {}
-  #   Person.all.each{|person|
-  #     surnameCount[person.last_name] = (surnameCount[person.last_name] || 0) + 1
-  #   }
-  #
-  #   @surname_word_data = []
-  #   surnameCount.each{|key, value|
-  #     @surname_word_data.push({key: key, value: value})
-  #   }
-  #
-  #   @surname_word_data = JSON.generate(@surname_word_data)
-  #   # For first name word cloud
-  #   first_nameCount = {}
-  #   Person.all.each{|person|
-  #     first_nameCount[person.first_name] = (first_nameCount[person.first_name] || 0) + 1
-  #   }
-  #
-  #   @first_name_word_data = []
-  #   first_nameCount.each{|key, value|
-  #     @first_name_word_data.push({key: key, value: value})
-  #   }
-  #
-  #   @first_name_word_data = JSON.generate(@first_name_word_data)
-  # end
-
 end

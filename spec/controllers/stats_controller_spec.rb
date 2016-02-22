@@ -44,4 +44,24 @@ describe StatsController, type: :controller do
       expect(json_response).to eq({ '19' => 60, '20' => 80 })
     end
   end
+
+  describe '#name_popularity' do
+    let!(:people) do
+      create(:person, first_name: 'John', last_name: 'Smith')
+      create(:person, first_name: 'Jane', last_name: 'Smith')
+      create(:person, first_name: 'Josh', last_name: 'Smith')
+      create(:person, first_name: 'Josh', last_name: 'Johnson')
+      create(:person, first_name: 'Johnson', last_name: 'Smith')
+    end
+    let(:first_names) { json_response['first_names'] }
+    let(:last_names) { json_response['last_names'] }
+
+    subject { get :name_popularity, format: :json }
+
+    it 'returns a hash mapping names to their counts' do
+      subject
+      expect(first_names).to include('John' => 1, 'Josh' => 2, 'Johnson' => 1)
+      expect(last_names).to include('Smith' => 4, 'Johnson' => 1)
+    end
+  end
 end

@@ -16,6 +16,7 @@ Kinship::Application.routes.draw do
 
   get 'stats/gender_distribution', to: 'stats#gender_distribution'
   get 'stats/average_lifespan_by_century', to: 'stats#average_lifespan_by_century'
+  get 'stats/name_popularity', to: 'stats#name_popularity'
 
   get "about",  to: 'static_pages#about'
   get 'help', to: 'help#new'
