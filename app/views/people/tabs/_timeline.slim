@@ -10,6 +10,5 @@ table
         br
         = event.place.string
       td.span1
-        i.icon
-        = event.try(:icon_class)
+        i.icon class="#{event.try(:icon_class)}"
     td.span6= event.short_description
