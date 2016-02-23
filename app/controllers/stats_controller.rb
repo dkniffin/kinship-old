@@ -32,8 +32,8 @@ class StatsController < ApplicationController
       .where.not('births.date' => nil)
       .group_by { |p| p.death.date.century }
       .map do |century, people|
-        [century, people.map{|p| p.age(p.death.date) }.sum / people.count]
+        lifespan = people.map{|p| p.age(p.death.date) }.sum / people.count
+        { century: century, lifespan: lifespan }
       end
-      .to_h
   end
 end

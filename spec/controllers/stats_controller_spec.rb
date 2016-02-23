@@ -41,7 +41,8 @@ describe StatsController, type: :controller do
 
     it 'returns a hash mapping century to average age of death' do
       subject
-      expect(json_response).to eq({ '19' => 60, '20' => 80 })
+      expect(json_response)
+        .to eq([{ 'century' => 19, 'lifespan' => 60 }, { 'century' => 20, 'lifespan' => 80 }])
     end
   end
 
