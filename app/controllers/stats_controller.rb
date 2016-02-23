@@ -25,7 +25,8 @@ class StatsController < ApplicationController
 
   # { 19: 66, 20: 80 }
   def lifespans
-    Person.all
+    Person
+      .all
       .joins(:death)
       .joins(:birth)
       .where.not('deaths.date' => nil)
