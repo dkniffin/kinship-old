@@ -1,6 +1,9 @@
 ruby:
   config_file: config/styles/ruby.yml
 
+jscs:
+  config_file: config/style_guides/javascript-jscs.json
+
 scss:
   enabled: false
 
