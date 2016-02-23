@@ -15,6 +15,7 @@
 //= require bootstrap
 //= require d3
 //= require leaflet
+//= require d3.tip
 
 //= require charts/d3.layout.cloud.js
 //= require charts/gender-pie.js.coffee
