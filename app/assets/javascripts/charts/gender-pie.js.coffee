@@ -36,7 +36,7 @@ $ ->
         .enter()
         .append('svg:g')
         .attr('class', 'slice')
-      # this creates the actual SVG path using the associated data (pie) with the arc drawing function
+      # this creates the SVG path using the associated data (pie) with the arc drawing function
       arcs.append('svg:path').attr('fill', (d, i) ->
         color i
       ).attr 'd', arc
