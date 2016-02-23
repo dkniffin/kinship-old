@@ -11,7 +11,7 @@ describe StatsController, type: :controller do
 
     it 'returns a hash mapping gender to count' do
       subject
-      expect(json_response).to eq({ 'male' => 10, 'female' => 15})
+      expect(json_response).to eq({ 'male' => 10, 'female' => 15 })
     end
   end
 
@@ -19,22 +19,22 @@ describe StatsController, type: :controller do
     let!(:people) do
       create(:person,
              birth_attributes: { date: Date.new(1800, 01, 01) },
-             death_attributes: { date: Date.new(1850, 01, 01)})
+             death_attributes: { date: Date.new(1850, 01, 01) })
       create(:person,
              birth_attributes: { date: Date.new(1800, 01, 01) },
-             death_attributes: { date: Date.new(1860, 01, 01)})
+             death_attributes: { date: Date.new(1860, 01, 01) })
       create(:person,
              birth_attributes: { date: Date.new(1800, 01, 01) },
-             death_attributes: { date: Date.new(1870, 01, 01)})
+             death_attributes: { date: Date.new(1870, 01, 01) })
       create(:person,
              birth_attributes: { date: Date.new(1900, 01, 01) },
-             death_attributes: { date: Date.new(1975, 01, 01)})
+             death_attributes: { date: Date.new(1975, 01, 01) })
       create(:person,
              birth_attributes: { date: Date.new(1900, 01, 01) },
-             death_attributes: { date: Date.new(1980, 01, 01)})
+             death_attributes: { date: Date.new(1980, 01, 01) })
       create(:person,
              birth_attributes: { date: Date.new(1900, 01, 01) },
-             death_attributes: { date: Date.new(1985, 01, 01)})
+             death_attributes: { date: Date.new(1985, 01, 01) })
     end
 
     subject { get :average_lifespan_by_century, format: :json }

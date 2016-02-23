@@ -2,23 +2,23 @@
 @import "leaflet";
 
 // Helpers
-@import "0_helpers/colors.scss";
+@import "0_helpers/colors";
 
 // Vendor
 
 // Base
-@import "2_base/fonts.scss";
-@import "2_base/icons.scss";
+@import "2_base/fonts";
+@import "2_base/icons";
 
 // Components
-@import "3_components/header.scss";
-@import "3_components/footer.scss";
-@import "3_components/charts/lifespan.scss";
+@import "3_components/header";
+@import "3_components/footer";
+@import "3_components/charts/lifespan";
 
 // Layouts
-@import "4_layouts/base.scss";
+@import "4_layouts/base";
 
 // Pages
-@import "5_pages/admin.scss";
-@import "5_pages/people.scss";
-@import "5_pages/users.scss";
+@import "5_pages/admin";
+@import "5_pages/people";
+@import "5_pages/users";

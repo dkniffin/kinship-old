@@ -26,7 +26,7 @@
   color: #fff;
   border-radius: 2px;
 
-  /* Creates a small triangle extender for the tooltip */
+  // Creates a small triangle extender for the tooltip
   &:after {
     box-sizing: border-box;
     display: inline;
@@ -39,7 +39,7 @@
     text-align: center;
   }
 
-  /* Style northward tooltips differently */
+  // Style northward tooltips differently
   &.n:after {
     margin: -1px 0 0 0;
     top: 100%;
