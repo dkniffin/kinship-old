@@ -1,100 +1,22 @@
 <% provide(:title, "Statistics") %>
 <h3>Statistics</h3><br>
 <div id='gender-pie'>
-    <h4>Gender Distribution</h4>
+    <h4>Gender</h4>
     <div class="chart">
     </div>
 </div>
 <div id='lifespan-bar'>
-    <h4>Average lifespan per century</h4>
+    <h4>Average Lifespan</h4>
     <div class="chart">
     </div>
 </div>
 <div id='surname-word-cloud'>
-    <h4>Surname Frequency Word Cloud</h4>
+    <h4>Last Name Word Cloud</h4>
     <div class="chart">
-
-        <script>
-          var fill = d3.scale.category20();
-
-          var fontSize = d3.scale.log().range([10, 100]);
-          var layout = d3.layout.cloud()
-            .size([960, 600])
-            .timeInterval(10)
-            .text(function(d) { return d.key; })
-            .font("Impact")
-            .fontSize(function(d) {
-              console.log(d);
-              return fontSize(+d.value);
-            })
-            .rotate(function(d) { return ~~(Math.random() * 5) * 30 - 60; })
-            .padding(1)
-            .on("end", draw)
-            .words(<%=@surname_word_data.to_s.html_safe %>)
-            .start();
-
-          function draw(words) {
-            d3.select("#surname-word-cloud>.chart").append("svg")
-                .attr("width", 600)
-                .attr("height", 600)
-              .append("g")
-                .attr("transform", "translate(300,300)")
-              .selectAll("text")
-                .data(words)
-              .enter().append("text")
-                .style("font-size", function(d) { return d.size + "px"; })
-                .style("font-family", "Impact")
-                .style("fill", function(d, i) { return fill(i); })
-                .attr("text-anchor", "middle")
-                .attr("transform", function(d) {
-                  return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-                })
-                .text(function(d) { return d.text; });
-          }
-        </script>
     </div>
 </div>
 <div id='firstname-word-cloud'>
-    <h4>First Name Frequency Word Cloud</h4>
+    <h4>First Name Word Cloud</h4>
     <div class="chart">
-
-        <script>
-          var fill = d3.scale.category20();
-
-          var fontSize = d3.scale.log().range([10, 100]);
-          var layout = d3.layout.cloud()
-            .size([960, 600])
-            .timeInterval(10)
-            .text(function(d) { return d.key; })
-            .font("Impact")
-            .fontSize(function(d) {
-              console.log(d);
-              return fontSize(+d.value);
-            })
-            .rotate(function(d) { return ~~(Math.random() * 5) * 30 - 60; })
-            .padding(1)
-            .on("end", draw)
-            .words(<%=@first_name_word_data.to_s.html_safe %>)
-            .start();
-
-          function draw(words) {
-            d3.select("#firstname-word-cloud>.chart").append("svg")
-                .attr("width", 600)
-                .attr("height", 600)
-              .append("g")
-                .attr("transform", "translate(300,300)")
-              .selectAll("text")
-                .data(words)
-              .enter().append("text")
-                .style("font-size", function(d) { return d.size + "px"; })
-                .style("font-family", "Impact")
-                .style("fill", function(d, i) { return fill(i); })
-                .attr("text-anchor", "middle")
-                .attr("transform", function(d) {
-                  return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-                })
-                .text(function(d) { return d.text; });
-          }
-        </script>
     </div>
 </div>
