@@ -3,8 +3,8 @@ $ ->
   w = 2 * r
   h = 300
   l = w / 2
+  # builtin range of colors
   color = d3.scale.category20c()
-  #builtin range of colors
   $.ajax
     url: '/stats/gender_distribution'
     type: 'GET'
