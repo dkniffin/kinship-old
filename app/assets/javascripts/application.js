@@ -15,4 +15,12 @@
 //= require bootstrap
 //= require d3
 //= require leaflet
-//= require_tree .
+//= require d3.tip
+
+//= require charts/d3.layout.cloud.js
+//= require charts/gender-pie.js.coffee
+//= require charts/lifespan.js.coffee
+//= require charts/name-frequency.js.coffee
+
+//= require pages/admin.js.coffee
+//= require pages/marriage.js.coffee

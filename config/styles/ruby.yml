@@ -16,10 +16,12 @@ Style/DotPosition:
   Description: Checks the position of the dot in multi-line method calls.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#consistent-multi-line-chains
   Enabled: true
-  EnforcedStyle: trailing
+  EnforcedStyle: leading
   SupportedStyles:
   - leading
   - trailing
+Style/Lambda:
+  Enabled: false
 Style/FileName:
   Description: Use snake_case for source file names.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#snake-case-files
@@ -55,7 +57,7 @@ Style/PercentLiteralDelimiters:
 Style/PredicateName:
   Description: Check the names of predicate methods.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#bool-methods-qmark
-  Enabled: true
+  Enabled: false
   NamePrefix:
   - is_
   - has_
@@ -107,13 +109,23 @@ Style/StringLiteralsInInterpolation:
   SupportedStyles:
   - single_quotes
   - double_quotes
-Style/TrailingComma:
-  Description: Checks for trailing comma in parameter lists and literals.
+Style/TrailingCommaInArguments:
+  Description: Checks for trailing comma in argument lists.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-trailing-array-commas
   Enabled: false
   EnforcedStyleForMultiline: no_comma
   SupportedStyles:
   - comma
+  - consistent_comma
+  - no_comma
+Style/TrailingCommaInLiteral:
+  Description: Checks for trailing comma in array and hash literals.
+  StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-trailing-array-commas
+  Enabled: false
+  EnforcedStyleForMultiline: no_comma
+  SupportedStyles:
+  - comma
+  - consistent_comma
   - no_comma
 Metrics/AbcSize:
   Description: A calculated magnitude based on number of assignments, branches, and
@@ -165,6 +177,8 @@ Lint/AssignmentInCondition:
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#safe-assignment-in-condition
   Enabled: false
   AllowSafeAssignment: true
+Style/BlockComments:
+  Enabled: true
 Style/ClassAndModuleChildren:
   Enabled: false
 Style/InlineComment:
