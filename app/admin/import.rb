@@ -1,7 +1,7 @@
 ActiveAdmin.register_page "Import" do
   page_action :gedcom, method: :post do
     file = params['gedcom']['file'].tempfile
-    result = GedcomImporter.run!(gedcom: file)
+    GedcomImporter.run!(gedcom: file)
     redirect_to :back, notice: "Import completed"
   end
 
