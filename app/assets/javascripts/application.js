@@ -22,5 +22,4 @@
 //= require charts/lifespan.js.coffee
 //= require charts/name-frequency.js.coffee
 
-//= require pages/admin.js.coffee
 //= require pages/marriage.js.coffee
