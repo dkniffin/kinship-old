@@ -147,10 +147,10 @@ class Import < GEDCOM::Parser
       @currentFamily[:children].each do |child_id|
          child = @allPeople[child_id]
          if !husb.nil?
-            child.birth.father_id = husb.id
+            child.birth.parent_1_id = husb.id
          end
          if !wife.nil?
-            child.birth.mother_id = wife.id
+            child.birth.parent_2_id = wife.id
          end
          child.save!(validate: false)
       end
