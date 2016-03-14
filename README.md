@@ -22,4 +22,8 @@ rake import:gedcom[file,verbosity] # Optional
 rails s
 ````
 
-Then, visit [http://localhost:3000] to view the site. The db is seeded with an admin user. email: admin@nowhere.com, pw: kinship123
+Then, visit [http://localhost:3000] to view the site.
+
+The db is seeded with an admin user:
+email: admin@nowhere.com
+pw: kinship123
