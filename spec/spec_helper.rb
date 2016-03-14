@@ -1,11 +1,13 @@
-# Test coverage statistics
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
+if ENV['CI']
+  require 'codeclimate_batch'
+  CodeclimateBatch.start
+end
 
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'factory_girl_rails'
+require 'webmock/rspec'
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 

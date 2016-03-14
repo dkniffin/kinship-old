@@ -1,4 +1,8 @@
+branches:
+  only:
+    - master
 language: ruby
+bundler_args: --binstubs
 rvm:
   - 2.0.0
 before_install:
@@ -11,6 +15,8 @@ script:
   - bundle exec rake db:setup
   - bundle exec rspec
   - bundle exec cucumber
+after_script:
+  - ./bin/codeclimate-batch --groups 2
 addons:
   code_climate:
     repo_token: f241ee42b8789671ef3e0a8e85d7f91734e503d1cafe1b76503df91a9aa5e556
