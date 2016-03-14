@@ -1,13 +1,13 @@
 FactoryGirl.define do
   factory :place do
-    street_address { Faker::Address.street_address }
-    city { Faker::Address.city }
-    county { 'Some county' }
-    state { Faker::Address.state }
-    postal_code { Faker::Address.postcode }
-    country { Faker::Address.country }
-    lat { Faker::Address.latitude }
-    lon { Faker::Address.longitude }
+    street_address { '359 Blackwell Street' }
+    city { 'Durham' }
+    county { 'Durham' }
+    state { 'NC' }
+    postal_code { 27701 }
+    country { 'USA' }
+    lat { 35.992591 }
+    lon { -78.903991 }
 
     # TODO: Associations
   end
