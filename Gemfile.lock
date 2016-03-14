@@ -6,6 +6,12 @@ GIT
       activeadmin
       rails-settings-cached
 
+PATH
+  remote: /Users/dkniffin/repos/codeclimate_batch
+  specs:
+    codeclimate_batch (0.3.0)
+      json
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -88,8 +94,8 @@ GEM
       activesupport (>= 3.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
-    codeclimate_batch (0.3.0)
-      json
+    codeclimate-test-reporter (0.5.0)
+      simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.1)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -131,6 +137,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    docile (1.1.5)
     draper (2.1.0)
       actionpack (>= 3.0)
       activemodel (>= 3.0)
@@ -281,6 +288,11 @@ GEM
     simple_form (3.2.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
+    simplecov (0.11.2)
+      docile (~> 1.1.0)
+      json (~> 1.8)
+      simplecov-html (~> 0.10.0)
+    simplecov-html (0.10.0)
     slim (3.0.6)
       temple (~> 0.7.3)
       tilt (>= 1.3.3, < 2.1)
@@ -326,7 +338,8 @@ DEPENDENCIES
   bootstrap-sass (= 2.3.2.0)
   capybara-screenshot
   capybara-webkit
-  codeclimate_batch
+  codeclimate-test-reporter
+  codeclimate_batch!
   coffee-rails (~> 4.0.0)
   cucumber-rails
   d3-rails (~> 3.5.11)
