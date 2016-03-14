@@ -38,6 +38,9 @@ gem 'kaminari'
 # For import/export of gedcom files
 gem 'gedcom_ruby'
 
+# Services
+gem 'active_interaction', '~> 3.0'
+
 # Front-end
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
