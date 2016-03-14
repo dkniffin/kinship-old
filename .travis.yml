@@ -11,6 +11,8 @@ script:
   - bundle exec rake db:setup
   - bundle exec rspec
   - bundle exec cucumber
+after_script:
+  - code-climate-batch --groups 2
 addons:
   code_climate:
     repo_token: f241ee42b8789671ef3e0a8e85d7f91734e503d1cafe1b76503df91a9aa5e556

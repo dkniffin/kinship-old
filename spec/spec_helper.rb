@@ -1,6 +1,7 @@
-# Test coverage statistics
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
+if ENV['CI']
+  require 'codeclimate_batch'
+  CodeclimateBatch.start
+end
 
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)

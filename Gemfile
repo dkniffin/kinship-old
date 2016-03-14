@@ -49,7 +49,7 @@ group :test do
   # Other/both
   gem 'factory_girl_rails'
   gem 'webmock'
-  gem 'codeclimate-test-reporter'
+  gem 'codeclimate_batch'
 end
 
 group :development, :test do
