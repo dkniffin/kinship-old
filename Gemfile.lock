@@ -44,6 +44,8 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    active_interaction (3.0.1)
+      activemodel (>= 4, < 6)
     activeadmin (1.0.0.pre1)
       arbre (~> 1.0, >= 1.0.2)
       bourbon
@@ -327,6 +329,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_interaction (~> 3.0)
   activeadmin (~> 1.0.0.pre1)
   activeadmin_settings_cached!
   bootstrap-sass (= 2.3.2.0)
