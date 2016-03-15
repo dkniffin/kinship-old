@@ -6,12 +6,6 @@ GIT
       activeadmin
       rails-settings-cached
 
-PATH
-  remote: /Users/dkniffin/repos/codeclimate_batch
-  specs:
-    codeclimate_batch (0.3.0)
-      json
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -96,6 +90,8 @@ GEM
       climate_control (>= 0.0.3, < 1.0)
     codeclimate-test-reporter (0.5.0)
       simplecov (>= 0.7.1, < 1.0.0)
+    codeclimate_batch (0.3.0)
+      json
     coderay (1.1.1)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -339,7 +335,7 @@ DEPENDENCIES
   capybara-screenshot
   capybara-webkit
   codeclimate-test-reporter
-  codeclimate_batch!
+  codeclimate_batch
   coffee-rails (~> 4.0.0)
   cucumber-rails
   d3-rails (~> 3.5.11)
