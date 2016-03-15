@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151130133156) do
+ActiveRecord::Schema.define(version: 20160315182740) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -24,9 +27,9 @@ ActiveRecord::Schema.define(version: 20151130133156) do
     t.datetime "updated_at"
   end
 
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "births", force: :cascade do |t|
     t.date     "date"
@@ -43,7 +46,6 @@ ActiveRecord::Schema.define(version: 20151130133156) do
     t.string   "cause"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "dead"
   end
 
   create_table "marriages", force: :cascade do |t|
@@ -90,8 +92,8 @@ ActiveRecord::Schema.define(version: 20151130133156) do
     t.datetime "updated_at",         null: false
   end
 
-  add_index "references", ["referenceable_id"], name: "index_references_on_referenceable_id"
-  add_index "references", ["source_id"], name: "index_references_on_source_id"
+  add_index "references", ["referenceable_id"], name: "index_references_on_referenceable_id", using: :btree
+  add_index "references", ["source_id"], name: "index_references_on_source_id", using: :btree
 
   create_table "settings", force: :cascade do |t|
     t.string   "var",                   null: false
@@ -102,7 +104,7 @@ ActiveRecord::Schema.define(version: 20151130133156) do
     t.datetime "updated_at"
   end
 
-  add_index "settings", ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
+  add_index "settings", ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true, using: :btree
 
   create_table "simple_captcha_data", force: :cascade do |t|
     t.string   "key",        limit: 40
@@ -111,7 +113,7 @@ ActiveRecord::Schema.define(version: 20151130133156) do
     t.datetime "updated_at"
   end
 
-  add_index "simple_captcha_data", ["key"], name: "idx_key"
+  add_index "simple_captcha_data", ["key"], name: "idx_key", using: :btree
 
   create_table "sources", force: :cascade do |t|
     t.string   "title"
@@ -138,7 +140,7 @@ ActiveRecord::Schema.define(version: 20151130133156) do
     t.string   "role"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

@@ -101,11 +101,34 @@ describe Person do
   end
 
   describe ".with_name" do
-    before do
-      person
-    end
+    before { person }
+
     it "returns a person with that name" do
       expect(Person.with_name(person.full_name)).to include(person)
+    end
+  end
+
+  describe '#dead?' do
+    context 'without a death date' do
+      it 'is false' do
+        expect(subject.dead?).to eq(false)
+      end
+
+      context 'and a birth date 100 years ago' do
+        before { subject.birth.update(date: 100.years.ago) }
+
+        it 'is true' do
+          expect(subject.dead?).to eq(true)
+        end
+      end
+    end
+
+    context 'with a death date' do
+      before { subject.death.update(date: 1.year.ago) }
+
+      it 'is true' do
+        expect(subject.dead?).to eq(true)
+      end
     end
   end
 end

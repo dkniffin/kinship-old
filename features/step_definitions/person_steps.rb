@@ -3,6 +3,12 @@ Given(/^there is a person with the name "(.*?)"$/) do |name|
   @person = create(:person, first_name: first, last_name: last)
 end
 
+Given(/^"(.*?)" died on "(.*?)"$/) do |name, date|
+  first_name, last_name = name.split(' ')
+  person = Person.where(first_name: first_name, last_name: last_name).first
+  person.death.update(date: Date.parse(date))
+end
+
 When(/^I enter the following details for (?:a new person|new people):$/) do |table|
   # table is a Cucumber::Ast::Table
   table.hashes.each do |hash|

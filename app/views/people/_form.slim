@@ -7,7 +7,6 @@
     = ff.simple_fields_for :place do |fff|
       = fff.input :string, label: "Birth Place"
   = f.simple_fields_for :death do |ff|
-    = ff.input :dead
     = ff.input :date, label: "Death Date", include_blank: true, html5: true
     = ff.simple_fields_for :place do |fff|
       = fff.input :string, label: "Death Place"

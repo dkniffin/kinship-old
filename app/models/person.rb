@@ -71,10 +71,6 @@ class Person < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  def alive?
-    !death.dead
-  end
-
   def age(date = Time.zone.today)
     return nil if birth.date.nil?
 
@@ -101,7 +97,7 @@ class Person < ActiveRecord::Base
 
     e.push(birth)
     e.push(marriages)
-    e.push(death)
+    e.push(death) if dead?
 
     # TODO: Add sibling births and deaths
     # TODO: Add child births and deaths
@@ -113,6 +109,14 @@ class Person < ActiveRecord::Base
 
   def self.all_genders
     VALID_GENDERS
+  end
+
+  def dead?
+    death.date.present? || (birth.date.present? && birth.date <= 100.years.ago)
+  end
+
+  def alive?
+    !dead?
   end
 
   private
