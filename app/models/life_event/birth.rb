@@ -39,6 +39,14 @@ module LifeEvent
       end
     end
 
+    def add_parent(parent)
+      if parent_1.nil?
+        update(parent_1: parent)
+      elsif parent_2.nil?
+        update(parent_2: parent)
+      end
+    end
+
     private
 
       def parents_born_before_child

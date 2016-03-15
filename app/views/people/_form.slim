@@ -1,4 +1,4 @@
-= simple_form_for setup_person(person), html: { multipart: true} do |f|
+= simple_form_for setup_person(@person), html: { multipart: true} do |f|
   = f.input :first_name
   = f.input :last_name
   = f.input :gender, collection: Person.all_genders
@@ -12,4 +12,5 @@
       = fff.input :string, label: "Death Place"
     = ff.input :cause
   = f.input :photo
-  = f.button :submit, :class => 'btn'
+  = hidden_field_tag :child_id, @child_id
+  = f.button :submit, class: 'btn'

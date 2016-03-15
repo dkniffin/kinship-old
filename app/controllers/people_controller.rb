@@ -23,6 +23,7 @@ class PeopleController < ApplicationController
 
   def new
     @person = Person.new
+    @child_id = params[:child_id]
     respond_with(@person)
   end
 
@@ -31,6 +32,9 @@ class PeopleController < ApplicationController
 
   def create
     @person = Person.create(person_params)
+    if @person.errors.empty? && params[:child_id].present?
+      Person.find(params[:child_id]).birth.add_parent(@person)
+    end
     respond_with(@person)
   end
 
@@ -55,9 +59,9 @@ class PeopleController < ApplicationController
   end
 
   def person_params
-    params.
-      require(:person).
-      permit(
+    params
+      .require(:person)
+      .permit(
         :first_name,
         :last_name,
         :gender,

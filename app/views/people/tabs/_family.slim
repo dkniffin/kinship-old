@@ -5,7 +5,7 @@ dl.dl-horizontal
     dd= link_to parent.full_name, parent
   - if person.parents.length < 2
     dd
-      = link_to new_person_path, class: 'btn btn-primary' do
+      = link_to new_person_path(child_id: person.id), class: 'btn btn-primary' do
         i.icon-plus.icon-white
         span Add Parent
   /! Siblings
