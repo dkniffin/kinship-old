@@ -7,7 +7,6 @@ describe LifeEvent::Death, type: :model do
   it { is_expected.to respond_to(:place) }
   it { is_expected.to respond_to(:person) }
   it { is_expected.to respond_to(:cause) }
-  it { is_expected.to respond_to(:dead) }
 
   it { is_expected.to respond_to(:references) }
   it { is_expected.to respond_to(:sources) }
@@ -16,15 +15,5 @@ describe LifeEvent::Death, type: :model do
     before { death.date = Date.tomorrow }
 
     it { is_expected.to be_invalid }
-  end
-
-  describe "#dead" do
-    context "when date is in the past" do
-      before { death.date = Date.new(1900, 01, 01) }
-
-      specify "is true" do
-        expect(death.dead).to be_truthy
-      end
-    end
   end
 end

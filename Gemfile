@@ -32,7 +32,6 @@ gem 'simple_form'
 gem 'slim'
 
 group :development do
-  gem 'pry-byebug'
   gem 'web-console', '~> 2.0'
 end
 
@@ -54,6 +53,7 @@ group :test do
 end
 
 group :development, :test do
+  gem 'pry-byebug'
   gem 'fuubar'
   gem 'faker'
 end

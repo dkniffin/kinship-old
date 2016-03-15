@@ -25,7 +25,8 @@ Feature: Reference creation
 
   @javascript
   Scenario: Add a source for a death
-    Given the database is seeded with 1 person
+    Given there is a person with the name "John Smith"
+      And "John Smith" died on "2005-01-01"
     When I visit the show page for the first person
       And I click "Details"
       And I click "Edit Event" for the event "Death"
