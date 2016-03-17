@@ -15,7 +15,7 @@ Feature: User Authentication
     When I enter my email
     And I enter my password
     And I click "submit"
-    Then I am redirected to the home page
+    Then I am on "/people"
 
   Scenario: User enters invalid authentication information
     Given I have a member account on the site
