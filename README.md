@@ -11,6 +11,7 @@ Kinship is a Ruby on Rails application for managing and displaying genealogical 
 
 ## Installation
 ### Pre-requisites
+
 Before installing Kinship, you'll need the following:
 - Postgresql
 - Ruby
