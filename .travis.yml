@@ -17,7 +17,5 @@ script:
   - bundle exec rake db:setup
   - bundle exec rspec
   - bundle exec cucumber
-after_script:
-  - ./bin/codeclimate-batch --groups 2
 notifications:
   webhooks: https://coveralls.io/webhook?repo_token=2QNUX8aQd6YAuAVYc6ZmmU1sXwT0u0GxC
