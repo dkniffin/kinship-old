@@ -1,7 +1,5 @@
-if ENV['CI']
-  require 'codeclimate_batch'
-  CodeclimateBatch.start
-end
+require 'coveralls'
+Coveralls.wear!
 
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
