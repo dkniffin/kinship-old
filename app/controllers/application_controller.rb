@@ -1,7 +1,7 @@
 require "application_responder"
 
 class ApplicationController < ActionController::Base
-  self.responder = ApplicationResponder
+  self.responder = ActionController::Responder
   respond_to :html
 
   # Prevent CSRF attacks by raising an exception.
@@ -20,5 +20,9 @@ class ApplicationController < ActionController::Base
 
   def access_denied(exception)
     redirect_to root_path, notice: exception.message
+  end
+
+  def after_sign_in_path_for(resource)
+    resource.person ? people_path(resource.person) : people_path
   end
 end
