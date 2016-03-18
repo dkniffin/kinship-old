@@ -4,7 +4,7 @@ Kinship::Application.routes.draw do
   ActiveAdmin.routes(self)
   mount ActiveadminSettingsCached::Engine => '/admin'
 
-  devise_for :users
+  devise_for :users, controllers: { sessions: 'users/sessions' }
 
   resources :people
   namespace :life_event do
