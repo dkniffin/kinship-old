@@ -4,6 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/dkniffin/kinship/badge.svg?branch=master)](https://coveralls.io/github/dkniffin/kinship?branch=master)
 [![Repo Size](https://reposs.herokuapp.com/?path=dkniffin/kinship)](https://github.com/ruddfawcett/reposs)
 [![License](https://img.shields.io/badge/license-BSD%203-blue.svg)](https://github.com/dkniffin/kinship/blob/master/LICENSE.txt)
+[![Gitter](https://badges.gitter.im/KeitIG/museeks.svg)](https://gitter.im/dkniffin/kinship)
 
 # Kinship
 
