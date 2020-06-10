@@ -15,7 +15,7 @@ gem 'gedcom_ruby'
 # Other backend
 gem 'email_validator'
 gem 'paperclip', '~> 3.0'
-gem 'geocoder', '~> 1.1.8'
+gem 'geocoder', '~> 1.6.3'
 gem 'draper'
 gem 'kaminari'
 
