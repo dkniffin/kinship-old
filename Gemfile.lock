@@ -57,7 +57,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    addressable (2.4.0)
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (6.0.3)
@@ -88,10 +89,6 @@ GEM
       activesupport (>= 3.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
-    codeclimate-test-reporter (0.5.0)
-      simplecov (>= 0.7.1, < 1.0.0)
-    codeclimate_batch (0.3.0)
-      json
     coderay (1.1.1)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -100,6 +97,12 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
+    coveralls (0.8.19)
+      json (>= 1.8, < 3)
+      simplecov (~> 0.12.0)
+      term-ansicolor (~> 1.3)
+      thor (~> 0.19.1)
+      tins (~> 1.6)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
     cucumber (2.3.2)
@@ -213,6 +216,7 @@ GEM
     pry-byebug (3.3.0)
       byebug (~> 8.0)
       pry (~> 0.10)
+    public_suffix (4.0.6)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -284,11 +288,11 @@ GEM
     simple_form (3.2.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
-    simplecov (0.11.2)
+    simplecov (0.12.0)
       docile (~> 1.1.0)
-      json (~> 1.8)
+      json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
-    simplecov-html (0.10.0)
+    simplecov-html (0.10.2)
     slim (3.0.6)
       temple (~> 0.7.3)
       tilt (>= 1.3.3, < 2.1)
@@ -302,10 +306,15 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    sync (0.5.0)
     temple (0.7.6)
+    term-ansicolor (1.7.1)
+      tins (~> 1.0)
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
+    tins (1.29.1)
+      sync
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.2)
@@ -334,9 +343,8 @@ DEPENDENCIES
   bootstrap-sass (= 2.3.2.0)
   capybara-screenshot
   capybara-webkit
-  codeclimate-test-reporter
-  codeclimate_batch
   coffee-rails (~> 4.0.0)
+  coveralls
   cucumber-rails
   d3-rails (~> 3.5.11)
   d3-tip-rails
