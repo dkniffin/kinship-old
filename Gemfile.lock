@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/dkniffin/activeadmin_settings_cached.git
+  remote: https://github.com/dkniffin/activeadmin_settings_cached.git
   revision: 32be126e7f3169b59f999fe2283b68d7e9c9a03c
   specs:
     activeadmin_settings_cached (0.1.0)
@@ -88,10 +88,6 @@ GEM
       activesupport (>= 3.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
-    codeclimate-test-reporter (0.5.0)
-      simplecov (>= 0.7.1, < 1.0.0)
-    codeclimate_batch (0.3.0)
-      json
     coderay (1.1.1)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -100,8 +96,15 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
+    coveralls (0.8.19)
+      json (>= 1.8, < 3)
+      simplecov (~> 0.12.0)
+      term-ansicolor (~> 1.3)
+      thor (~> 0.19.1)
+      tins (~> 1.6)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
+    crass (1.0.6)
     cucumber (2.3.2)
       builder (>= 2.1.2)
       cucumber-core (~> 1.4.0)
@@ -185,18 +188,19 @@ GEM
     launchy (2.4.3)
       addressable (~> 2.3)
     leaflet-rails (0.7.7)
-    loofah (2.0.3)
+    loofah (2.18.0)
+      crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
     mime-types (2.99.1)
-    mini_portile2 (2.0.0)
+    mini_portile2 (2.1.0)
     minitest (5.8.4)
     multi_json (1.11.2)
     multi_test (0.1.2)
-    nokogiri (1.6.7.2)
-      mini_portile2 (~> 2.0.0.rc2)
+    nokogiri (1.6.8.1)
+      mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
     paperclip (3.5.4)
       activemodel (>= 3.0.0)
@@ -233,8 +237,8 @@ GEM
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
-    rails-html-sanitizer (1.0.3)
-      loofah (~> 2.0)
+    rails-html-sanitizer (1.4.3)
+      loofah (~> 2.3)
     rails-settings-cached (0.4.1)
       rails (>= 4.0.0)
     railties (4.2.6)
@@ -284,11 +288,11 @@ GEM
     simple_form (3.2.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
-    simplecov (0.11.2)
+    simplecov (0.12.0)
       docile (~> 1.1.0)
-      json (~> 1.8)
+      json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
-    simplecov-html (0.10.0)
+    simplecov-html (0.10.2)
     slim (3.0.6)
       temple (~> 0.7.3)
       tilt (>= 1.3.3, < 2.1)
@@ -302,10 +306,15 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    sync (0.5.0)
     temple (0.7.6)
+    term-ansicolor (1.7.1)
+      tins (~> 1.0)
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
+    tins (1.31.1)
+      sync
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.2)
@@ -334,9 +343,8 @@ DEPENDENCIES
   bootstrap-sass (= 2.3.2.0)
   capybara-screenshot
   capybara-webkit
-  codeclimate-test-reporter
-  codeclimate_batch
   coffee-rails (~> 4.0.0)
+  coveralls
   cucumber-rails
   d3-rails (~> 3.5.11)
   d3-tip-rails
